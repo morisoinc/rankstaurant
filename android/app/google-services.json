@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "227138632093",
+    "project_id": "rankstaurant",
+    "storage_bucket": "rankstaurant.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227138632093:android:911e6998d7a31a88dd9774",
+        "android_client_info": {
+          "package_name": "com.morisoinc.rankstaurant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227138632093-s4n5vitn6s41r2k4ackf1hjb8i5vu01p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJwXp9DQ_kvhsmQdqvjlkya2OUIcnRhIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227138632093-s4n5vitn6s41r2k4ackf1hjb8i5vu01p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "227138632093-7kh1lthnjilida4hgeqpvts09s68b689.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.morisoinc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
