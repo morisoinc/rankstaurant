@@ -30,3 +30,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  fonts:
+  - family: PlayfairDisplay
+    fonts:
+      - asset: fonts/PlayfairDisplay-Regular.ttf
+      - asset: fonts/PlayfairDisplay-SemiBold.ttf
+        weight: 600
