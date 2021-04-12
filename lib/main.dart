@@ -12,7 +12,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Material(
+      home: const Material(
         child: Center(
           child: Text('Welcome to rankstaurant'),
         ),
