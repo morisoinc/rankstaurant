@@ -9,9 +9,7 @@ enum Theme {
 }
 
 ThemeData buildTheme({Theme? theme}) {
-  ThemeData base = ThemeData.light();
-  base = base.copyWith(
-    scaffoldBackgroundColor: kWhite,
+  final ThemeData base = ThemeData.light().copyWith(
     splashColor: Colors.transparent,
     errorColor: kRed,
     cardTheme: _kCardMainElevation1Theme,
@@ -60,7 +58,7 @@ const _kCardMainElevation1Theme = CardTheme(
 );
 
 ThemeData _buildColorDependentThemeData({
-  required ThemeData? theme,
+  required ThemeData theme,
   required Color primary,
   required Color lightest,
   required Color lighter,
@@ -68,7 +66,7 @@ ThemeData _buildColorDependentThemeData({
   required Color darker,
   required Color darkest,
 }) {
-  return theme!.copyWith(
+  return theme.copyWith(
       accentColor: primary,
       primaryColor: lighter,
       buttonTheme: ButtonThemeData(splashColor: darker),
@@ -147,7 +145,7 @@ InputDecorationTheme _inputDecorationTheme(
       borderSide: BorderSide(color: kRed),
       borderRadius: BorderRadius.zero,
     ),
-    focusedErrorBorder: const OutlineInputBorder(
+    focusedErrorBorder: const UnderlineInputBorder(
       borderSide: BorderSide(color: kRed),
       borderRadius: BorderRadius.zero,
     ),

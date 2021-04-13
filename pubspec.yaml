@@ -13,18 +13,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  another_flushbar: ^1.10.17
+  auto_route: ^1.0.2
+  cloud_firestore: ^1.0.4
   cupertino_icons: ^1.0.2
+  dartz: ^0.10.0-nullsafety.1
+  equatable: ^2.0.0
   firebase: ^9.0.0
   firebase_auth: ^1.0.0
   firebase_core: ^1.0.0
   firebase_crashlytics: ^2.0.0
   firebase_storage: ^8.0.0
+  flutter_bloc: ^7.0.0
+  get_it: ^6.1.1
+  injectable: ^1.2.2
+  provider: ^5.0.0
+  uuid: ^3.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  auto_route_generator: ^1.0.2
   build_runner: ^1.12.2
   freezed: ^0.14.1+2
+  injectable_generator: ^1.2.2
   json_serializable: ^4.1.0
   lint: ^1.5.3
 
@@ -32,8 +44,8 @@ flutter:
   uses-material-design: true
 
   fonts:
-  - family: PlayfairDisplay
-    fonts:
-      - asset: fonts/PlayfairDisplay-Regular.ttf
-      - asset: fonts/PlayfairDisplay-SemiBold.ttf
-        weight: 600
+    - family: PlayfairDisplay
+      fonts:
+        - asset: fonts/PlayfairDisplay-Regular.ttf
+        - asset: fonts/PlayfairDisplay-SemiBold.ttf
+          weight: 600
