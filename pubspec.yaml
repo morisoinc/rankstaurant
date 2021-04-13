@@ -49,3 +49,8 @@ flutter:
         - asset: fonts/PlayfairDisplay-Regular.ttf
         - asset: fonts/PlayfairDisplay-SemiBold.ttf
           weight: 600
+    - family: NotoSerifJP
+      fonts:
+        - asset: fonts/NotoSerifJP-Regular.otf
+        - asset: fonts/NotoSerifJP-SemiBold.otf
+          weight: 600

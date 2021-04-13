@@ -172,7 +172,7 @@ TextTheme _buildTextTheme({required TextTheme base, required Color textColor}) {
         ),
       )
       .apply(
-        fontFamily: 'PlayfairDisplay',
+        fontFamily: 'NotoSerifJP',
         displayColor: textColor,
         bodyColor: textColor,
       );
