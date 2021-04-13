@@ -150,8 +150,7 @@ InputDecorationTheme _inputDecorationTheme(
       borderRadius: BorderRadius.zero,
     ),
     errorStyle: const TextStyle(
-      fontSize: 0,
-      height: 0,
+      fontSize: 12,
     ),
   );
 }

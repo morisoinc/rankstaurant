@@ -93,6 +93,7 @@ class SignInForm extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.read<SignInFormBloc>().add(
                             const SignInFormEvent
                                 .registerWithEmailAndPasswordPressed(),
@@ -102,6 +103,7 @@ class SignInForm extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
+                      FocusScope.of(context).unfocus();
                       context.read<SignInFormBloc>().add(
                             const SignInFormEvent
                                 .signInWithEmailAndPasswordPressed(),
