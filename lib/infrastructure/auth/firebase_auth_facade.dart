@@ -45,13 +45,13 @@ class FirebaseAuthFacade implements IAuthFacade {
         role: userRole,
       ));
 
-      if (userCreation.isRight()) {
-        SettingsHelper.setUserRole(userRoleStr);
-      }
-
-      return userCreation.isRight()
-          ? right(unit)
-          : left(const AuthFailure.serverError());
+      return userCreation.fold(
+        (l) => left(const AuthFailure.serverError()),
+        (r) {
+          SettingsHelper.setUserRole(userRoleStr);
+          return right(unit);
+        },
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
@@ -69,11 +69,20 @@ class FirebaseAuthFacade implements IAuthFacade {
     final emailAddressStr = emailAddress.getOrCrash();
     final passwordStr = password.getOrCrash();
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
         email: emailAddressStr,
         password: passwordStr,
       );
-      return right(unit);
+
+      final user = await _userRepository.get(userCredential.user!.uid);
+
+      return user.fold(
+        (l) => left(const AuthFailure.serverError()),
+        (r) {
+          SettingsHelper.setUserRole(r.role.getOrCrash());
+          return right(unit);
+        },
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'wrong-password' || e.code == 'user-not-found') {
         return left(const AuthFailure.invalidEmailOrPassword());

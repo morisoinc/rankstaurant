@@ -26,4 +26,19 @@ class UserRepository implements IUserRepository {
       return left(const UserFailure.unexpected());
     }
   }
+
+  @override
+  Future<Either<UserFailure, User>> get(String id) async {
+    try {
+      final usersCollection = await _firestore.usersCollection();
+
+      final doc = await usersCollection.doc(id).get();
+
+      final user = UserDto.fromFirestore(doc).toDomain();
+
+      return right(user);
+    } on FirebaseException {
+      return left(const UserFailure.unexpected());
+    }
+  }
 }
