@@ -18,7 +18,6 @@ class RestaurantsPage extends StatelessWidget {
               ElevatedButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
-                    Navigator.pop(context);
                   },
                   child: const Text('Sign out')),
             ],

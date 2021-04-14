@@ -19,3 +19,11 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
     return left(ValueFailure.shortPassword(failedValue: input));
   }
 }
+
+Either<ValueFailure<String>, String> validateUserRole(String input) {
+  if (input == 'admin' || input == 'owner' || input == 'regular') {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidUserRole(failedValue: input));
+  }
+}
