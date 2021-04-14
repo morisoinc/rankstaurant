@@ -4,8 +4,12 @@ extension FirestoreX on FirebaseFirestore {
   Future<CollectionReference> usersCollection() async {
     return FirebaseFirestore.instance.collection('users');
   }
-}
 
-extension DocumentReferenceX on DocumentReference {
-  CollectionReference get restaurantCollection => collection('restaurants');
+  Future<CollectionReference> restaurantsCollection() async {
+    return FirebaseFirestore.instance.collection('restaurants');
+  }
+
+  Future<DocumentReference> restaurantDocument(String id) async {
+    return FirebaseFirestore.instance.collection('restaurants').doc(id);
+  }
 }

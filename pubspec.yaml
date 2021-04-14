@@ -27,7 +27,9 @@ dependencies:
   flutter_bloc: ^7.0.0
   get_it: ^6.1.1
   injectable: ^1.2.2
+  kt_dart: ^0.9.0
   provider: ^5.0.0
+  rxdart: ^0.26.0
   shared_preferences: ^2.0.5
   uuid: ^3.0.4
 

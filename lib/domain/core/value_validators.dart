@@ -27,3 +27,19 @@ Either<ValueFailure<String>, String> validateUserRole(String input) {
     return left(ValueFailure.invalidUserRole(failedValue: input));
   }
 }
+
+Either<ValueFailure<String>, String> validateRestaurantName(String input) {
+  if (input.length <= 20) {
+    return right(input);
+  } else {
+    return left(ValueFailure.longRestaurantName(failedValue: input));
+  }
+}
+
+Either<ValueFailure<double>, double> validateRestaurantRating(double input) {
+  if (input > 0 && input <= 5) {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidRestaurantRating(failedValue: input));
+  }
+}

@@ -33,6 +33,19 @@ class _$ValueFailureTearOff {
       failedValue: failedValue,
     );
   }
+
+  LongRestaurantName<T> longRestaurantName<T>({required String failedValue}) {
+    return LongRestaurantName<T>(
+      failedValue: failedValue,
+    );
+  }
+
+  InvalidRestaurantRating<T> invalidRestaurantRating<T>(
+      {required double failedValue}) {
+    return InvalidRestaurantRating<T>(
+      failedValue: failedValue,
+    );
+  }
 }
 
 /// @nodoc
@@ -40,13 +53,13 @@ const $ValueFailure = _$ValueFailureTearOff();
 
 /// @nodoc
 mixin _$ValueFailure<T> {
-  String get failedValue => throw _privateConstructorUsedError;
-
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(String failedValue) invalidEmail,
     required TResult Function(String failedValue) shortPassword,
     required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +67,8 @@ mixin _$ValueFailure<T> {
     TResult Function(String failedValue)? invalidEmail,
     TResult Function(String failedValue)? shortPassword,
     TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +77,9 @@ mixin _$ValueFailure<T> {
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,12 +87,10 @@ mixin _$ValueFailure<T> {
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ValueFailureCopyWith<T, ValueFailure<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -83,7 +99,6 @@ abstract class $ValueFailureCopyWith<T, $Res> {
   factory $ValueFailureCopyWith(
           ValueFailure<T> value, $Res Function(ValueFailure<T>) then) =
       _$ValueFailureCopyWithImpl<T, $Res>;
-  $Res call({String failedValue});
 }
 
 /// @nodoc
@@ -94,27 +109,13 @@ class _$ValueFailureCopyWithImpl<T, $Res>
   final ValueFailure<T> _value;
   // ignore: unused_field
   final $Res Function(ValueFailure<T>) _then;
-
-  @override
-  $Res call({
-    Object? failedValue = freezed,
-  }) {
-    return _then(_value.copyWith(
-      failedValue: failedValue == freezed
-          ? _value.failedValue
-          : failedValue // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
-abstract class $InvalidEmailCopyWith<T, $Res>
-    implements $ValueFailureCopyWith<T, $Res> {
+abstract class $InvalidEmailCopyWith<T, $Res> {
   factory $InvalidEmailCopyWith(
           InvalidEmail<T> value, $Res Function(InvalidEmail<T>) then) =
       _$InvalidEmailCopyWithImpl<T, $Res>;
-  @override
   $Res call({String failedValue});
 }
 
@@ -178,6 +179,8 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(String failedValue) invalidEmail,
     required TResult Function(String failedValue) shortPassword,
     required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
   }) {
     return invalidEmail(failedValue);
   }
@@ -188,6 +191,8 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(String failedValue)? invalidEmail,
     TResult Function(String failedValue)? shortPassword,
     TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -202,6 +207,9 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
   }) {
     return invalidEmail(this);
   }
@@ -212,6 +220,8 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -224,21 +234,17 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
 abstract class InvalidEmail<T> implements ValueFailure<T> {
   const factory InvalidEmail({required String failedValue}) = _$InvalidEmail<T>;
 
-  @override
   String get failedValue => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
   $InvalidEmailCopyWith<T, InvalidEmail<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ShortPasswordCopyWith<T, $Res>
-    implements $ValueFailureCopyWith<T, $Res> {
+abstract class $ShortPasswordCopyWith<T, $Res> {
   factory $ShortPasswordCopyWith(
           ShortPassword<T> value, $Res Function(ShortPassword<T>) then) =
       _$ShortPasswordCopyWithImpl<T, $Res>;
-  @override
   $Res call({String failedValue});
 }
 
@@ -302,6 +308,8 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(String failedValue) invalidEmail,
     required TResult Function(String failedValue) shortPassword,
     required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
   }) {
     return shortPassword(failedValue);
   }
@@ -312,6 +320,8 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(String failedValue)? invalidEmail,
     TResult Function(String failedValue)? shortPassword,
     TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (shortPassword != null) {
@@ -326,6 +336,9 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
   }) {
     return shortPassword(this);
   }
@@ -336,6 +349,8 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (shortPassword != null) {
@@ -349,21 +364,17 @@ abstract class ShortPassword<T> implements ValueFailure<T> {
   const factory ShortPassword({required String failedValue}) =
       _$ShortPassword<T>;
 
-  @override
   String get failedValue => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
   $ShortPasswordCopyWith<T, ShortPassword<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $InvalidUserRoleCopyWith<T, $Res>
-    implements $ValueFailureCopyWith<T, $Res> {
+abstract class $InvalidUserRoleCopyWith<T, $Res> {
   factory $InvalidUserRoleCopyWith(
           InvalidUserRole<T> value, $Res Function(InvalidUserRole<T>) then) =
       _$InvalidUserRoleCopyWithImpl<T, $Res>;
-  @override
   $Res call({String failedValue});
 }
 
@@ -427,6 +438,8 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     required TResult Function(String failedValue) invalidEmail,
     required TResult Function(String failedValue) shortPassword,
     required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
   }) {
     return invalidUserRole(failedValue);
   }
@@ -437,6 +450,8 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(String failedValue)? invalidEmail,
     TResult Function(String failedValue)? shortPassword,
     TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (invalidUserRole != null) {
@@ -451,6 +466,9 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
   }) {
     return invalidUserRole(this);
   }
@@ -461,6 +479,8 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     required TResult orElse(),
   }) {
     if (invalidUserRole != null) {
@@ -474,10 +494,272 @@ abstract class InvalidUserRole<T> implements ValueFailure<T> {
   const factory InvalidUserRole({required String failedValue}) =
       _$InvalidUserRole<T>;
 
-  @override
   String get failedValue => throw _privateConstructorUsedError;
-  @override
   @JsonKey(ignore: true)
   $InvalidUserRoleCopyWith<T, InvalidUserRole<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LongRestaurantNameCopyWith<T, $Res> {
+  factory $LongRestaurantNameCopyWith(LongRestaurantName<T> value,
+          $Res Function(LongRestaurantName<T>) then) =
+      _$LongRestaurantNameCopyWithImpl<T, $Res>;
+  $Res call({String failedValue});
+}
+
+/// @nodoc
+class _$LongRestaurantNameCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $LongRestaurantNameCopyWith<T, $Res> {
+  _$LongRestaurantNameCopyWithImpl(
+      LongRestaurantName<T> _value, $Res Function(LongRestaurantName<T>) _then)
+      : super(_value, (v) => _then(v as LongRestaurantName<T>));
+
+  @override
+  LongRestaurantName<T> get _value => super._value as LongRestaurantName<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(LongRestaurantName<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$LongRestaurantName<T> implements LongRestaurantName<T> {
+  const _$LongRestaurantName({required this.failedValue});
+
+  @override
+  final String failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.longRestaurantName(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is LongRestaurantName<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @JsonKey(ignore: true)
+  @override
+  $LongRestaurantNameCopyWith<T, LongRestaurantName<T>> get copyWith =>
+      _$LongRestaurantNameCopyWithImpl<T, LongRestaurantName<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String failedValue) invalidEmail,
+    required TResult Function(String failedValue) shortPassword,
+    required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
+  }) {
+    return longRestaurantName(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String failedValue)? invalidEmail,
+    TResult Function(String failedValue)? shortPassword,
+    TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
+    required TResult orElse(),
+  }) {
+    if (longRestaurantName != null) {
+      return longRestaurantName(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
+  }) {
+    return longRestaurantName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
+    required TResult orElse(),
+  }) {
+    if (longRestaurantName != null) {
+      return longRestaurantName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LongRestaurantName<T> implements ValueFailure<T> {
+  const factory LongRestaurantName({required String failedValue}) =
+      _$LongRestaurantName<T>;
+
+  String get failedValue => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LongRestaurantNameCopyWith<T, LongRestaurantName<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $InvalidRestaurantRatingCopyWith<T, $Res> {
+  factory $InvalidRestaurantRatingCopyWith(InvalidRestaurantRating<T> value,
+          $Res Function(InvalidRestaurantRating<T>) then) =
+      _$InvalidRestaurantRatingCopyWithImpl<T, $Res>;
+  $Res call({double failedValue});
+}
+
+/// @nodoc
+class _$InvalidRestaurantRatingCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $InvalidRestaurantRatingCopyWith<T, $Res> {
+  _$InvalidRestaurantRatingCopyWithImpl(InvalidRestaurantRating<T> _value,
+      $Res Function(InvalidRestaurantRating<T>) _then)
+      : super(_value, (v) => _then(v as InvalidRestaurantRating<T>));
+
+  @override
+  InvalidRestaurantRating<T> get _value =>
+      super._value as InvalidRestaurantRating<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(InvalidRestaurantRating<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as double,
+    ));
+  }
+}
+
+/// @nodoc
+class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
+  const _$InvalidRestaurantRating({required this.failedValue});
+
+  @override
+  final double failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidRestaurantRating(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is InvalidRestaurantRating<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @JsonKey(ignore: true)
+  @override
+  $InvalidRestaurantRatingCopyWith<T, InvalidRestaurantRating<T>>
+      get copyWith =>
+          _$InvalidRestaurantRatingCopyWithImpl<T, InvalidRestaurantRating<T>>(
+              this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String failedValue) invalidEmail,
+    required TResult Function(String failedValue) shortPassword,
+    required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
+  }) {
+    return invalidRestaurantRating(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String failedValue)? invalidEmail,
+    TResult Function(String failedValue)? shortPassword,
+    TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
+    required TResult orElse(),
+  }) {
+    if (invalidRestaurantRating != null) {
+      return invalidRestaurantRating(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
+  }) {
+    return invalidRestaurantRating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
+    required TResult orElse(),
+  }) {
+    if (invalidRestaurantRating != null) {
+      return invalidRestaurantRating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidRestaurantRating<T> implements ValueFailure<T> {
+  const factory InvalidRestaurantRating({required double failedValue}) =
+      _$InvalidRestaurantRating<T>;
+
+  double get failedValue => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $InvalidRestaurantRatingCopyWith<T, InvalidRestaurantRating<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
