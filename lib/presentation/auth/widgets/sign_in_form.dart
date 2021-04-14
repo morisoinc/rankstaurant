@@ -88,6 +88,21 @@ class SignInForm extends StatelessWidget {
                           (_) => null,
                         ),
               ),
+              const SizedBox(height: 8),
+              DropdownButtonFormField(
+                items: const [
+                  DropdownMenuItem(value: 'regular', child: Text('Consumer')),
+                  DropdownMenuItem(value: 'owner', child: Text('Owner'))
+                ],
+                value: 'regular',
+                onChanged: (newValue) {
+                  if (newValue is String) {
+                    context
+                        .read<SignInFormBloc>()
+                        .add(SignInFormEvent.userRoleChanged(newValue));
+                  }
+                },
+              ),
               const SizedBox(height: 16),
               Column(
                 children: [
