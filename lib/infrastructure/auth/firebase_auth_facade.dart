@@ -5,13 +5,20 @@ import 'package:rankstaurant/domain/auth/auth_failure.dart';
 import 'package:rankstaurant/domain/auth/i_auth_facade.dart';
 import 'package:rankstaurant/domain/auth/user.dart';
 import 'package:rankstaurant/domain/auth/value_objects.dart';
+import 'package:rankstaurant/domain/core/value_objects.dart';
+import 'package:rankstaurant/domain/user/i_user_repository.dart';
+import 'package:rankstaurant/domain/user/user.dart' as user;
+import 'package:rankstaurant/domain/user/user_failure.dart';
+import 'package:rankstaurant/domain/user/value_objects.dart';
+import 'package:rankstaurant/global/settings/settings_helper.dart';
 import './firebase_user_mapper.dart';
 
 @LazySingleton(as: IAuthFacade)
 class FirebaseAuthFacade implements IAuthFacade {
-  FirebaseAuthFacade(this._firebaseAuth);
+  FirebaseAuthFacade(this._firebaseAuth, this._userRepository);
 
   final FirebaseAuth _firebaseAuth;
+  final IUserRepository _userRepository;
 
   @override
   Future<Option<User>> getSignedInUser() async =>
@@ -21,14 +28,30 @@ class FirebaseAuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerWithEmailAndPassword({
     required EmailAddress emailAddress,
     required Password password,
+    required UserRole userRole,
   }) async {
     final emailAddressStr = emailAddress.getOrCrash();
     final passwordStr = password.getOrCrash();
+    final userRoleStr = userRole.getOrCrash();
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
-          email: emailAddressStr, password: passwordStr);
+      final UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+              email: emailAddressStr, password: passwordStr);
 
-      return right(unit);
+      final Either<UserFailure, Unit> userCreation =
+          await _userRepository.create(user.User(
+        id: UniqueId.fromUniqueString(userCredential.user?.uid ?? ''),
+        email: UserEmail(userRoleStr),
+        role: userRole,
+      ));
+
+      if (userCreation.isRight()) {
+        SettingsHelper.setUserRole(userRoleStr);
+      }
+
+      return userCreation.isRight()
+          ? right(unit)
+          : left(const AuthFailure.serverError());
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
