@@ -16,10 +16,10 @@ class UserRepository implements IUserRepository {
   @override
   Future<Either<UserFailure, Unit>> create(User user) async {
     try {
-      final userDoc = await _firestore.userDocument();
+      final usersCollection = await _firestore.usersCollection();
       final userDto = UserDto.fromDomain(user);
 
-      await userDoc.doc(userDto.id).set(userDto.toJson());
+      await usersCollection.doc(userDto.id).set(userDto.toJson());
 
       return right(unit);
     } on FirebaseException {
