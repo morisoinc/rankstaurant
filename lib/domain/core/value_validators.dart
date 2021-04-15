@@ -29,7 +29,7 @@ Either<ValueFailure<String>, String> validateUserRole(String input) {
 }
 
 Either<ValueFailure<String>, String> validateRestaurantName(String input) {
-  if (input.length <= 20) {
+  if (input.length <= 50) {
     return right(input);
   } else {
     return left(ValueFailure.longRestaurantName(failedValue: input));

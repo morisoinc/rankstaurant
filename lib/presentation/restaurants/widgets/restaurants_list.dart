@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/error_restaurant.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/load_fail.dart';
-import 'package:rankstaurant/presentation/restaurants/widgets/restaurant_cart.dart';
+import 'package:rankstaurant/presentation/restaurants/widgets/restaurant_card.dart';
 
 class RestaurantsList extends StatelessWidget {
   @override

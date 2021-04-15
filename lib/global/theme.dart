@@ -12,7 +12,6 @@ ThemeData buildTheme({Theme? theme}) {
   final ThemeData base = ThemeData.light().copyWith(
     splashColor: Colors.transparent,
     errorColor: kRed,
-    cardTheme: _kCardMainElevation1Theme,
   );
 
   switch (theme) {
@@ -49,14 +48,6 @@ ThemeData buildTheme({Theme? theme}) {
   }
 }
 
-const _kCardMainElevation1Theme = CardTheme(
-  color: kWhite,
-  shadowColor: kCardShadow,
-  shape: RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-  ),
-);
-
 ThemeData _buildColorDependentThemeData({
   required ThemeData theme,
   required Color primary,
@@ -70,6 +61,18 @@ ThemeData _buildColorDependentThemeData({
       accentColor: primary,
       primaryColor: lighter,
       buttonTheme: ButtonThemeData(splashColor: darker),
+      cardTheme: CardTheme(
+        color: lightest,
+        shadowColor: kCardShadow,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: darker),
+        ),
+      ),
+      iconTheme: IconThemeData(
+        color: darkest,
+        size: 12,
+      ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           primary: primary,

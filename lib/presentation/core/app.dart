@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       ],
       child: MaterialApp.router(
         title: 'rankstaurant',
-        theme: theme.buildTheme(),
+        theme: theme.buildTheme(theme: theme.Theme.lightBrown),
         debugShowCheckedModeBanner: false,
         routerDelegate: appRouter.delegate(),
         routeInformationParser: appRouter.defaultRouteParser(),
