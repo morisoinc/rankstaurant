@@ -1,11 +1,14 @@
 import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:rankstaurant/application/auth/auth_bloc.dart';
 import 'package:rankstaurant/application/restaurant_creation/restaurant_creation_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/restaurants_list.dart';
+import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class RestaurantsPage extends StatelessWidget {
   @override
@@ -16,9 +19,30 @@ class RestaurantsPage extends StatelessWidget {
           create: (context) => getIt<RestaurantsBloc>()..add(_watchEvent()),
         ),
       ],
-      child: Scaffold(
-        body: RestaurantsList(),
-        floatingActionButton: _buildFab(context),
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              state.maybeMap(
+                  unauthenticated: (_) =>
+                      context.router.replace(const SignInRoute()),
+                  orElse: () {});
+            },
+          ),
+        ],
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Restaurants'),
+            leading: IconButton(
+              icon: const Icon(Icons.logout),
+              onPressed: () {
+                context.read<AuthBloc>().add(const AuthEvent.signedOut());
+              },
+            ),
+          ),
+          body: RestaurantsList(),
+          floatingActionButton: _buildFab(context),
+        ),
       ),
     );
   }
