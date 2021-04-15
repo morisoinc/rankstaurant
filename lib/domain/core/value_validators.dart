@@ -37,7 +37,7 @@ Either<ValueFailure<String>, String> validateRestaurantName(String input) {
 }
 
 Either<ValueFailure<double>, double> validateRestaurantRating(double input) {
-  if (input > 0 && input <= 5) {
+  if (input >= -1 && input <= 5) {
     return right(input);
   } else {
     return left(ValueFailure.invalidRestaurantRating(failedValue: input));

@@ -25,11 +25,19 @@ class RestaurantRepository implements IRestaurantRepository {
       final restaurantsCollection = await _firestore.restaurantsCollection();
       final restaurantDto = RestaurantDto.fromDomain(restaurant);
 
-      await restaurantsCollection
-          .doc(restaurantDto.id)
-          .set(restaurantDto.toJson());
+      final existingRestaurant = await restaurantsCollection
+          .where('name', isEqualTo: restaurant.name.getOrCrash())
+          .get();
 
-      return right(unit);
+      if (existingRestaurant.docs.isEmpty) {
+        await restaurantsCollection
+            .doc(restaurantDto.id)
+            .set(restaurantDto.toJson());
+
+        return right(unit);
+      } else {
+        return left(const RestaurantFailure.unexpected());
+      }
     } on FirebaseException {
       return left(const RestaurantFailure.unexpected());
     }
