@@ -19,6 +19,15 @@ abstract class Restaurant implements _$Restaurant {
 
   const Restaurant._();
 
+  factory Restaurant.empty() => Restaurant(
+        id: UniqueId(),
+        name: RestaurantName(''),
+        owner: UniqueId(),
+        averageRating: RestaurantRating(-1),
+        highestRating: RestaurantRating(-1),
+        lowestRating: RestaurantRating(-1),
+      );
+
   Option<ValueFailure<dynamic>> get failureOption {
     return name.failureOrUnit
         .andThen(owner.failureOrUnit)

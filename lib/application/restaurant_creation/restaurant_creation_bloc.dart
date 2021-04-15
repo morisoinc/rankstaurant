@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
@@ -20,11 +19,10 @@ part 'restaurant_creation_bloc.freezed.dart';
 @injectable
 class RestaurantCreationBloc
     extends Bloc<RestaurantCreationEvent, RestaurantCreationState> {
-  RestaurantCreationBloc(this.restaurantRepository, this._firebaseAuth)
+  RestaurantCreationBloc(this.restaurantRepository, FirebaseAuth _firebaseAuth)
       : super(RestaurantCreationState.initial(_firebaseAuth.currentUser!.uid));
 
   final IRestaurantRepository restaurantRepository;
-  final FirebaseAuth _firebaseAuth;
 
   @override
   Stream<RestaurantCreationState> mapEventToState(
