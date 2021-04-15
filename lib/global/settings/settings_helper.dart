@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:hive/hive.dart';
 
 import 'keys.dart';
 
@@ -9,8 +9,8 @@ class SettingsHelper {
     _setString(SettingsKeys.userRole, role);
   }
 
-  static Future<Role> userRole() async {
-    switch (await _getString(SettingsKeys.userRole)) {
+  static Role userRole() {
+    switch (_getString(SettingsKeys.userRole)) {
       case 'admin':
         return Role.admin;
       case 'owner':
@@ -22,12 +22,10 @@ class SettingsHelper {
   }
 
   static void _setString(String key, String value) {
-    SharedPreferences.getInstance()
-        .then((prefs) => prefs.setString(key, value));
+    Hive.box(settingsHiveBox).put(key, value);
   }
 
-  static Future<String?> _getString(String key) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(key);
+  static String? _getString(String key) {
+    return Hive.box(settingsHiveBox).get(key) as String;
   }
 }
