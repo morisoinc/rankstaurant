@@ -6,9 +6,6 @@ abstract class RestaurantCreationState with _$RestaurantCreationState {
     required UniqueId id,
     required RestaurantName restaurantName,
     required UniqueId owner,
-    required RestaurantRating averageRating,
-    required RestaurantRating highestRating,
-    required RestaurantRating lowestRating,
     required bool isSubmitting,
     required Option<Either<RestaurantFailure, Unit>>
         restaurantFailureOrSuccessOption,
@@ -19,9 +16,6 @@ abstract class RestaurantCreationState with _$RestaurantCreationState {
         id: UniqueId(),
         restaurantName: RestaurantName(''),
         owner: UniqueId.fromUniqueString(ownerId),
-        averageRating: RestaurantRating(-1),
-        highestRating: RestaurantRating(-1),
-        lowestRating: RestaurantRating(-1),
         isSubmitting: false,
         restaurantFailureOrSuccessOption: none(),
       );

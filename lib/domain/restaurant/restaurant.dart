@@ -15,6 +15,9 @@ abstract class Restaurant implements _$Restaurant {
     required RestaurantRating averageRating,
     required RestaurantRating highestRating,
     required RestaurantRating lowestRating,
+    required RestaurantRating latestRating,
+    required int numberOfRatings,
+    required int sumOfRatings,
   }) = _Restaurant;
 
   const Restaurant._();
@@ -26,7 +29,18 @@ abstract class Restaurant implements _$Restaurant {
         averageRating: RestaurantRating(-1),
         highestRating: RestaurantRating(-1),
         lowestRating: RestaurantRating(-1),
+        latestRating: RestaurantRating(-1),
+        numberOfRatings: 0,
+        sumOfRatings: 0,
       );
+
+  // * downside of getters: bad data can be generated.
+  // * the best way to handle this is to create a value object for each field
+  // * along with it's validator.
+  @override
+  int get numberOfRatings;
+  @override
+  int get sumOfRatings;
 
   Option<ValueFailure<dynamic>> get failureOption {
     return name.failureOrUnit
@@ -34,6 +48,7 @@ abstract class Restaurant implements _$Restaurant {
         .andThen(averageRating.failureOrUnit)
         .andThen(highestRating.failureOrUnit)
         .andThen(lowestRating.failureOrUnit)
+        .andThen(latestRating.failureOrUnit)
         .fold((f) => some(f), (_) => none());
   }
 }

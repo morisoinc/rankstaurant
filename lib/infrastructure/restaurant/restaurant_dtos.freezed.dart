@@ -26,7 +26,10 @@ class _$RestaurantDtoTearOff {
       required String owner,
       required double averageRating,
       required double highestRating,
-      required double lowestRating}) {
+      required double lowestRating,
+      required double latestRating,
+      required int numberOfRatings,
+      required int sumOfRatings}) {
     return _RestaurantDto(
       id: id,
       name: name,
@@ -34,6 +37,9 @@ class _$RestaurantDtoTearOff {
       averageRating: averageRating,
       highestRating: highestRating,
       lowestRating: lowestRating,
+      latestRating: latestRating,
+      numberOfRatings: numberOfRatings,
+      sumOfRatings: sumOfRatings,
     );
   }
 
@@ -54,6 +60,9 @@ mixin _$RestaurantDto {
   double get averageRating => throw _privateConstructorUsedError;
   double get highestRating => throw _privateConstructorUsedError;
   double get lowestRating => throw _privateConstructorUsedError;
+  double get latestRating => throw _privateConstructorUsedError;
+  int get numberOfRatings => throw _privateConstructorUsedError;
+  int get sumOfRatings => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +81,10 @@ abstract class $RestaurantDtoCopyWith<$Res> {
       String owner,
       double averageRating,
       double highestRating,
-      double lowestRating});
+      double lowestRating,
+      double latestRating,
+      int numberOfRatings,
+      int sumOfRatings});
 }
 
 /// @nodoc
@@ -92,6 +104,9 @@ class _$RestaurantDtoCopyWithImpl<$Res>
     Object? averageRating = freezed,
     Object? highestRating = freezed,
     Object? lowestRating = freezed,
+    Object? latestRating = freezed,
+    Object? numberOfRatings = freezed,
+    Object? sumOfRatings = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -118,6 +133,18 @@ class _$RestaurantDtoCopyWithImpl<$Res>
           ? _value.lowestRating
           : lowestRating // ignore: cast_nullable_to_non_nullable
               as double,
+      latestRating: latestRating == freezed
+          ? _value.latestRating
+          : latestRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      numberOfRatings: numberOfRatings == freezed
+          ? _value.numberOfRatings
+          : numberOfRatings // ignore: cast_nullable_to_non_nullable
+              as int,
+      sumOfRatings: sumOfRatings == freezed
+          ? _value.sumOfRatings
+          : sumOfRatings // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -135,7 +162,10 @@ abstract class _$RestaurantDtoCopyWith<$Res>
       String owner,
       double averageRating,
       double highestRating,
-      double lowestRating});
+      double lowestRating,
+      double latestRating,
+      int numberOfRatings,
+      int sumOfRatings});
 }
 
 /// @nodoc
@@ -157,6 +187,9 @@ class __$RestaurantDtoCopyWithImpl<$Res>
     Object? averageRating = freezed,
     Object? highestRating = freezed,
     Object? lowestRating = freezed,
+    Object? latestRating = freezed,
+    Object? numberOfRatings = freezed,
+    Object? sumOfRatings = freezed,
   }) {
     return _then(_RestaurantDto(
       id: id == freezed
@@ -183,6 +216,18 @@ class __$RestaurantDtoCopyWithImpl<$Res>
           ? _value.lowestRating
           : lowestRating // ignore: cast_nullable_to_non_nullable
               as double,
+      latestRating: latestRating == freezed
+          ? _value.latestRating
+          : latestRating // ignore: cast_nullable_to_non_nullable
+              as double,
+      numberOfRatings: numberOfRatings == freezed
+          ? _value.numberOfRatings
+          : numberOfRatings // ignore: cast_nullable_to_non_nullable
+              as int,
+      sumOfRatings: sumOfRatings == freezed
+          ? _value.sumOfRatings
+          : sumOfRatings // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -197,7 +242,10 @@ class _$_RestaurantDto extends _RestaurantDto {
       required this.owner,
       required this.averageRating,
       required this.highestRating,
-      required this.lowestRating})
+      required this.lowestRating,
+      required this.latestRating,
+      required this.numberOfRatings,
+      required this.sumOfRatings})
       : super._();
 
   factory _$_RestaurantDto.fromJson(Map<String, dynamic> json) =>
@@ -216,10 +264,16 @@ class _$_RestaurantDto extends _RestaurantDto {
   final double highestRating;
   @override
   final double lowestRating;
+  @override
+  final double latestRating;
+  @override
+  final int numberOfRatings;
+  @override
+  final int sumOfRatings;
 
   @override
   String toString() {
-    return 'RestaurantDto(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating)';
+    return 'RestaurantDto(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings)';
   }
 
   @override
@@ -240,7 +294,16 @@ class _$_RestaurantDto extends _RestaurantDto {
                     .equals(other.highestRating, highestRating)) &&
             (identical(other.lowestRating, lowestRating) ||
                 const DeepCollectionEquality()
-                    .equals(other.lowestRating, lowestRating)));
+                    .equals(other.lowestRating, lowestRating)) &&
+            (identical(other.latestRating, latestRating) ||
+                const DeepCollectionEquality()
+                    .equals(other.latestRating, latestRating)) &&
+            (identical(other.numberOfRatings, numberOfRatings) ||
+                const DeepCollectionEquality()
+                    .equals(other.numberOfRatings, numberOfRatings)) &&
+            (identical(other.sumOfRatings, sumOfRatings) ||
+                const DeepCollectionEquality()
+                    .equals(other.sumOfRatings, sumOfRatings)));
   }
 
   @override
@@ -251,7 +314,10 @@ class _$_RestaurantDto extends _RestaurantDto {
       const DeepCollectionEquality().hash(owner) ^
       const DeepCollectionEquality().hash(averageRating) ^
       const DeepCollectionEquality().hash(highestRating) ^
-      const DeepCollectionEquality().hash(lowestRating);
+      const DeepCollectionEquality().hash(lowestRating) ^
+      const DeepCollectionEquality().hash(latestRating) ^
+      const DeepCollectionEquality().hash(numberOfRatings) ^
+      const DeepCollectionEquality().hash(sumOfRatings);
 
   @JsonKey(ignore: true)
   @override
@@ -271,7 +337,10 @@ abstract class _RestaurantDto extends RestaurantDto {
       required String owner,
       required double averageRating,
       required double highestRating,
-      required double lowestRating}) = _$_RestaurantDto;
+      required double lowestRating,
+      required double latestRating,
+      required int numberOfRatings,
+      required int sumOfRatings}) = _$_RestaurantDto;
   const _RestaurantDto._() : super._();
 
   factory _RestaurantDto.fromJson(Map<String, dynamic> json) =
@@ -290,6 +359,12 @@ abstract class _RestaurantDto extends RestaurantDto {
   double get highestRating => throw _privateConstructorUsedError;
   @override
   double get lowestRating => throw _privateConstructorUsedError;
+  @override
+  double get latestRating => throw _privateConstructorUsedError;
+  @override
+  int get numberOfRatings => throw _privateConstructorUsedError;
+  @override
+  int get sumOfRatings => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RestaurantDtoCopyWith<_RestaurantDto> get copyWith =>

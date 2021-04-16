@@ -48,9 +48,12 @@ class RestaurantCreationBloc
             id: state.id,
             name: state.restaurantName,
             owner: state.owner,
-            averageRating: state.averageRating,
-            highestRating: state.highestRating,
-            lowestRating: state.lowestRating,
+            averageRating: RestaurantRating(-1),
+            highestRating: RestaurantRating(-1),
+            lowestRating: RestaurantRating(-1),
+            latestRating: RestaurantRating(-1),
+            numberOfRatings: 0,
+            sumOfRatings: 0,
           ));
         }
 

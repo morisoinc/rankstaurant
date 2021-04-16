@@ -13,6 +13,9 @@ _$_RestaurantDto _$_$_RestaurantDtoFromJson(Map<String, dynamic> json) {
     averageRating: (json['averageRating'] as num).toDouble(),
     highestRating: (json['highestRating'] as num).toDouble(),
     lowestRating: (json['lowestRating'] as num).toDouble(),
+    latestRating: (json['latestRating'] as num).toDouble(),
+    numberOfRatings: json['numberOfRatings'] as int,
+    sumOfRatings: json['sumOfRatings'] as int,
   );
 }
 
@@ -23,4 +26,7 @@ Map<String, dynamic> _$_$_RestaurantDtoToJson(_$_RestaurantDto instance) =>
       'averageRating': instance.averageRating,
       'highestRating': instance.highestRating,
       'lowestRating': instance.lowestRating,
+      'latestRating': instance.latestRating,
+      'numberOfRatings': instance.numberOfRatings,
+      'sumOfRatings': instance.sumOfRatings,
     };

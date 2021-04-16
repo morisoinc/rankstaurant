@@ -289,9 +289,6 @@ class _$RestaurantCreationStateTearOff {
       {required UniqueId id,
       required RestaurantName restaurantName,
       required UniqueId owner,
-      required RestaurantRating averageRating,
-      required RestaurantRating highestRating,
-      required RestaurantRating lowestRating,
       required bool isSubmitting,
       required Option<Either<RestaurantFailure, Unit>>
           restaurantFailureOrSuccessOption}) {
@@ -299,9 +296,6 @@ class _$RestaurantCreationStateTearOff {
       id: id,
       restaurantName: restaurantName,
       owner: owner,
-      averageRating: averageRating,
-      highestRating: highestRating,
-      lowestRating: lowestRating,
       isSubmitting: isSubmitting,
       restaurantFailureOrSuccessOption: restaurantFailureOrSuccessOption,
     );
@@ -316,9 +310,6 @@ mixin _$RestaurantCreationState {
   UniqueId get id => throw _privateConstructorUsedError;
   RestaurantName get restaurantName => throw _privateConstructorUsedError;
   UniqueId get owner => throw _privateConstructorUsedError;
-  RestaurantRating get averageRating => throw _privateConstructorUsedError;
-  RestaurantRating get highestRating => throw _privateConstructorUsedError;
-  RestaurantRating get lowestRating => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<RestaurantFailure, Unit>>
       get restaurantFailureOrSuccessOption =>
@@ -338,9 +329,6 @@ abstract class $RestaurantCreationStateCopyWith<$Res> {
       {UniqueId id,
       RestaurantName restaurantName,
       UniqueId owner,
-      RestaurantRating averageRating,
-      RestaurantRating highestRating,
-      RestaurantRating lowestRating,
       bool isSubmitting,
       Option<Either<RestaurantFailure, Unit>>
           restaurantFailureOrSuccessOption});
@@ -360,9 +348,6 @@ class _$RestaurantCreationStateCopyWithImpl<$Res>
     Object? id = freezed,
     Object? restaurantName = freezed,
     Object? owner = freezed,
-    Object? averageRating = freezed,
-    Object? highestRating = freezed,
-    Object? lowestRating = freezed,
     Object? isSubmitting = freezed,
     Object? restaurantFailureOrSuccessOption = freezed,
   }) {
@@ -379,18 +364,6 @@ class _$RestaurantCreationStateCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      averageRating: averageRating == freezed
-          ? _value.averageRating
-          : averageRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
-      highestRating: highestRating == freezed
-          ? _value.highestRating
-          : highestRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
-      lowestRating: lowestRating == freezed
-          ? _value.lowestRating
-          : lowestRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
       isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -415,9 +388,6 @@ abstract class _$RestaurantCreationStateCopyWith<$Res>
       {UniqueId id,
       RestaurantName restaurantName,
       UniqueId owner,
-      RestaurantRating averageRating,
-      RestaurantRating highestRating,
-      RestaurantRating lowestRating,
       bool isSubmitting,
       Option<Either<RestaurantFailure, Unit>>
           restaurantFailureOrSuccessOption});
@@ -440,9 +410,6 @@ class __$RestaurantCreationStateCopyWithImpl<$Res>
     Object? id = freezed,
     Object? restaurantName = freezed,
     Object? owner = freezed,
-    Object? averageRating = freezed,
-    Object? highestRating = freezed,
-    Object? lowestRating = freezed,
     Object? isSubmitting = freezed,
     Object? restaurantFailureOrSuccessOption = freezed,
   }) {
@@ -459,18 +426,6 @@ class __$RestaurantCreationStateCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      averageRating: averageRating == freezed
-          ? _value.averageRating
-          : averageRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
-      highestRating: highestRating == freezed
-          ? _value.highestRating
-          : highestRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
-      lowestRating: lowestRating == freezed
-          ? _value.lowestRating
-          : lowestRating // ignore: cast_nullable_to_non_nullable
-              as RestaurantRating,
       isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -490,9 +445,6 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
       {required this.id,
       required this.restaurantName,
       required this.owner,
-      required this.averageRating,
-      required this.highestRating,
-      required this.lowestRating,
       required this.isSubmitting,
       required this.restaurantFailureOrSuccessOption});
 
@@ -503,12 +455,6 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
   @override
   final UniqueId owner;
   @override
-  final RestaurantRating averageRating;
-  @override
-  final RestaurantRating highestRating;
-  @override
-  final RestaurantRating lowestRating;
-  @override
   final bool isSubmitting;
   @override
   final Option<Either<RestaurantFailure, Unit>>
@@ -516,7 +462,7 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
 
   @override
   String toString() {
-    return 'RestaurantCreationState(id: $id, restaurantName: $restaurantName, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, isSubmitting: $isSubmitting, restaurantFailureOrSuccessOption: $restaurantFailureOrSuccessOption)';
+    return 'RestaurantCreationState(id: $id, restaurantName: $restaurantName, owner: $owner, isSubmitting: $isSubmitting, restaurantFailureOrSuccessOption: $restaurantFailureOrSuccessOption)';
   }
 
   @override
@@ -530,15 +476,6 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
                     .equals(other.restaurantName, restaurantName)) &&
             (identical(other.owner, owner) ||
                 const DeepCollectionEquality().equals(other.owner, owner)) &&
-            (identical(other.averageRating, averageRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.averageRating, averageRating)) &&
-            (identical(other.highestRating, highestRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.highestRating, highestRating)) &&
-            (identical(other.lowestRating, lowestRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.lowestRating, lowestRating)) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
@@ -555,9 +492,6 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(restaurantName) ^
       const DeepCollectionEquality().hash(owner) ^
-      const DeepCollectionEquality().hash(averageRating) ^
-      const DeepCollectionEquality().hash(highestRating) ^
-      const DeepCollectionEquality().hash(lowestRating) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(restaurantFailureOrSuccessOption);
 
@@ -573,9 +507,6 @@ abstract class _RestaurantCreationState implements RestaurantCreationState {
       {required UniqueId id,
       required RestaurantName restaurantName,
       required UniqueId owner,
-      required RestaurantRating averageRating,
-      required RestaurantRating highestRating,
-      required RestaurantRating lowestRating,
       required bool isSubmitting,
       required Option<Either<RestaurantFailure, Unit>>
           restaurantFailureOrSuccessOption}) = _$_RestaurantCreationState;
@@ -586,12 +517,6 @@ abstract class _RestaurantCreationState implements RestaurantCreationState {
   RestaurantName get restaurantName => throw _privateConstructorUsedError;
   @override
   UniqueId get owner => throw _privateConstructorUsedError;
-  @override
-  RestaurantRating get averageRating => throw _privateConstructorUsedError;
-  @override
-  RestaurantRating get highestRating => throw _privateConstructorUsedError;
-  @override
-  RestaurantRating get lowestRating => throw _privateConstructorUsedError;
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
   @override

@@ -16,6 +16,9 @@ abstract class RestaurantDto implements _$RestaurantDto {
     required double averageRating,
     required double highestRating,
     required double lowestRating,
+    required double latestRating,
+    required int numberOfRatings,
+    required int sumOfRatings,
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) =>
@@ -35,6 +38,9 @@ abstract class RestaurantDto implements _$RestaurantDto {
       averageRating: restaurant.averageRating.getOrCrash(),
       highestRating: restaurant.highestRating.getOrCrash(),
       lowestRating: restaurant.lowestRating.getOrCrash(),
+      latestRating: restaurant.latestRating.getOrCrash(),
+      numberOfRatings: restaurant.numberOfRatings,
+      sumOfRatings: restaurant.sumOfRatings,
     );
   }
 
@@ -46,6 +52,9 @@ abstract class RestaurantDto implements _$RestaurantDto {
       averageRating: RestaurantRating(averageRating),
       highestRating: RestaurantRating(highestRating),
       lowestRating: RestaurantRating(lowestRating),
+      latestRating: RestaurantRating(latestRating),
+      numberOfRatings: numberOfRatings,
+      sumOfRatings: sumOfRatings,
     );
   }
 }
