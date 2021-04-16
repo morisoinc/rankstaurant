@@ -159,24 +159,9 @@ InputDecorationTheme _inputDecorationTheme(
 }
 
 TextTheme _buildTextTheme({required TextTheme base, required Color textColor}) {
-  return base
-      .copyWith(
-        headline5: base.headline5!.copyWith(
-          fontWeight: FontWeight.w600,
-          fontSize: 24.0,
-        ),
-        caption: base.caption!.copyWith(
-          fontWeight: FontWeight.w400,
-          fontSize: 18.0,
-        ),
-        bodyText1: base.bodyText1!.copyWith(
-          fontWeight: FontWeight.w400,
-          fontSize: 20.0,
-        ),
-      )
-      .apply(
-        fontFamily: 'NotoSerifJP',
-        displayColor: textColor,
-        bodyColor: textColor,
-      );
+  return base.apply(
+    fontFamily: 'NotoSerifJP',
+    displayColor: textColor,
+    bodyColor: textColor,
+  );
 }
