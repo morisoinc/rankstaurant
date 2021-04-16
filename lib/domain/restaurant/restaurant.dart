@@ -3,7 +3,6 @@ import 'package:rankstaurant/domain/core/failures.dart';
 import 'package:rankstaurant/domain/core/value_objects.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rankstaurant/domain/restaurant/value_objects.dart';
-import 'package:rankstaurant/domain/review/review.dart';
 
 part 'restaurant.freezed.dart';
 

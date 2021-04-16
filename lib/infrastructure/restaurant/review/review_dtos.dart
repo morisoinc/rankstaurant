@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dartz/dartz_unsafe.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:rankstaurant/domain/core/value_objects.dart';
 import 'package:rankstaurant/domain/review/review.dart';
