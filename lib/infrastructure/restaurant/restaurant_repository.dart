@@ -62,6 +62,7 @@ class RestaurantRepository implements IRestaurantRepository {
   @override
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll() async* {
     final restaurantsCollection = await _firestore.restaurantsCollection();
+
     yield* restaurantsCollection
         .orderBy('averageRating', descending: true)
         .snapshots()
