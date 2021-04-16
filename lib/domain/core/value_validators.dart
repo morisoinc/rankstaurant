@@ -45,7 +45,7 @@ Either<ValueFailure<double>, double> validateRestaurantRating(double input) {
 }
 
 Either<ValueFailure<String>, String> validateReviewBody(String input) {
-  if (input.isNotEmpty && input.length < 360) {
+  if (input.length < 360) {
     return right(input);
   } else {
     return left(ValueFailure.longReviewBody(failedValue: input));

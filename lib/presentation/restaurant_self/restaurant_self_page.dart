@@ -1,13 +1,17 @@
+import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rankstaurant/application/restaurant_self/restaurant_self_bloc.dart';
+import 'package:rankstaurant/application/review_creation/review_creation_bloc.dart';
 import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
+import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/error_review.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/review_card.dart';
+import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
 
 class RestaurantSelfPage extends StatelessWidget {
   const RestaurantSelfPage({required this.restaurant});
@@ -67,6 +71,7 @@ class RestaurantSelfPage extends StatelessWidget {
             }),
           ],
         ),
+        floatingActionButton: _buildFab(context),
       ),
     );
   }
@@ -158,5 +163,108 @@ class RestaurantSelfPage extends StatelessWidget {
         ],
       );
     }
+  }
+
+  Widget _buildFab(BuildContext context) {
+    switch (SettingsHelper.userRole()) {
+      case Role.regular:
+        return FloatingActionButton(
+          onPressed: () => showLeaveReviewDialog(context),
+          child: const Icon(Icons.add, size: 24),
+        );
+      case Role.admin:
+      case Role.owner:
+      default:
+        return Container();
+    }
+  }
+
+  void showLeaveReviewDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (_) => BlocProvider<ReviewCreationBloc>(
+        create: (context) => getIt<ReviewCreationBloc>(),
+        child: BlocConsumer<ReviewCreationBloc, ReviewCreationState>(
+          listener: (context, state) {
+            state.reviewFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold((failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    unexpected: (_) => 'Unexpected error',
+                  ),
+                ).show(context);
+              }, (_) {
+                Navigator.pop(context);
+              }),
+            );
+          },
+          builder: (context, state) {
+            return AlertDialog(
+              title: const Text('Leave a review'),
+              content: Builder(
+                builder: (context) {
+                  final width = MediaQuery.of(context).size.width;
+                  return Form(
+                    child: Container(
+                      width: width,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          StarsSelector(
+                            onChanged: (starsSelected) => context
+                                .read<ReviewCreationBloc>()
+                                .add(ReviewCreationEvent.ratingChanged(
+                                    starsSelected)),
+                          ),
+                          const SizedBox(height: 16),
+                          TextFormField(
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            decoration:
+                                const InputDecoration(hintText: 'Comment'),
+                            onChanged: (value) => context
+                                .read<ReviewCreationBloc>()
+                                .add(ReviewCreationEvent.bodyChanged(value)),
+                            validator: (_) => context
+                                .read<ReviewCreationBloc>()
+                                .state
+                                .reviewBody
+                                .value
+                                .fold(
+                                  (f) => f.maybeMap(
+                                    longReviewBody: (_) =>
+                                        'Comment must be shorter',
+                                    orElse: () => null,
+                                  ),
+                                  (_) => null,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                ElevatedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      context.read<ReviewCreationBloc>().add(
+                          ReviewCreationEvent.leaveReviewPressed(restaurant));
+                    },
+                    child: const Text('Leave')),
+              ],
+              shape: const RoundedRectangleBorder(),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
