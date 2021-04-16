@@ -16,10 +16,7 @@ part 'restaurant_self_bloc.freezed.dart';
 @injectable
 class RestaurantSelfBloc
     extends Bloc<RestaurantSelfEvent, RestaurantSelfState> {
-  RestaurantSelfBloc(this._restaurantRepository)
-      : super(RestaurantSelfState.initial());
-
-  final IRestaurantRepository _restaurantRepository;
+  RestaurantSelfBloc() : super(RestaurantSelfState.initial());
 
   @override
   Stream<RestaurantSelfState> mapEventToState(
@@ -30,7 +27,6 @@ class RestaurantSelfBloc
         yield e.restaurantOption.fold(() => state,
             (restaurant) => state.copyWith(restaurant: restaurant));
       },
-      loadReviews: (e) async* {},
     );
   }
 }

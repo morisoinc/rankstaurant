@@ -55,7 +55,7 @@ class ReviewRepository implements IReviewRepository {
         await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
     yield* reviewsCollection
-        .orderBy('serverTimestamp', descending: true)
+        .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map((snapshot) => right<ReviewFailure, KtList<Review>>(
               snapshot.docs

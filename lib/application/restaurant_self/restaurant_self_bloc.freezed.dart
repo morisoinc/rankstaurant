@@ -21,10 +21,6 @@ class _$RestaurantSelfEventTearOff {
       restaurantOption,
     );
   }
-
-  _LoadReviews loadReviews() {
-    return const _LoadReviews();
-  }
 }
 
 /// @nodoc
@@ -32,31 +28,33 @@ const $RestaurantSelfEvent = _$RestaurantSelfEventTearOff();
 
 /// @nodoc
 mixin _$RestaurantSelfEvent {
+  Option<Restaurant> get restaurantOption => throw _privateConstructorUsedError;
+
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Option<Restaurant> restaurantOption) initialized,
-    required TResult Function() loadReviews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Option<Restaurant> restaurantOption)? initialized,
-    TResult Function()? loadReviews,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_LoadReviews value) loadReviews,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_LoadReviews value)? loadReviews,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $RestaurantSelfEventCopyWith<RestaurantSelfEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -65,6 +63,7 @@ abstract class $RestaurantSelfEventCopyWith<$Res> {
   factory $RestaurantSelfEventCopyWith(
           RestaurantSelfEvent value, $Res Function(RestaurantSelfEvent) then) =
       _$RestaurantSelfEventCopyWithImpl<$Res>;
+  $Res call({Option<Restaurant> restaurantOption});
 }
 
 /// @nodoc
@@ -75,13 +74,27 @@ class _$RestaurantSelfEventCopyWithImpl<$Res>
   final RestaurantSelfEvent _value;
   // ignore: unused_field
   final $Res Function(RestaurantSelfEvent) _then;
+
+  @override
+  $Res call({
+    Object? restaurantOption = freezed,
+  }) {
+    return _then(_value.copyWith(
+      restaurantOption: restaurantOption == freezed
+          ? _value.restaurantOption
+          : restaurantOption // ignore: cast_nullable_to_non_nullable
+              as Option<Restaurant>,
+    ));
+  }
 }
 
 /// @nodoc
-abstract class _$InitializedCopyWith<$Res> {
+abstract class _$InitializedCopyWith<$Res>
+    implements $RestaurantSelfEventCopyWith<$Res> {
   factory _$InitializedCopyWith(
           _Initialized value, $Res Function(_Initialized) then) =
       __$InitializedCopyWithImpl<$Res>;
+  @override
   $Res call({Option<Restaurant> restaurantOption});
 }
 
@@ -144,7 +157,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Option<Restaurant> restaurantOption) initialized,
-    required TResult Function() loadReviews,
   }) {
     return initialized(restaurantOption);
   }
@@ -153,7 +165,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Option<Restaurant> restaurantOption)? initialized,
-    TResult Function()? loadReviews,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -166,7 +177,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initialized value) initialized,
-    required TResult Function(_LoadReviews value) loadReviews,
   }) {
     return initialized(this);
   }
@@ -175,7 +185,6 @@ class _$_Initialized implements _Initialized {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initialized value)? initialized,
-    TResult Function(_LoadReviews value)? loadReviews,
     required TResult orElse(),
   }) {
     if (initialized != null) {
@@ -189,95 +198,12 @@ abstract class _Initialized implements RestaurantSelfEvent {
   const factory _Initialized(Option<Restaurant> restaurantOption) =
       _$_Initialized;
 
+  @override
   Option<Restaurant> get restaurantOption => throw _privateConstructorUsedError;
+  @override
   @JsonKey(ignore: true)
   _$InitializedCopyWith<_Initialized> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$LoadReviewsCopyWith<$Res> {
-  factory _$LoadReviewsCopyWith(
-          _LoadReviews value, $Res Function(_LoadReviews) then) =
-      __$LoadReviewsCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$LoadReviewsCopyWithImpl<$Res>
-    extends _$RestaurantSelfEventCopyWithImpl<$Res>
-    implements _$LoadReviewsCopyWith<$Res> {
-  __$LoadReviewsCopyWithImpl(
-      _LoadReviews _value, $Res Function(_LoadReviews) _then)
-      : super(_value, (v) => _then(v as _LoadReviews));
-
-  @override
-  _LoadReviews get _value => super._value as _LoadReviews;
-}
-
-/// @nodoc
-class _$_LoadReviews implements _LoadReviews {
-  const _$_LoadReviews();
-
-  @override
-  String toString() {
-    return 'RestaurantSelfEvent.loadReviews()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _LoadReviews);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Option<Restaurant> restaurantOption) initialized,
-    required TResult Function() loadReviews,
-  }) {
-    return loadReviews();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Option<Restaurant> restaurantOption)? initialized,
-    TResult Function()? loadReviews,
-    required TResult orElse(),
-  }) {
-    if (loadReviews != null) {
-      return loadReviews();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Initialized value) initialized,
-    required TResult Function(_LoadReviews value) loadReviews,
-  }) {
-    return loadReviews(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Initialized value)? initialized,
-    TResult Function(_LoadReviews value)? loadReviews,
-    required TResult orElse(),
-  }) {
-    if (loadReviews != null) {
-      return loadReviews(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _LoadReviews implements RestaurantSelfEvent {
-  const factory _LoadReviews() = _$_LoadReviews;
 }
 
 /// @nodoc

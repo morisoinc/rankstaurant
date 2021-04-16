@@ -44,16 +44,10 @@ class RestaurantCreationBloc
             restaurantFailureOrSuccessOption: none(),
           );
 
-          failureOrSuccess = await restaurantRepository.create(Restaurant(
-            id: state.id,
+          failureOrSuccess =
+              await restaurantRepository.create(Restaurant.empty().copyWith(
             name: state.restaurantName,
             owner: state.owner,
-            averageRating: RestaurantRating(-1),
-            highestRating: RestaurantRating(-1),
-            lowestRating: RestaurantRating(-1),
-            latestRating: RestaurantRating(-1),
-            numberOfRatings: 0,
-            sumOfRatings: 0,
           ));
         }
 
