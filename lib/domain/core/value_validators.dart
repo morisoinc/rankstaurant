@@ -43,3 +43,19 @@ Either<ValueFailure<double>, double> validateRestaurantRating(double input) {
     return left(ValueFailure.invalidRestaurantRating(failedValue: input));
   }
 }
+
+Either<ValueFailure<String>, String> validateReviewBody(String input) {
+  if (input.isNotEmpty && input.length < 360) {
+    return right(input);
+  } else {
+    return left(ValueFailure.longReviewBody(failedValue: input));
+  }
+}
+
+Either<ValueFailure<int>, int> validateReviewRating(int input) {
+  if (input >= 0 && input <= 5) {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidRating(failedValue: input));
+  }
+}

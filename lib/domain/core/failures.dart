@@ -19,4 +19,10 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidRestaurantRating({
     required double failedValue,
   }) = InvalidRestaurantRating<T>;
+  const factory ValueFailure.longReviewBody({
+    required String failedValue,
+  }) = LongReviewBody<T>;
+  const factory ValueFailure.invalidRating({
+    required int failedValue,
+  }) = InvalidRating<T>;
 }
