@@ -7,6 +7,9 @@ import 'package:rankstaurant/domain/core/errors.dart';
 import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
+import 'package:rankstaurant/domain/restaurant/value_objects.dart';
+import 'package:rankstaurant/domain/review/review.dart';
+import 'package:rankstaurant/domain/review/review_failure.dart';
 import 'package:rankstaurant/infrastructure/core/firestore_helpers.dart';
 import 'package:rankstaurant/infrastructure/restaurant/restaurant_dtos.dart';
 import 'package:rxdart/rxdart.dart';
@@ -56,6 +59,45 @@ class RestaurantRepository implements IRestaurantRepository {
       return right(unit);
     } on FirebaseException {
       return left(const RestaurantFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<ReviewFailure, Unit>> updateWithReview(
+      Restaurant restaurant, Review review) async {
+    try {
+      final restaurantsCollection = await _firestore.restaurantsCollection();
+
+      final currentRating = review.reviewRating.getOrCrash().toDouble();
+
+      var updatedRestaurant = restaurant.copyWith(
+        latestRating: RestaurantRating(currentRating),
+        numberOfRatings: restaurant.numberOfRatings + 1,
+        sumOfRatings:
+            restaurant.sumOfRatings + review.reviewRating.getOrCrash(),
+        lowestRating: currentRating < restaurant.lowestRating.getOrCrash()
+            ? RestaurantRating(currentRating)
+            : restaurant.lowestRating,
+        highestRating: currentRating > restaurant.highestRating.getOrCrash()
+            ? RestaurantRating(currentRating)
+            : restaurant.highestRating,
+      );
+
+      updatedRestaurant = updatedRestaurant.copyWith(
+        averageRating: RestaurantRating(
+          updatedRestaurant.sumOfRatings / updatedRestaurant.numberOfRatings,
+        ),
+      );
+
+      final restaurantDto = RestaurantDto.fromDomain(updatedRestaurant);
+
+      await restaurantsCollection
+          .doc(restaurantDto.id)
+          .update(restaurantDto.toJson());
+
+      return right(unit);
+    } on FirebaseException {
+      return left(const ReviewFailure.unexpected());
     }
   }
 

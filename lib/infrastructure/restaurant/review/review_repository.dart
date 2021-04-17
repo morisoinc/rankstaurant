@@ -59,9 +59,13 @@ class ReviewRepository implements IReviewRepository {
         .snapshots()
         .map((snapshot) => right<ReviewFailure, KtList<Review>>(
               snapshot.docs
-                  .map((doc) => ReviewDto.fromFirestore(doc).toDomain())
-                  .toImmutableList(),
+                  .where((doc) => !doc.metadata.hasPendingWrites)
+                  .map((doc) {
+                return ReviewDto.fromFirestore(doc).toDomain();
+              }).toImmutableList(),
             ))
-        .onErrorReturnWith((error) => left(const ReviewFailure.unexpected()));
+        .onErrorReturnWith((error) {
+      return left(const ReviewFailure.unexpected());
+    });
   }
 }

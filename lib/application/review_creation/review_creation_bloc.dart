@@ -5,6 +5,7 @@ import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rankstaurant/domain/core/value_objects.dart';
+import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/review/i_review_repository.dart';
 import 'package:rankstaurant/domain/review/review.dart';
@@ -18,10 +19,11 @@ part 'review_creation_bloc.freezed.dart';
 @injectable
 class ReviewCreationBloc
     extends Bloc<ReviewCreationEvent, ReviewCreationState> {
-  ReviewCreationBloc(this.reviewRepository)
+  ReviewCreationBloc(this.reviewRepository, this.restaurantRepository)
       : super(ReviewCreationState.initial());
 
   final IReviewRepository reviewRepository;
+  final IRestaurantRepository restaurantRepository;
 
   @override
   Stream<ReviewCreationState> mapEventToState(
@@ -41,7 +43,8 @@ class ReviewCreationBloc
         );
       },
       leaveReviewPressed: (e) async* {
-        Either<ReviewFailure, Unit>? failureOrSuccess;
+        Either<ReviewFailure, Unit> failureOrSuccess =
+            left(const ReviewFailure.unexpected());
 
         if (state.reviewBody.isValid() && state.reviewRating.isValid()) {
           yield state.copyWith(
@@ -49,13 +52,20 @@ class ReviewCreationBloc
             reviewFailureOrSuccessOption: none(),
           );
 
+          final review = Review.empty().copyWith(
+            reviewBody: state.reviewBody,
+            reviewRating: state.reviewRating,
+          );
+
           failureOrSuccess = await reviewRepository.create(
-            Review.empty().copyWith(
-              reviewBody: state.reviewBody,
-              reviewRating: state.reviewRating,
-            ),
+            review,
             e.restaurant,
           );
+
+          if (failureOrSuccess.isRight()) {
+            failureOrSuccess = await restaurantRepository.updateWithReview(
+                e.restaurant, review);
+          }
         }
 
         yield state.copyWith(

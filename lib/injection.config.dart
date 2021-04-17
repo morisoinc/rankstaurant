@@ -48,8 +48,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
   gh.factory<_i12.RestaurantSelfBloc>(() => _i12.RestaurantSelfBloc());
   gh.factory<_i13.RestaurantsBloc>(
       () => _i13.RestaurantsBloc(get<_i5.IRestaurantRepository>()));
-  gh.factory<_i14.ReviewCreationBloc>(
-      () => _i14.ReviewCreationBloc(get<_i7.IReviewRepository>()));
+  gh.factory<_i14.ReviewCreationBloc>(() => _i14.ReviewCreationBloc(
+      get<_i7.IReviewRepository>(), get<_i5.IRestaurantRepository>()));
   gh.factory<_i15.ReviewsBloc>(
       () => _i15.ReviewsBloc(get<_i7.IReviewRepository>()));
   gh.lazySingleton<_i16.IAuthFacade>(() => _i17.FirebaseAuthFacade(
