@@ -69,14 +69,16 @@ class RestaurantRepository implements IRestaurantRepository {
       final restaurantsCollection = await _firestore.restaurantsCollection();
 
       final rating = review.rating.getOrCrash().toDouble();
+      final restaurantLowestRating = restaurant.lowestRating.getOrCrash();
 
       var updatedRestaurant = restaurant.copyWith(
         latestRating: RestaurantRating(rating),
         numberOfRatings: restaurant.numberOfRatings + 1,
         sumOfRatings: restaurant.sumOfRatings + rating.toInt(),
-        lowestRating: rating < restaurant.lowestRating.getOrCrash()
-            ? RestaurantRating(rating)
-            : restaurant.lowestRating,
+        lowestRating:
+            restaurantLowestRating == -1 || rating < restaurantLowestRating
+                ? RestaurantRating(rating)
+                : restaurant.lowestRating,
         highestRating: rating > restaurant.highestRating.getOrCrash()
             ? RestaurantRating(rating)
             : restaurant.highestRating,
