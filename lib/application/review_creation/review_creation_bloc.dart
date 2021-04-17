@@ -32,13 +32,13 @@ class ReviewCreationBloc
     yield* event.map(
       bodyChanged: (e) async* {
         yield state.copyWith(
-          reviewBody: ReviewBody(e.bodyStr),
+          body: ReviewBody(e.bodyStr),
           reviewFailureOrSuccessOption: none(),
         );
       },
       ratingChanged: (e) async* {
         yield state.copyWith(
-          reviewRating: ReviewRating(e.ratingInt),
+          rating: ReviewRating(e.ratingInt),
           reviewFailureOrSuccessOption: none(),
         );
       },
@@ -46,15 +46,15 @@ class ReviewCreationBloc
         Either<ReviewFailure, Unit> failureOrSuccess =
             left(const ReviewFailure.unexpected());
 
-        if (state.reviewBody.isValid() && state.reviewRating.isValid()) {
+        if (state.body.isValid() && state.rating.isValid()) {
           yield state.copyWith(
             isSubmitting: true,
             reviewFailureOrSuccessOption: none(),
           );
 
           final review = Review.empty().copyWith(
-            reviewBody: state.reviewBody,
-            reviewRating: state.reviewRating,
+            body: state.body,
+            rating: state.rating,
           );
 
           failureOrSuccess = await reviewRepository.create(

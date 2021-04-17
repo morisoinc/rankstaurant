@@ -10,21 +10,24 @@ part 'review.freezed.dart';
 abstract class Review with _$Review {
   const factory Review({
     required UniqueId id,
-    required ReviewBody reviewBody,
-    required ReviewRating reviewRating,
+    required ReviewBody body,
+    required ReviewRating rating,
+    required ReviewResponse response,
   }) = _Review;
 
   const Review._();
 
   factory Review.empty() => Review(
         id: UniqueId(),
-        reviewBody: ReviewBody(''),
-        reviewRating: ReviewRating(0),
+        body: ReviewBody(''),
+        rating: ReviewRating(0),
+        response: ReviewResponse(''),
       );
 
   Option<ValueFailure<dynamic>> get failureOrOption {
-    return reviewBody.failureOrUnit
-        .andThen(reviewRating.failureOrUnit)
+    return body.failureOrUnit
+        .andThen(rating.failureOrUnit)
+        .andThen(response.failureOrUnit)
         .fold((l) => some(l), (_) => none());
   }
 }

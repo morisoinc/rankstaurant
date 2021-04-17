@@ -59,7 +59,7 @@ class RestaurantSelfPage extends StatelessWidget {
                                 if (review.failureOrOption.isSome()) {
                                   return ErrorReviewCard();
                                 } else {
-                                  return ReviewCard(review);
+                                  return ReviewCard(review, restaurant);
                                 }
                               },
                             );
@@ -229,7 +229,7 @@ class RestaurantSelfPage extends StatelessWidget {
                             validator: (_) => context
                                 .read<ReviewCreationBloc>()
                                 .state
-                                .reviewBody
+                                .body
                                 .value
                                 .fold(
                                   (f) => f.maybeMap(

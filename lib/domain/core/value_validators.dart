@@ -59,3 +59,11 @@ Either<ValueFailure<int>, int> validateReviewRating(int input) {
     return left(ValueFailure.invalidRating(failedValue: input));
   }
 }
+
+Either<ValueFailure<String>, String> validateReviewResponse(String input) {
+  if (input.length < 360) {
+    return right(input);
+  } else {
+    return left(ValueFailure.longReviewResponse(failedValue: input));
+  }
+}

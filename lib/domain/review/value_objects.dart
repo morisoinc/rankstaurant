@@ -24,3 +24,14 @@ class ReviewRating extends ValueObject<int> {
   @override
   final Either<ValueFailure<int>, int> value;
 }
+
+class ReviewResponse extends ValueObject<String> {
+  factory ReviewResponse(String input) {
+    return ReviewResponse._(validateReviewResponse(input));
+  }
+
+  const ReviewResponse._(this.value);
+
+  @override
+  final Either<ValueFailure<String>, String> value;
+}

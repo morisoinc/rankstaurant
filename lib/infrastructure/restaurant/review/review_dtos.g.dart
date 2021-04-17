@@ -8,8 +8,9 @@ part of 'review_dtos.dart';
 
 _$_ReviewDto _$_$_ReviewDtoFromJson(Map<String, dynamic> json) {
   return _$_ReviewDto(
-    reviewBody: json['reviewBody'] as String,
-    reviewRating: json['reviewRating'] as int,
+    body: json['body'] as String,
+    rating: json['rating'] as int,
+    response: json['response'] as String,
     serverTimeStamp: const ServerTimestampConverter()
         .fromJson(json['serverTimeStamp'] as Object),
   );
@@ -17,8 +18,9 @@ _$_ReviewDto _$_$_ReviewDtoFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_ReviewDtoToJson(_$_ReviewDto instance) =>
     <String, dynamic>{
-      'reviewBody': instance.reviewBody,
-      'reviewRating': instance.reviewRating,
+      'body': instance.body,
+      'rating': instance.rating,
+      'response': instance.response,
       'serverTimeStamp':
           const ServerTimestampConverter().toJson(instance.serverTimeStamp),
     };

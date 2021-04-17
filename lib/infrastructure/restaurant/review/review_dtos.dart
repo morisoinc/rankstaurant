@@ -12,8 +12,9 @@ part 'review_dtos.g.dart';
 abstract class ReviewDto implements _$ReviewDto {
   const factory ReviewDto({
     @JsonKey(ignore: true) String? id,
-    required String reviewBody,
-    required int reviewRating,
+    required String body,
+    required int rating,
+    required String response,
     @ServerTimestampConverter() required FieldValue serverTimeStamp,
   }) = _ReviewDto;
 
@@ -29,8 +30,9 @@ abstract class ReviewDto implements _$ReviewDto {
   factory ReviewDto.fromDomain(Review review) {
     return ReviewDto(
       id: review.id.getOrCrash(),
-      reviewBody: review.reviewBody.getOrCrash(),
-      reviewRating: review.reviewRating.getOrCrash(),
+      body: review.body.getOrCrash(),
+      rating: review.rating.getOrCrash(),
+      response: review.response.getOrCrash(),
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
@@ -38,8 +40,9 @@ abstract class ReviewDto implements _$ReviewDto {
   Review toDomain() {
     return Review(
       id: UniqueId.fromUniqueString(id ?? ''),
-      reviewBody: ReviewBody(reviewBody),
-      reviewRating: ReviewRating(reviewRating),
+      body: ReviewBody(body),
+      rating: ReviewRating(rating),
+      response: ReviewResponse(response),
     );
   }
 }

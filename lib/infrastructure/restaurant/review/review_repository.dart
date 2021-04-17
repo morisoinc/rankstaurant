@@ -24,10 +24,10 @@ class ReviewRepository implements IReviewRepository {
       final reviewsCollection =
           await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
-      reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
+      await reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
 
       return right(unit);
-    } on FirebaseException {
+    } on FirebaseException catch (e) {
       return left(const ReviewFailure.unexpected());
     }
   }
@@ -40,7 +40,7 @@ class ReviewRepository implements IReviewRepository {
       final reviewsCollection =
           await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
-      reviewsCollection.doc(reviewDto.id).update(reviewDto.toJson());
+      await reviewsCollection.doc(reviewDto.id).update(reviewDto.toJson());
 
       return right(unit);
     } on FirebaseException {

@@ -464,15 +464,15 @@ class _$ReviewCreationStateTearOff {
 
   _ReviewCreationState call(
       {required UniqueId id,
-      required ReviewBody reviewBody,
-      required ReviewRating reviewRating,
+      required ReviewBody body,
+      required ReviewRating rating,
       required bool isSubmitting,
       required Option<Either<ReviewFailure, Unit>>
           reviewFailureOrSuccessOption}) {
     return _ReviewCreationState(
       id: id,
-      reviewBody: reviewBody,
-      reviewRating: reviewRating,
+      body: body,
+      rating: rating,
       isSubmitting: isSubmitting,
       reviewFailureOrSuccessOption: reviewFailureOrSuccessOption,
     );
@@ -485,8 +485,8 @@ const $ReviewCreationState = _$ReviewCreationStateTearOff();
 /// @nodoc
 mixin _$ReviewCreationState {
   UniqueId get id => throw _privateConstructorUsedError;
-  ReviewBody get reviewBody => throw _privateConstructorUsedError;
-  ReviewRating get reviewRating => throw _privateConstructorUsedError;
+  ReviewBody get body => throw _privateConstructorUsedError;
+  ReviewRating get rating => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<ReviewFailure, Unit>> get reviewFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
@@ -503,8 +503,8 @@ abstract class $ReviewCreationStateCopyWith<$Res> {
       _$ReviewCreationStateCopyWithImpl<$Res>;
   $Res call(
       {UniqueId id,
-      ReviewBody reviewBody,
-      ReviewRating reviewRating,
+      ReviewBody body,
+      ReviewRating rating,
       bool isSubmitting,
       Option<Either<ReviewFailure, Unit>> reviewFailureOrSuccessOption});
 }
@@ -521,8 +521,8 @@ class _$ReviewCreationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? reviewBody = freezed,
-    Object? reviewRating = freezed,
+    Object? body = freezed,
+    Object? rating = freezed,
     Object? isSubmitting = freezed,
     Object? reviewFailureOrSuccessOption = freezed,
   }) {
@@ -531,13 +531,13 @@ class _$ReviewCreationStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      reviewBody: reviewBody == freezed
-          ? _value.reviewBody
-          : reviewBody // ignore: cast_nullable_to_non_nullable
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as ReviewBody,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as ReviewRating,
       isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
@@ -560,8 +560,8 @@ abstract class _$ReviewCreationStateCopyWith<$Res>
   @override
   $Res call(
       {UniqueId id,
-      ReviewBody reviewBody,
-      ReviewRating reviewRating,
+      ReviewBody body,
+      ReviewRating rating,
       bool isSubmitting,
       Option<Either<ReviewFailure, Unit>> reviewFailureOrSuccessOption});
 }
@@ -580,8 +580,8 @@ class __$ReviewCreationStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? reviewBody = freezed,
-    Object? reviewRating = freezed,
+    Object? body = freezed,
+    Object? rating = freezed,
     Object? isSubmitting = freezed,
     Object? reviewFailureOrSuccessOption = freezed,
   }) {
@@ -590,13 +590,13 @@ class __$ReviewCreationStateCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as UniqueId,
-      reviewBody: reviewBody == freezed
-          ? _value.reviewBody
-          : reviewBody // ignore: cast_nullable_to_non_nullable
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as ReviewBody,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as ReviewRating,
       isSubmitting: isSubmitting == freezed
           ? _value.isSubmitting
@@ -614,17 +614,17 @@ class __$ReviewCreationStateCopyWithImpl<$Res>
 class _$_ReviewCreationState implements _ReviewCreationState {
   const _$_ReviewCreationState(
       {required this.id,
-      required this.reviewBody,
-      required this.reviewRating,
+      required this.body,
+      required this.rating,
       required this.isSubmitting,
       required this.reviewFailureOrSuccessOption});
 
   @override
   final UniqueId id;
   @override
-  final ReviewBody reviewBody;
+  final ReviewBody body;
   @override
-  final ReviewRating reviewRating;
+  final ReviewRating rating;
   @override
   final bool isSubmitting;
   @override
@@ -632,7 +632,7 @@ class _$_ReviewCreationState implements _ReviewCreationState {
 
   @override
   String toString() {
-    return 'ReviewCreationState(id: $id, reviewBody: $reviewBody, reviewRating: $reviewRating, isSubmitting: $isSubmitting, reviewFailureOrSuccessOption: $reviewFailureOrSuccessOption)';
+    return 'ReviewCreationState(id: $id, body: $body, rating: $rating, isSubmitting: $isSubmitting, reviewFailureOrSuccessOption: $reviewFailureOrSuccessOption)';
   }
 
   @override
@@ -641,12 +641,10 @@ class _$_ReviewCreationState implements _ReviewCreationState {
         (other is _ReviewCreationState &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.reviewBody, reviewBody) ||
-                const DeepCollectionEquality()
-                    .equals(other.reviewBody, reviewBody)) &&
-            (identical(other.reviewRating, reviewRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.reviewRating, reviewRating)) &&
+            (identical(other.body, body) ||
+                const DeepCollectionEquality().equals(other.body, body)) &&
+            (identical(other.rating, rating) ||
+                const DeepCollectionEquality().equals(other.rating, rating)) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 const DeepCollectionEquality()
                     .equals(other.isSubmitting, isSubmitting)) &&
@@ -661,8 +659,8 @@ class _$_ReviewCreationState implements _ReviewCreationState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(reviewBody) ^
-      const DeepCollectionEquality().hash(reviewRating) ^
+      const DeepCollectionEquality().hash(body) ^
+      const DeepCollectionEquality().hash(rating) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(reviewFailureOrSuccessOption);
 
@@ -676,8 +674,8 @@ class _$_ReviewCreationState implements _ReviewCreationState {
 abstract class _ReviewCreationState implements ReviewCreationState {
   const factory _ReviewCreationState(
       {required UniqueId id,
-      required ReviewBody reviewBody,
-      required ReviewRating reviewRating,
+      required ReviewBody body,
+      required ReviewRating rating,
       required bool isSubmitting,
       required Option<Either<ReviewFailure, Unit>>
           reviewFailureOrSuccessOption}) = _$_ReviewCreationState;
@@ -685,9 +683,9 @@ abstract class _ReviewCreationState implements ReviewCreationState {
   @override
   UniqueId get id => throw _privateConstructorUsedError;
   @override
-  ReviewBody get reviewBody => throw _privateConstructorUsedError;
+  ReviewBody get body => throw _privateConstructorUsedError;
   @override
-  ReviewRating get reviewRating => throw _privateConstructorUsedError;
+  ReviewRating get rating => throw _privateConstructorUsedError;
   @override
   bool get isSubmitting => throw _privateConstructorUsedError;
   @override

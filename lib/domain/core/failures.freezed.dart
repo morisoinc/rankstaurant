@@ -58,6 +58,12 @@ class _$ValueFailureTearOff {
       failedValue: failedValue,
     );
   }
+
+  LongReviewResponse<T> longReviewResponse<T>({required String failedValue}) {
+    return LongReviewResponse<T>(
+      failedValue: failedValue,
+    );
+  }
 }
 
 /// @nodoc
@@ -74,6 +80,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -85,6 +92,7 @@ mixin _$ValueFailure<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -98,6 +106,7 @@ mixin _$ValueFailure<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -109,6 +118,7 @@ mixin _$ValueFailure<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -203,6 +213,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidEmail(failedValue);
   }
@@ -217,6 +228,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -236,6 +248,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidEmail(this);
   }
@@ -250,6 +263,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidEmail != null) {
@@ -340,6 +354,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return shortPassword(failedValue);
   }
@@ -354,6 +369,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (shortPassword != null) {
@@ -373,6 +389,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return shortPassword(this);
   }
@@ -387,6 +404,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (shortPassword != null) {
@@ -478,6 +496,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidUserRole(failedValue);
   }
@@ -492,6 +511,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidUserRole != null) {
@@ -511,6 +531,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidUserRole(this);
   }
@@ -525,6 +546,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidUserRole != null) {
@@ -617,6 +639,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return longRestaurantName(failedValue);
   }
@@ -631,6 +654,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (longRestaurantName != null) {
@@ -650,6 +674,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return longRestaurantName(this);
   }
@@ -664,6 +689,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (longRestaurantName != null) {
@@ -758,6 +784,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidRestaurantRating(failedValue);
   }
@@ -772,6 +799,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidRestaurantRating != null) {
@@ -791,6 +819,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidRestaurantRating(this);
   }
@@ -805,6 +834,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidRestaurantRating != null) {
@@ -896,6 +926,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return longReviewBody(failedValue);
   }
@@ -910,6 +941,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (longReviewBody != null) {
@@ -929,6 +961,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return longReviewBody(this);
   }
@@ -943,6 +976,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (longReviewBody != null) {
@@ -1034,6 +1068,7 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
     required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidRating(failedValue);
   }
@@ -1048,6 +1083,7 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
     TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidRating != null) {
@@ -1067,6 +1103,7 @@ class _$InvalidRating<T> implements InvalidRating<T> {
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
     required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidRating(this);
   }
@@ -1081,6 +1118,7 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
     TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
     if (invalidRating != null) {
@@ -1096,5 +1134,148 @@ abstract class InvalidRating<T> implements ValueFailure<T> {
   int get failedValue => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $InvalidRatingCopyWith<T, InvalidRating<T>> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $LongReviewResponseCopyWith<T, $Res> {
+  factory $LongReviewResponseCopyWith(LongReviewResponse<T> value,
+          $Res Function(LongReviewResponse<T>) then) =
+      _$LongReviewResponseCopyWithImpl<T, $Res>;
+  $Res call({String failedValue});
+}
+
+/// @nodoc
+class _$LongReviewResponseCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res>
+    implements $LongReviewResponseCopyWith<T, $Res> {
+  _$LongReviewResponseCopyWithImpl(
+      LongReviewResponse<T> _value, $Res Function(LongReviewResponse<T>) _then)
+      : super(_value, (v) => _then(v as LongReviewResponse<T>));
+
+  @override
+  LongReviewResponse<T> get _value => super._value as LongReviewResponse<T>;
+
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(LongReviewResponse<T>(
+      failedValue: failedValue == freezed
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+class _$LongReviewResponse<T> implements LongReviewResponse<T> {
+  const _$LongReviewResponse({required this.failedValue});
+
+  @override
+  final String failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.longReviewResponse(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other is LongReviewResponse<T> &&
+            (identical(other.failedValue, failedValue) ||
+                const DeepCollectionEquality()
+                    .equals(other.failedValue, failedValue)));
+  }
+
+  @override
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(failedValue);
+
+  @JsonKey(ignore: true)
+  @override
+  $LongReviewResponseCopyWith<T, LongReviewResponse<T>> get copyWith =>
+      _$LongReviewResponseCopyWithImpl<T, LongReviewResponse<T>>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String failedValue) invalidEmail,
+    required TResult Function(String failedValue) shortPassword,
+    required TResult Function(String failedValue) invalidUserRole,
+    required TResult Function(String failedValue) longRestaurantName,
+    required TResult Function(double failedValue) invalidRestaurantRating,
+    required TResult Function(String failedValue) longReviewBody,
+    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(String failedValue) longReviewResponse,
+  }) {
+    return longReviewResponse(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String failedValue)? invalidEmail,
+    TResult Function(String failedValue)? shortPassword,
+    TResult Function(String failedValue)? invalidUserRole,
+    TResult Function(String failedValue)? longRestaurantName,
+    TResult Function(double failedValue)? invalidRestaurantRating,
+    TResult Function(String failedValue)? longReviewBody,
+    TResult Function(int failedValue)? invalidRating,
+    TResult Function(String failedValue)? longReviewResponse,
+    required TResult orElse(),
+  }) {
+    if (longReviewResponse != null) {
+      return longReviewResponse(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(InvalidUserRole<T> value) invalidUserRole,
+    required TResult Function(LongRestaurantName<T> value) longRestaurantName,
+    required TResult Function(InvalidRestaurantRating<T> value)
+        invalidRestaurantRating,
+    required TResult Function(LongReviewBody<T> value) longReviewBody,
+    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(LongReviewResponse<T> value) longReviewResponse,
+  }) {
+    return longReviewResponse(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(InvalidUserRole<T> value)? invalidUserRole,
+    TResult Function(LongRestaurantName<T> value)? longRestaurantName,
+    TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
+    TResult Function(LongReviewBody<T> value)? longReviewBody,
+    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(LongReviewResponse<T> value)? longReviewResponse,
+    required TResult orElse(),
+  }) {
+    if (longReviewResponse != null) {
+      return longReviewResponse(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LongReviewResponse<T> implements ValueFailure<T> {
+  const factory LongReviewResponse({required String failedValue}) =
+      _$LongReviewResponse<T>;
+
+  String get failedValue => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $LongReviewResponseCopyWith<T, LongReviewResponse<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }

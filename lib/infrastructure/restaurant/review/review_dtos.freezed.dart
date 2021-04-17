@@ -22,13 +22,15 @@ class _$ReviewDtoTearOff {
 
   _ReviewDto call(
       {@JsonKey(ignore: true) String? id,
-      required String reviewBody,
-      required int reviewRating,
+      required String body,
+      required int rating,
+      required String response,
       @ServerTimestampConverter() required FieldValue serverTimeStamp}) {
     return _ReviewDto(
       id: id,
-      reviewBody: reviewBody,
-      reviewRating: reviewRating,
+      body: body,
+      rating: rating,
+      response: response,
       serverTimeStamp: serverTimeStamp,
     );
   }
@@ -45,8 +47,9 @@ const $ReviewDto = _$ReviewDtoTearOff();
 mixin _$ReviewDto {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
-  String get reviewBody => throw _privateConstructorUsedError;
-  int get reviewRating => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
+  int get rating => throw _privateConstructorUsedError;
+  String get response => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
 
@@ -62,8 +65,9 @@ abstract class $ReviewDtoCopyWith<$Res> {
       _$ReviewDtoCopyWithImpl<$Res>;
   $Res call(
       {@JsonKey(ignore: true) String? id,
-      String reviewBody,
-      int reviewRating,
+      String body,
+      int rating,
+      String response,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
@@ -78,8 +82,9 @@ class _$ReviewDtoCopyWithImpl<$Res> implements $ReviewDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? reviewBody = freezed,
-    Object? reviewRating = freezed,
+    Object? body = freezed,
+    Object? rating = freezed,
+    Object? response = freezed,
     Object? serverTimeStamp = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,14 +92,18 @@ class _$ReviewDtoCopyWithImpl<$Res> implements $ReviewDtoCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      reviewBody: reviewBody == freezed
-          ? _value.reviewBody
-          : reviewBody // ignore: cast_nullable_to_non_nullable
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as int,
+      response: response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -111,8 +120,9 @@ abstract class _$ReviewDtoCopyWith<$Res> implements $ReviewDtoCopyWith<$Res> {
   @override
   $Res call(
       {@JsonKey(ignore: true) String? id,
-      String reviewBody,
-      int reviewRating,
+      String body,
+      int rating,
+      String response,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
@@ -128,8 +138,9 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? reviewBody = freezed,
-    Object? reviewRating = freezed,
+    Object? body = freezed,
+    Object? rating = freezed,
+    Object? response = freezed,
     Object? serverTimeStamp = freezed,
   }) {
     return _then(_ReviewDto(
@@ -137,14 +148,18 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String?,
-      reviewBody: reviewBody == freezed
-          ? _value.reviewBody
-          : reviewBody // ignore: cast_nullable_to_non_nullable
+      body: body == freezed
+          ? _value.body
+          : body // ignore: cast_nullable_to_non_nullable
               as String,
-      reviewRating: reviewRating == freezed
-          ? _value.reviewRating
-          : reviewRating // ignore: cast_nullable_to_non_nullable
+      rating: rating == freezed
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
               as int,
+      response: response == freezed
+          ? _value.response
+          : response // ignore: cast_nullable_to_non_nullable
+              as String,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -159,8 +174,9 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
 class _$_ReviewDto extends _ReviewDto {
   const _$_ReviewDto(
       {@JsonKey(ignore: true) this.id,
-      required this.reviewBody,
-      required this.reviewRating,
+      required this.body,
+      required this.rating,
+      required this.response,
       @ServerTimestampConverter() required this.serverTimeStamp})
       : super._();
 
@@ -171,16 +187,18 @@ class _$_ReviewDto extends _ReviewDto {
   @JsonKey(ignore: true)
   final String? id;
   @override
-  final String reviewBody;
+  final String body;
   @override
-  final int reviewRating;
+  final int rating;
+  @override
+  final String response;
   @override
   @ServerTimestampConverter()
   final FieldValue serverTimeStamp;
 
   @override
   String toString() {
-    return 'ReviewDto(id: $id, reviewBody: $reviewBody, reviewRating: $reviewRating, serverTimeStamp: $serverTimeStamp)';
+    return 'ReviewDto(id: $id, body: $body, rating: $rating, response: $response, serverTimeStamp: $serverTimeStamp)';
   }
 
   @override
@@ -189,12 +207,13 @@ class _$_ReviewDto extends _ReviewDto {
         (other is _ReviewDto &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.reviewBody, reviewBody) ||
+            (identical(other.body, body) ||
+                const DeepCollectionEquality().equals(other.body, body)) &&
+            (identical(other.rating, rating) ||
+                const DeepCollectionEquality().equals(other.rating, rating)) &&
+            (identical(other.response, response) ||
                 const DeepCollectionEquality()
-                    .equals(other.reviewBody, reviewBody)) &&
-            (identical(other.reviewRating, reviewRating) ||
-                const DeepCollectionEquality()
-                    .equals(other.reviewRating, reviewRating)) &&
+                    .equals(other.response, response)) &&
             (identical(other.serverTimeStamp, serverTimeStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.serverTimeStamp, serverTimeStamp)));
@@ -204,8 +223,9 @@ class _$_ReviewDto extends _ReviewDto {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(reviewBody) ^
-      const DeepCollectionEquality().hash(reviewRating) ^
+      const DeepCollectionEquality().hash(body) ^
+      const DeepCollectionEquality().hash(rating) ^
+      const DeepCollectionEquality().hash(response) ^
       const DeepCollectionEquality().hash(serverTimeStamp);
 
   @JsonKey(ignore: true)
@@ -222,8 +242,9 @@ class _$_ReviewDto extends _ReviewDto {
 abstract class _ReviewDto extends ReviewDto {
   const factory _ReviewDto(
           {@JsonKey(ignore: true) String? id,
-          required String reviewBody,
-          required int reviewRating,
+          required String body,
+          required int rating,
+          required String response,
           @ServerTimestampConverter() required FieldValue serverTimeStamp}) =
       _$_ReviewDto;
   const _ReviewDto._() : super._();
@@ -235,9 +256,11 @@ abstract class _ReviewDto extends ReviewDto {
   @JsonKey(ignore: true)
   String? get id => throw _privateConstructorUsedError;
   @override
-  String get reviewBody => throw _privateConstructorUsedError;
+  String get body => throw _privateConstructorUsedError;
   @override
-  int get reviewRating => throw _privateConstructorUsedError;
+  int get rating => throw _privateConstructorUsedError;
+  @override
+  String get response => throw _privateConstructorUsedError;
   @override
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
