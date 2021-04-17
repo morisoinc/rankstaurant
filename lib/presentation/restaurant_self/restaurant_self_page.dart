@@ -107,7 +107,10 @@ class RestaurantSelfPage extends StatelessWidget {
           Flexible(
             child: Text(
               'New!',
-              style: Theme.of(context).textTheme.headline6,
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6!
+                  .copyWith(color: kYellow),
               textAlign: TextAlign.center,
             ),
           ),

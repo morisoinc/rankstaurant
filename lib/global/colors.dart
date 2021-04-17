@@ -27,6 +27,7 @@ const kBrown = Color(0xFFA79E8B);
 const kDarkerBrown = Color(0xFF827055);
 const kMostDarkestBrown = Color(0xFF655947);
 
+const kYellow = Color(0xFFD2B648);
 const kRed = Color(0xFFF95E5A);
 const kMostLightestRed = Color(0xFFFEEFEE);
 
