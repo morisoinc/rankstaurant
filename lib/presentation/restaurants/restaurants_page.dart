@@ -6,6 +6,7 @@ import 'package:rankstaurant/application/auth/auth_bloc.dart';
 import 'package:rankstaurant/application/restaurant_form/restaurant_form_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/restaurants_list.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
@@ -31,17 +32,21 @@ class RestaurantsPage extends StatelessWidget {
           ),
         ],
         child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Restaurants'),
-            leading: IconButton(
-              icon: const Icon(Icons.logout),
-              onPressed: () {
-                context.read<AuthBloc>().add(const AuthEvent.signedOut());
-              },
-            ),
-          ),
-          body: RestaurantsList(),
           floatingActionButton: _buildFab(context),
+          body: RContainer(
+            headerTitle: 'Restaurants',
+            headerContent: const SizedBox(height: 0, width: 0),
+            // appBar: AppBar(
+            //   title: const Text('Restaurants'),
+            //   leading: IconButton(
+            //     icon: const Icon(Icons.logout),
+            //     onPressed: () {
+            //       context.read<AuthBloc>().add(const AuthEvent.signedOut());
+            //     },
+            //   ),
+            // ),
+            body: RestaurantsList(),
+          ),
         ),
       ),
     );

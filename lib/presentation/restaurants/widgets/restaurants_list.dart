@@ -15,6 +15,8 @@ class RestaurantsList extends StatelessWidget {
           loading: (_) => const Center(child: CircularProgressIndicator()),
           loaded: (state) {
             return ListView.builder(
+              shrinkWrap: true,
+              itemCount: state.restaurants.size,
               itemBuilder: (context, index) {
                 final restaurant = state.restaurants[index];
                 if (restaurant.failureOrOption.isSome()) {
@@ -23,7 +25,6 @@ class RestaurantsList extends StatelessWidget {
                   return RestaurantCard(restaurant: restaurant);
                 }
               },
-              itemCount: state.restaurants.size,
             );
           },
           fail: (state) {
