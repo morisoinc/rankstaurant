@@ -67,14 +67,21 @@ class RestaurantCard extends StatelessWidget {
       return;
     }
 
+    final textEditingController = TextEditingController();
+
+    bool textEditingControllerInitialized = false;
+
     showDialog(
       context: context,
       builder: (_) => BlocProvider<RestaurantFormBloc>(
         create: (context) => getIt<RestaurantFormBloc>()
-          ..add(RestaurantFormEvent.initialized(optionOf(restaurant)))
-          ..add(RestaurantFormEvent.nameChanged(restaurant.name.getOrCrash())),
+          ..add(RestaurantFormEvent.initialized(optionOf(restaurant))),
         child: BlocConsumer<RestaurantFormBloc, RestaurantFormState>(
           listener: (context, state) {
+            if (!textEditingControllerInitialized) {
+              textEditingController.text = state.restaurant.name.getOrCrash();
+              textEditingControllerInitialized = true;
+            }
             state.restaurantFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold((failure) {
@@ -102,7 +109,7 @@ class RestaurantCard extends StatelessWidget {
                         children: [
                           const SizedBox(height: 16),
                           TextFormField(
-                            initialValue: state.restaurant.name.getOrCrash(),
+                            controller: textEditingController,
                             keyboardType: TextInputType.multiline,
                             maxLines: 5,
                             decoration: const InputDecoration(hintText: 'Name'),

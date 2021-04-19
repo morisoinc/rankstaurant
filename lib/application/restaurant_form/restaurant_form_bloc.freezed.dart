@@ -552,13 +552,13 @@ abstract class _DeleteRestaurantPressed implements RestaurantFormEvent {
 class _$RestaurantFormStateTearOff {
   const _$RestaurantFormStateTearOff();
 
-  _RestaurantCreationState call(
+  _RestaurantFormState call(
       {required Restaurant restaurant,
       required bool isEditing,
       required bool isSubmitting,
       required Option<Either<RestaurantFailure, Unit>>
           restaurantFailureOrSuccessOption}) {
-    return _RestaurantCreationState(
+    return _RestaurantFormState(
       restaurant: restaurant,
       isEditing: isEditing,
       isSubmitting: isSubmitting,
@@ -645,11 +645,11 @@ class _$RestaurantFormStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$RestaurantCreationStateCopyWith<$Res>
+abstract class _$RestaurantFormStateCopyWith<$Res>
     implements $RestaurantFormStateCopyWith<$Res> {
-  factory _$RestaurantCreationStateCopyWith(_RestaurantCreationState value,
-          $Res Function(_RestaurantCreationState) then) =
-      __$RestaurantCreationStateCopyWithImpl<$Res>;
+  factory _$RestaurantFormStateCopyWith(_RestaurantFormState value,
+          $Res Function(_RestaurantFormState) then) =
+      __$RestaurantFormStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {Restaurant restaurant,
@@ -663,16 +663,15 @@ abstract class _$RestaurantCreationStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RestaurantCreationStateCopyWithImpl<$Res>
+class __$RestaurantFormStateCopyWithImpl<$Res>
     extends _$RestaurantFormStateCopyWithImpl<$Res>
-    implements _$RestaurantCreationStateCopyWith<$Res> {
-  __$RestaurantCreationStateCopyWithImpl(_RestaurantCreationState _value,
-      $Res Function(_RestaurantCreationState) _then)
-      : super(_value, (v) => _then(v as _RestaurantCreationState));
+    implements _$RestaurantFormStateCopyWith<$Res> {
+  __$RestaurantFormStateCopyWithImpl(
+      _RestaurantFormState _value, $Res Function(_RestaurantFormState) _then)
+      : super(_value, (v) => _then(v as _RestaurantFormState));
 
   @override
-  _RestaurantCreationState get _value =>
-      super._value as _RestaurantCreationState;
+  _RestaurantFormState get _value => super._value as _RestaurantFormState;
 
   @override
   $Res call({
@@ -681,7 +680,7 @@ class __$RestaurantCreationStateCopyWithImpl<$Res>
     Object? isSubmitting = freezed,
     Object? restaurantFailureOrSuccessOption = freezed,
   }) {
-    return _then(_RestaurantCreationState(
+    return _then(_RestaurantFormState(
       restaurant: restaurant == freezed
           ? _value.restaurant
           : restaurant // ignore: cast_nullable_to_non_nullable
@@ -704,8 +703,8 @@ class __$RestaurantCreationStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_RestaurantCreationState implements _RestaurantCreationState {
-  const _$_RestaurantCreationState(
+class _$_RestaurantFormState implements _RestaurantFormState {
+  const _$_RestaurantFormState(
       {required this.restaurant,
       required this.isEditing,
       required this.isSubmitting,
@@ -729,7 +728,7 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RestaurantCreationState &&
+        (other is _RestaurantFormState &&
             (identical(other.restaurant, restaurant) ||
                 const DeepCollectionEquality()
                     .equals(other.restaurant, restaurant)) &&
@@ -756,18 +755,18 @@ class _$_RestaurantCreationState implements _RestaurantCreationState {
 
   @JsonKey(ignore: true)
   @override
-  _$RestaurantCreationStateCopyWith<_RestaurantCreationState> get copyWith =>
-      __$RestaurantCreationStateCopyWithImpl<_RestaurantCreationState>(
+  _$RestaurantFormStateCopyWith<_RestaurantFormState> get copyWith =>
+      __$RestaurantFormStateCopyWithImpl<_RestaurantFormState>(
           this, _$identity);
 }
 
-abstract class _RestaurantCreationState implements RestaurantFormState {
-  const factory _RestaurantCreationState(
+abstract class _RestaurantFormState implements RestaurantFormState {
+  const factory _RestaurantFormState(
       {required Restaurant restaurant,
       required bool isEditing,
       required bool isSubmitting,
       required Option<Either<RestaurantFailure, Unit>>
-          restaurantFailureOrSuccessOption}) = _$_RestaurantCreationState;
+          restaurantFailureOrSuccessOption}) = _$_RestaurantFormState;
 
   @override
   Restaurant get restaurant => throw _privateConstructorUsedError;
@@ -781,6 +780,6 @@ abstract class _RestaurantCreationState implements RestaurantFormState {
           throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$RestaurantCreationStateCopyWith<_RestaurantCreationState> get copyWith =>
+  _$RestaurantFormStateCopyWith<_RestaurantFormState> get copyWith =>
       throw _privateConstructorUsedError;
 }

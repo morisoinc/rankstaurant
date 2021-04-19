@@ -8,7 +8,7 @@ abstract class RestaurantFormState with _$RestaurantFormState {
     required bool isSubmitting,
     required Option<Either<RestaurantFailure, Unit>>
         restaurantFailureOrSuccessOption,
-  }) = _RestaurantCreationState;
+  }) = _RestaurantFormState;
 
   factory RestaurantFormState.initial() => RestaurantFormState(
         restaurant: Restaurant.empty(),

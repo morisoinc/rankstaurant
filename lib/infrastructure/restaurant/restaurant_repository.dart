@@ -69,8 +69,10 @@ class RestaurantRepository implements IRestaurantRepository {
   Future<Either<RestaurantFailure, Unit>> delete(Restaurant restaurant) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
-      final restaurantDto =
-          RestaurantDto.fromDomain(restaurant).copyWith(archived: true);
+      final originalRestaurant =
+          await restaurantsCollection.doc(restaurant.id.getOrCrash()).get();
+      final restaurantDto = RestaurantDto.fromFirestore(originalRestaurant)
+          .copyWith(archived: true);
 
       await restaurantsCollection
           .doc(restaurantDto.id)
