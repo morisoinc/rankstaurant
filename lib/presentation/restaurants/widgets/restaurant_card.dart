@@ -1,8 +1,13 @@
+import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rankstaurant/application/restaurant_form/restaurant_form_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -18,7 +23,7 @@ class RestaurantCard extends StatelessWidget {
         onTap: () {
           context.router.push(RestaurantSelfRoute(restaurant: restaurant));
         },
-        onLongPress: () {},
+        onLongPress: () => showEditDeleteRestaurantDialog(context, restaurant),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
           child: Row(
@@ -61,5 +66,96 @@ class RestaurantCard extends StatelessWidget {
     if (SettingsHelper.userRole() != Role.admin) {
       return;
     }
+
+    showDialog(
+      context: context,
+      builder: (_) => BlocProvider<RestaurantFormBloc>(
+        create: (context) => getIt<RestaurantFormBloc>()
+          ..add(RestaurantFormEvent.initialized(optionOf(restaurant)))
+          ..add(RestaurantFormEvent.nameChanged(restaurant.name.getOrCrash())),
+        child: BlocConsumer<RestaurantFormBloc, RestaurantFormState>(
+          listener: (context, state) {
+            state.restaurantFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold((failure) {
+                FlushbarHelper.createError(
+                  message: failure.map(
+                    unexpected: (_) => 'Unexpected error',
+                  ),
+                ).show(context);
+              }, (_) {
+                Navigator.pop(context);
+              }),
+            );
+          },
+          builder: (context, state) {
+            return AlertDialog(
+              title: const Text('Edit Restaurant'),
+              content: Builder(
+                builder: (context) {
+                  final width = MediaQuery.of(context).size.width;
+                  return Form(
+                    child: SizedBox(
+                      width: width,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const SizedBox(height: 16),
+                          TextFormField(
+                            initialValue: state.restaurant.name.getOrCrash(),
+                            keyboardType: TextInputType.multiline,
+                            maxLines: 5,
+                            decoration: const InputDecoration(hintText: 'Name'),
+                            onChanged: (value) => context
+                                .read<RestaurantFormBloc>()
+                                .add(RestaurantFormEvent.nameChanged(value)),
+                            validator: (_) => context
+                                .read<RestaurantFormBloc>()
+                                .state
+                                .restaurant
+                                .name
+                                .value
+                                .fold(
+                                  (f) => f.maybeMap(
+                                    longRestaurantName: (_) =>
+                                        'Name must be shorter',
+                                    orElse: () => null,
+                                  ),
+                                  (_) => null,
+                                ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      context.read<RestaurantFormBloc>().add(
+                          const RestaurantFormEvent.deleteRestaurantPressed());
+                    },
+                    child: const Text('Archive')),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Cancel')),
+                ElevatedButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      context.read<RestaurantFormBloc>().add(
+                          const RestaurantFormEvent.saveRestaurantPressed());
+                    },
+                    child: const Text('Save')),
+              ],
+              shape: const RoundedRectangleBorder(),
+            );
+          },
+        ),
+      ),
+    );
   }
 }
