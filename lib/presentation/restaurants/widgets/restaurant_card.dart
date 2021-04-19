@@ -41,7 +41,9 @@ class RestaurantCard extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(width: 2),
-                      Text(restaurant.averageRating.getOrCrash().toString()),
+                      Text(restaurant.averageRating
+                          .getOrCrash()
+                          .toStringAsFixed(2)),
                     ],
                   );
                 } else {

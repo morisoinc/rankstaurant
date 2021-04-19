@@ -122,7 +122,8 @@ class RestaurantSelfPage extends StatelessWidget {
       );
     } else {
       final lowestRating = restaurant.lowestRating.getOrCrash().toString();
-      final averageRating = restaurant.averageRating.getOrCrash().toString();
+      final averageRating =
+          restaurant.averageRating.getOrCrash().toStringAsFixed(2);
       final highestRating = restaurant.highestRating.getOrCrash().toString();
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
