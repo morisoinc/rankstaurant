@@ -11,6 +11,7 @@ _$_ReviewDto _$_$_ReviewDtoFromJson(Map<String, dynamic> json) {
     body: json['body'] as String,
     rating: json['rating'] as int,
     response: json['response'] as String,
+    archived: json['archived'] as bool,
     serverTimeStamp: const ServerTimestampConverter()
         .fromJson(json['serverTimeStamp'] as Object),
   );
@@ -21,6 +22,7 @@ Map<String, dynamic> _$_$_ReviewDtoToJson(_$_ReviewDto instance) =>
       'body': instance.body,
       'rating': instance.rating,
       'response': instance.response,
+      'archived': instance.archived,
       'serverTimeStamp':
           const ServerTimestampConverter().toJson(instance.serverTimeStamp),
     };

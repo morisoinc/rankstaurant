@@ -10,4 +10,6 @@ abstract class IReviewRepository {
       Review review, Restaurant restaurant);
   Future<Either<ReviewFailure, Unit>> update(
       Review review, Restaurant restaurant);
+  Future<Either<ReviewFailure, Unit>> delete(
+      Review review, Restaurant restaurant);
 }

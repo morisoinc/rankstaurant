@@ -13,6 +13,7 @@ abstract class Review with _$Review {
     required ReviewBody body,
     required ReviewRating rating,
     required ReviewResponse response,
+    required bool archived,
   }) = _Review;
 
   const Review._();
@@ -22,6 +23,7 @@ abstract class Review with _$Review {
         body: ReviewBody(''),
         rating: ReviewRating(0),
         response: ReviewResponse(''),
+        archived: false,
       );
 
   Option<ValueFailure<dynamic>> get failureOrOption {

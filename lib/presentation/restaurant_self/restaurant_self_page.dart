@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rankstaurant/application/restaurant_self/restaurant_self_bloc.dart';
-import 'package:rankstaurant/application/review_creation/review_creation_bloc.dart';
+import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
@@ -185,9 +185,11 @@ class RestaurantSelfPage extends StatelessWidget {
   void showLeaveReviewDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => BlocProvider<ReviewCreationBloc>(
-        create: (context) => getIt<ReviewCreationBloc>(),
-        child: BlocConsumer<ReviewCreationBloc, ReviewCreationState>(
+      builder: (_) => BlocProvider<ReviewFormBloc>(
+        create: (context) => getIt<ReviewFormBloc>()
+          ..add(ReviewFormEvent.initialized(
+              optionOf(null), optionOf(restaurant))),
+        child: BlocConsumer<ReviewFormBloc, ReviewFormState>(
           listener: (context, state) {
             state.reviewFailureOrSuccessOption.fold(
               () {},
@@ -216,8 +218,8 @@ class RestaurantSelfPage extends StatelessWidget {
                         children: [
                           StarsSelector(
                             onChanged: (starsSelected) => context
-                                .read<ReviewCreationBloc>()
-                                .add(ReviewCreationEvent.ratingChanged(
+                                .read<ReviewFormBloc>()
+                                .add(ReviewFormEvent.ratingChanged(
                                     starsSelected)),
                           ),
                           const SizedBox(height: 16),
@@ -227,11 +229,12 @@ class RestaurantSelfPage extends StatelessWidget {
                             decoration:
                                 const InputDecoration(hintText: 'Comment'),
                             onChanged: (value) => context
-                                .read<ReviewCreationBloc>()
-                                .add(ReviewCreationEvent.bodyChanged(value)),
+                                .read<ReviewFormBloc>()
+                                .add(ReviewFormEvent.bodyChanged(value)),
                             validator: (_) => context
-                                .read<ReviewCreationBloc>()
+                                .read<ReviewFormBloc>()
                                 .state
+                                .review
                                 .body
                                 .value
                                 .fold(
@@ -258,10 +261,11 @@ class RestaurantSelfPage extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-                      context.read<ReviewCreationBloc>().add(
-                          ReviewCreationEvent.leaveReviewPressed(restaurant));
+                      context
+                          .read<ReviewFormBloc>()
+                          .add(const ReviewFormEvent.saveReviewPressed());
                     },
-                    child: const Text('Leave')),
+                    child: const Text('Save')),
               ],
               shape: const RoundedRectangleBorder(),
             );

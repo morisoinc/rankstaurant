@@ -25,12 +25,14 @@ class _$ReviewDtoTearOff {
       required String body,
       required int rating,
       required String response,
+      required bool archived,
       @ServerTimestampConverter() required FieldValue serverTimeStamp}) {
     return _ReviewDto(
       id: id,
       body: body,
       rating: rating,
       response: response,
+      archived: archived,
       serverTimeStamp: serverTimeStamp,
     );
   }
@@ -50,6 +52,7 @@ mixin _$ReviewDto {
   String get body => throw _privateConstructorUsedError;
   int get rating => throw _privateConstructorUsedError;
   String get response => throw _privateConstructorUsedError;
+  bool get archived => throw _privateConstructorUsedError;
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
 
@@ -68,6 +71,7 @@ abstract class $ReviewDtoCopyWith<$Res> {
       String body,
       int rating,
       String response,
+      bool archived,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
@@ -85,6 +89,7 @@ class _$ReviewDtoCopyWithImpl<$Res> implements $ReviewDtoCopyWith<$Res> {
     Object? body = freezed,
     Object? rating = freezed,
     Object? response = freezed,
+    Object? archived = freezed,
     Object? serverTimeStamp = freezed,
   }) {
     return _then(_value.copyWith(
@@ -104,6 +109,10 @@ class _$ReviewDtoCopyWithImpl<$Res> implements $ReviewDtoCopyWith<$Res> {
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as String,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -123,6 +132,7 @@ abstract class _$ReviewDtoCopyWith<$Res> implements $ReviewDtoCopyWith<$Res> {
       String body,
       int rating,
       String response,
+      bool archived,
       @ServerTimestampConverter() FieldValue serverTimeStamp});
 }
 
@@ -141,6 +151,7 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
     Object? body = freezed,
     Object? rating = freezed,
     Object? response = freezed,
+    Object? archived = freezed,
     Object? serverTimeStamp = freezed,
   }) {
     return _then(_ReviewDto(
@@ -160,6 +171,10 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as String,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
@@ -177,6 +192,7 @@ class _$_ReviewDto extends _ReviewDto {
       required this.body,
       required this.rating,
       required this.response,
+      required this.archived,
       @ServerTimestampConverter() required this.serverTimeStamp})
       : super._();
 
@@ -193,12 +209,14 @@ class _$_ReviewDto extends _ReviewDto {
   @override
   final String response;
   @override
+  final bool archived;
+  @override
   @ServerTimestampConverter()
   final FieldValue serverTimeStamp;
 
   @override
   String toString() {
-    return 'ReviewDto(id: $id, body: $body, rating: $rating, response: $response, serverTimeStamp: $serverTimeStamp)';
+    return 'ReviewDto(id: $id, body: $body, rating: $rating, response: $response, archived: $archived, serverTimeStamp: $serverTimeStamp)';
   }
 
   @override
@@ -214,6 +232,9 @@ class _$_ReviewDto extends _ReviewDto {
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
                     .equals(other.response, response)) &&
+            (identical(other.archived, archived) ||
+                const DeepCollectionEquality()
+                    .equals(other.archived, archived)) &&
             (identical(other.serverTimeStamp, serverTimeStamp) ||
                 const DeepCollectionEquality()
                     .equals(other.serverTimeStamp, serverTimeStamp)));
@@ -226,6 +247,7 @@ class _$_ReviewDto extends _ReviewDto {
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(rating) ^
       const DeepCollectionEquality().hash(response) ^
+      const DeepCollectionEquality().hash(archived) ^
       const DeepCollectionEquality().hash(serverTimeStamp);
 
   @JsonKey(ignore: true)
@@ -245,6 +267,7 @@ abstract class _ReviewDto extends ReviewDto {
           required String body,
           required int rating,
           required String response,
+          required bool archived,
           @ServerTimestampConverter() required FieldValue serverTimeStamp}) =
       _$_ReviewDto;
   const _ReviewDto._() : super._();
@@ -261,6 +284,8 @@ abstract class _ReviewDto extends ReviewDto {
   int get rating => throw _privateConstructorUsedError;
   @override
   String get response => throw _privateConstructorUsedError;
+  @override
+  bool get archived => throw _privateConstructorUsedError;
   @override
   @ServerTimestampConverter()
   FieldValue get serverTimeStamp => throw _privateConstructorUsedError;

@@ -119,7 +119,7 @@ class RestaurantRepository implements IRestaurantRepository {
           .update(restaurantDto.toJson());
 
       return right(unit);
-    } on FirebaseException {
+    } on FirebaseException catch (e) {
       return left(const ReviewFailure.unexpected());
     }
   }

@@ -1,11 +1,12 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
-import 'package:rankstaurant/application/review_response/review_response_bloc.dart';
 import 'package:rankstaurant/injection.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -66,9 +67,11 @@ void showRespondToReview(
     Review review, Restaurant restaurant, BuildContext context) {
   showDialog(
     context: context,
-    builder: (_) => BlocProvider<ReviewResponseBloc>(
-      create: (context) => getIt<ReviewResponseBloc>(),
-      child: BlocConsumer<ReviewResponseBloc, ReviewResponseState>(
+    builder: (_) => BlocProvider<ReviewFormBloc>(
+      create: (context) => getIt<ReviewFormBloc>()
+        ..add(ReviewFormEvent.initialized(
+            optionOf(review), optionOf(restaurant))),
+      child: BlocConsumer<ReviewFormBloc, ReviewFormState>(
         listener: (context, state) {
           state.reviewFailureOrSuccessOption.fold(
             () {},
@@ -102,11 +105,12 @@ void showRespondToReview(
                           decoration:
                               const InputDecoration(hintText: 'Comment'),
                           onChanged: (value) => context
-                              .read<ReviewResponseBloc>()
-                              .add(ReviewResponseEvent.responseChanged(value)),
+                              .read<ReviewFormBloc>()
+                              .add(ReviewFormEvent.responseChanged(value)),
                           validator: (_) => context
-                              .read<ReviewResponseBloc>()
+                              .read<ReviewFormBloc>()
                               .state
+                              .review
                               .response
                               .value
                               .fold(
@@ -133,9 +137,9 @@ void showRespondToReview(
               ElevatedButton(
                   onPressed: () {
                     FocusScope.of(context).unfocus();
-                    context.read<ReviewResponseBloc>().add(
-                        ReviewResponseEvent.leaveResponsePressed(
-                            review, restaurant));
+                    context
+                        .read<ReviewFormBloc>()
+                        .add(const ReviewFormEvent.saveReviewPressed());
                   },
                   child: const Text('Leave')),
             ],

@@ -15,6 +15,7 @@ abstract class ReviewDto implements _$ReviewDto {
     required String body,
     required int rating,
     required String response,
+    required bool archived,
     @ServerTimestampConverter() required FieldValue serverTimeStamp,
   }) = _ReviewDto;
 
@@ -33,6 +34,7 @@ abstract class ReviewDto implements _$ReviewDto {
       body: review.body.getOrCrash(),
       rating: review.rating.getOrCrash(),
       response: review.response.getOrCrash(),
+      archived: review.archived,
       serverTimeStamp: FieldValue.serverTimestamp(),
     );
   }
@@ -43,6 +45,7 @@ abstract class ReviewDto implements _$ReviewDto {
       body: ReviewBody(body),
       rating: ReviewRating(rating),
       response: ReviewResponse(response),
+      archived: archived,
     );
   }
 }

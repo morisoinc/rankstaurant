@@ -24,7 +24,8 @@ class ReviewRepository implements IReviewRepository {
       final reviewsCollection =
           await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
-      await reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
+      final result =
+          await reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
 
       return right(unit);
     } on FirebaseException catch (e) {
@@ -43,7 +44,26 @@ class ReviewRepository implements IReviewRepository {
       await reviewsCollection.doc(reviewDto.id).update(reviewDto.toJson());
 
       return right(unit);
-    } on FirebaseException {
+    } on FirebaseException catch (e) {
+      return left(const ReviewFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<ReviewFailure, Unit>> delete(
+      Review review, Restaurant restaurant) async {
+    try {
+      final reviewsCollection =
+          await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
+      final originalReview =
+          await reviewsCollection.doc(review.id.getOrCrash()).get();
+      final reviewDto =
+          ReviewDto.fromFirestore(originalReview).copyWith(archived: true);
+
+      await reviewsCollection.doc(reviewDto.id).update(reviewDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
       return left(const ReviewFailure.unexpected());
     }
   }
@@ -55,6 +75,7 @@ class ReviewRepository implements IReviewRepository {
         await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
     yield* reviewsCollection
+        .where('archived', isEqualTo: false)
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map((snapshot) => right<ReviewFailure, KtList<Review>>(

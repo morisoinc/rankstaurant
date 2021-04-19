@@ -20,12 +20,14 @@ class _$ReviewTearOff {
       {required UniqueId id,
       required ReviewBody body,
       required ReviewRating rating,
-      required ReviewResponse response}) {
+      required ReviewResponse response,
+      required bool archived}) {
     return _Review(
       id: id,
       body: body,
       rating: rating,
       response: response,
+      archived: archived,
     );
   }
 }
@@ -39,6 +41,7 @@ mixin _$Review {
   ReviewBody get body => throw _privateConstructorUsedError;
   ReviewRating get rating => throw _privateConstructorUsedError;
   ReviewResponse get response => throw _privateConstructorUsedError;
+  bool get archived => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReviewCopyWith<Review> get copyWith => throw _privateConstructorUsedError;
@@ -52,7 +55,8 @@ abstract class $ReviewCopyWith<$Res> {
       {UniqueId id,
       ReviewBody body,
       ReviewRating rating,
-      ReviewResponse response});
+      ReviewResponse response,
+      bool archived});
 }
 
 /// @nodoc
@@ -69,6 +73,7 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
     Object? body = freezed,
     Object? rating = freezed,
     Object? response = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -87,6 +92,10 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as ReviewResponse,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -100,7 +109,8 @@ abstract class _$ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       {UniqueId id,
       ReviewBody body,
       ReviewRating rating,
-      ReviewResponse response});
+      ReviewResponse response,
+      bool archived});
 }
 
 /// @nodoc
@@ -118,6 +128,7 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
     Object? body = freezed,
     Object? rating = freezed,
     Object? response = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_Review(
       id: id == freezed
@@ -136,6 +147,10 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
           ? _value.response
           : response // ignore: cast_nullable_to_non_nullable
               as ReviewResponse,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -146,7 +161,8 @@ class _$_Review extends _Review {
       {required this.id,
       required this.body,
       required this.rating,
-      required this.response})
+      required this.response,
+      required this.archived})
       : super._();
 
   @override
@@ -157,10 +173,12 @@ class _$_Review extends _Review {
   final ReviewRating rating;
   @override
   final ReviewResponse response;
+  @override
+  final bool archived;
 
   @override
   String toString() {
-    return 'Review(id: $id, body: $body, rating: $rating, response: $response)';
+    return 'Review(id: $id, body: $body, rating: $rating, response: $response, archived: $archived)';
   }
 
   @override
@@ -175,7 +193,10 @@ class _$_Review extends _Review {
                 const DeepCollectionEquality().equals(other.rating, rating)) &&
             (identical(other.response, response) ||
                 const DeepCollectionEquality()
-                    .equals(other.response, response)));
+                    .equals(other.response, response)) &&
+            (identical(other.archived, archived) ||
+                const DeepCollectionEquality()
+                    .equals(other.archived, archived)));
   }
 
   @override
@@ -184,7 +205,8 @@ class _$_Review extends _Review {
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(rating) ^
-      const DeepCollectionEquality().hash(response);
+      const DeepCollectionEquality().hash(response) ^
+      const DeepCollectionEquality().hash(archived);
 
   @JsonKey(ignore: true)
   @override
@@ -197,7 +219,8 @@ abstract class _Review extends Review {
       {required UniqueId id,
       required ReviewBody body,
       required ReviewRating rating,
-      required ReviewResponse response}) = _$_Review;
+      required ReviewResponse response,
+      required bool archived}) = _$_Review;
   const _Review._() : super._();
 
   @override
@@ -208,6 +231,8 @@ abstract class _Review extends Review {
   ReviewRating get rating => throw _privateConstructorUsedError;
   @override
   ReviewResponse get response => throw _privateConstructorUsedError;
+  @override
+  bool get archived => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ReviewCopyWith<_Review> get copyWith => throw _privateConstructorUsedError;
