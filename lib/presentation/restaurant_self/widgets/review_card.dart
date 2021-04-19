@@ -90,7 +90,7 @@ void showRespondToReview(
               builder: (context) {
                 final width = MediaQuery.of(context).size.width;
                 return Form(
-                  child: Container(
+                  child: SizedBox(
                     width: width,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,

@@ -18,6 +18,7 @@ abstract class Restaurant implements _$Restaurant {
     required RestaurantRating latestRating,
     required int numberOfRatings,
     required int sumOfRatings,
+    required bool archived,
   }) = _Restaurant;
 
   const Restaurant._();
@@ -32,6 +33,7 @@ abstract class Restaurant implements _$Restaurant {
         latestRating: RestaurantRating(-1),
         numberOfRatings: 0,
         sumOfRatings: 0,
+        archived: false,
       );
 
   // * downside of getters: bad data can be generated.
@@ -42,7 +44,7 @@ abstract class Restaurant implements _$Restaurant {
   @override
   int get sumOfRatings;
 
-  Option<ValueFailure<dynamic>> get failureOption {
+  Option<ValueFailure<dynamic>> get failureOrOption {
     return name.failureOrUnit
         .andThen(owner.failureOrUnit)
         .andThen(averageRating.failureOrUnit)

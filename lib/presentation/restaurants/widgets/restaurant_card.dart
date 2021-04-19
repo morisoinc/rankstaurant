@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
+import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -17,6 +18,7 @@ class RestaurantCard extends StatelessWidget {
         onTap: () {
           context.router.push(RestaurantSelfRoute(restaurant: restaurant));
         },
+        onLongPress: () {},
         child: Padding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
           child: Row(
@@ -52,5 +54,12 @@ class RestaurantCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showEditDeleteRestaurantDialog(
+      BuildContext context, Restaurant restaurant) {
+    if (SettingsHelper.userRole() != Role.admin) {
+      return;
+    }
   }
 }

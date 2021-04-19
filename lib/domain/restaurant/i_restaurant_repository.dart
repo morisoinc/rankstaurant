@@ -10,6 +10,7 @@ abstract class IRestaurantRepository {
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn();
   Future<Either<RestaurantFailure, Unit>> create(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> update(Restaurant restaurant);
+  Future<Either<RestaurantFailure, Unit>> delete(Restaurant restaurant);
   Future<Either<ReviewFailure, Unit>> updateWithReview(
       Restaurant restaurant, Review review);
 }

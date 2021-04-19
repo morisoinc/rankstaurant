@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart' as _i2;
 
 import 'application/auth/auth_bloc.dart' as _i20;
 import 'application/auth/sign_in_form/sign_in_form_bloc.dart' as _i19;
-import 'application/restaurant_creation/restaurant_creation_bloc.dart' as _i11;
+import 'application/restaurant_form/restaurant_form_bloc.dart' as _i11;
 import 'application/restaurant_self/restaurant_self_bloc.dart' as _i12;
 import 'application/restaurants/restaurants_bloc.dart' as _i13;
 import 'application/review_creation/review_creation_bloc.dart' as _i14;
@@ -38,14 +38,14 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => firebaseInjectableModule.firebaseAuth);
   gh.lazySingleton<_i4.FirebaseFirestore>(
       () => firebaseInjectableModule.firestore);
-  gh.lazySingleton<_i5.IRestaurantRepository>(
-      () => _i6.RestaurantRepository(get<_i4.FirebaseFirestore>()));
+  gh.lazySingleton<_i5.IRestaurantRepository>(() => _i6.RestaurantRepository(
+      get<_i4.FirebaseFirestore>(), get<_i3.FirebaseAuth>()));
   gh.lazySingleton<_i7.IReviewRepository>(
       () => _i8.ReviewRepository(get<_i4.FirebaseFirestore>()));
   gh.lazySingleton<_i9.IUserRepository>(
       () => _i10.UserRepository(get<_i4.FirebaseFirestore>()));
-  gh.factory<_i11.RestaurantCreationBloc>(() => _i11.RestaurantCreationBloc(
-      get<_i5.IRestaurantRepository>(), get<_i3.FirebaseAuth>()));
+  gh.factory<_i11.RestaurantFormBloc>(
+      () => _i11.RestaurantFormBloc(get<_i5.IRestaurantRepository>()));
   gh.factory<_i12.RestaurantSelfBloc>(() => _i12.RestaurantSelfBloc());
   gh.factory<_i13.RestaurantsBloc>(
       () => _i13.RestaurantsBloc(get<_i5.IRestaurantRepository>()));

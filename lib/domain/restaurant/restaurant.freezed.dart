@@ -25,7 +25,8 @@ class _$RestaurantTearOff {
       required RestaurantRating lowestRating,
       required RestaurantRating latestRating,
       required int numberOfRatings,
-      required int sumOfRatings}) {
+      required int sumOfRatings,
+      required bool archived}) {
     return _Restaurant(
       id: id,
       name: name,
@@ -36,6 +37,7 @@ class _$RestaurantTearOff {
       latestRating: latestRating,
       numberOfRatings: numberOfRatings,
       sumOfRatings: sumOfRatings,
+      archived: archived,
     );
   }
 }
@@ -54,6 +56,7 @@ mixin _$Restaurant {
   RestaurantRating get latestRating => throw _privateConstructorUsedError;
   int get numberOfRatings => throw _privateConstructorUsedError;
   int get sumOfRatings => throw _privateConstructorUsedError;
+  bool get archived => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $RestaurantCopyWith<Restaurant> get copyWith =>
@@ -74,7 +77,8 @@ abstract class $RestaurantCopyWith<$Res> {
       RestaurantRating lowestRating,
       RestaurantRating latestRating,
       int numberOfRatings,
-      int sumOfRatings});
+      int sumOfRatings,
+      bool archived});
 }
 
 /// @nodoc
@@ -96,6 +100,7 @@ class _$RestaurantCopyWithImpl<$Res> implements $RestaurantCopyWith<$Res> {
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -134,6 +139,10 @@ class _$RestaurantCopyWithImpl<$Res> implements $RestaurantCopyWith<$Res> {
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -153,7 +162,8 @@ abstract class _$RestaurantCopyWith<$Res> implements $RestaurantCopyWith<$Res> {
       RestaurantRating lowestRating,
       RestaurantRating latestRating,
       int numberOfRatings,
-      int sumOfRatings});
+      int sumOfRatings,
+      bool archived});
 }
 
 /// @nodoc
@@ -177,6 +187,7 @@ class __$RestaurantCopyWithImpl<$Res> extends _$RestaurantCopyWithImpl<$Res>
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_Restaurant(
       id: id == freezed
@@ -215,6 +226,10 @@ class __$RestaurantCopyWithImpl<$Res> extends _$RestaurantCopyWithImpl<$Res>
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -230,7 +245,8 @@ class _$_Restaurant extends _Restaurant {
       required this.lowestRating,
       required this.latestRating,
       required this.numberOfRatings,
-      required this.sumOfRatings})
+      required this.sumOfRatings,
+      required this.archived})
       : super._();
 
   @override
@@ -251,10 +267,12 @@ class _$_Restaurant extends _Restaurant {
   final int numberOfRatings;
   @override
   final int sumOfRatings;
+  @override
+  final bool archived;
 
   @override
   String toString() {
-    return 'Restaurant(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings)';
+    return 'Restaurant(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings, archived: $archived)';
   }
 
   @override
@@ -284,7 +302,10 @@ class _$_Restaurant extends _Restaurant {
                     .equals(other.numberOfRatings, numberOfRatings)) &&
             (identical(other.sumOfRatings, sumOfRatings) ||
                 const DeepCollectionEquality()
-                    .equals(other.sumOfRatings, sumOfRatings)));
+                    .equals(other.sumOfRatings, sumOfRatings)) &&
+            (identical(other.archived, archived) ||
+                const DeepCollectionEquality()
+                    .equals(other.archived, archived)));
   }
 
   @override
@@ -298,7 +319,8 @@ class _$_Restaurant extends _Restaurant {
       const DeepCollectionEquality().hash(lowestRating) ^
       const DeepCollectionEquality().hash(latestRating) ^
       const DeepCollectionEquality().hash(numberOfRatings) ^
-      const DeepCollectionEquality().hash(sumOfRatings);
+      const DeepCollectionEquality().hash(sumOfRatings) ^
+      const DeepCollectionEquality().hash(archived);
 
   @JsonKey(ignore: true)
   @override
@@ -316,7 +338,8 @@ abstract class _Restaurant extends Restaurant {
       required RestaurantRating lowestRating,
       required RestaurantRating latestRating,
       required int numberOfRatings,
-      required int sumOfRatings}) = _$_Restaurant;
+      required int sumOfRatings,
+      required bool archived}) = _$_Restaurant;
   _Restaurant._() : super._();
 
   @override
@@ -337,6 +360,8 @@ abstract class _Restaurant extends Restaurant {
   int get numberOfRatings => throw _privateConstructorUsedError;
   @override
   int get sumOfRatings => throw _privateConstructorUsedError;
+  @override
+  bool get archived => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RestaurantCopyWith<_Restaurant> get copyWith =>

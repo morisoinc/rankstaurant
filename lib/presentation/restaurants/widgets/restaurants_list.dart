@@ -17,7 +17,7 @@ class RestaurantsList extends StatelessWidget {
             return ListView.builder(
               itemBuilder: (context, index) {
                 final restaurant = state.restaurants[index];
-                if (restaurant.failureOption.isSome()) {
+                if (restaurant.failureOrOption.isSome()) {
                   return ErrorRestaurantCard();
                 } else {
                   return RestaurantCard(restaurant: restaurant);

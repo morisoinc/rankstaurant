@@ -16,6 +16,7 @@ _$_RestaurantDto _$_$_RestaurantDtoFromJson(Map<String, dynamic> json) {
     latestRating: (json['latestRating'] as num).toDouble(),
     numberOfRatings: json['numberOfRatings'] as int,
     sumOfRatings: json['sumOfRatings'] as int,
+    archived: json['archived'] as bool,
   );
 }
 
@@ -29,4 +30,5 @@ Map<String, dynamic> _$_$_RestaurantDtoToJson(_$_RestaurantDto instance) =>
       'latestRating': instance.latestRating,
       'numberOfRatings': instance.numberOfRatings,
       'sumOfRatings': instance.sumOfRatings,
+      'archived': instance.archived,
     };

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kt_dart/kt.dart';
 import 'package:injectable/injectable.dart';
 import 'package:dartz/dartz.dart';
@@ -18,15 +19,17 @@ import 'package:rankstaurant/injection.dart';
 
 @LazySingleton(as: IRestaurantRepository)
 class RestaurantRepository implements IRestaurantRepository {
-  RestaurantRepository(this._firestore);
+  RestaurantRepository(this._firestore, this._firebaseAuth);
 
   final FirebaseFirestore _firestore;
+  final FirebaseAuth _firebaseAuth;
 
   @override
   Future<Either<RestaurantFailure, Unit>> create(Restaurant restaurant) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
-      final restaurantDto = RestaurantDto.fromDomain(restaurant);
+      final restaurantDto = RestaurantDto.fromDomain(restaurant)
+          .copyWith(owner: _firebaseAuth.currentUser!.uid);
 
       final existingRestaurant = await restaurantsCollection
           .where('name', isEqualTo: restaurant.name.getOrCrash())
@@ -58,6 +61,23 @@ class RestaurantRepository implements IRestaurantRepository {
 
       return right(unit);
     } on FirebaseException {
+      return left(const RestaurantFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<RestaurantFailure, Unit>> delete(Restaurant restaurant) async {
+    try {
+      final restaurantsCollection = await _firestore.restaurantsCollection();
+      final restaurantDto =
+          RestaurantDto.fromDomain(restaurant).copyWith(archived: true);
+
+      await restaurantsCollection
+          .doc(restaurantDto.id)
+          .update(restaurantDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
       return left(const RestaurantFailure.unexpected());
     }
   }
@@ -107,6 +127,7 @@ class RestaurantRepository implements IRestaurantRepository {
     final restaurantsCollection = await _firestore.restaurantsCollection();
 
     yield* restaurantsCollection
+        .where('archived', isEqualTo: false)
         .orderBy('averageRating', descending: true)
         .snapshots()
         .map(
@@ -126,6 +147,7 @@ class RestaurantRepository implements IRestaurantRepository {
 
     final restaurantsCollection = await _firestore.restaurantsCollection();
     yield* restaurantsCollection
+        .where('archived', isEqualTo: false)
         .orderBy('averageRating', descending: true)
         .snapshots()
         .map(
@@ -139,6 +161,8 @@ class RestaurantRepository implements IRestaurantRepository {
                 .toImmutableList(),
           ),
         )
-        .onErrorReturnWith((e) => left(const RestaurantFailure.unexpected()));
+        .onErrorReturnWith((e) {
+      return left(const RestaurantFailure.unexpected());
+    });
   }
 }

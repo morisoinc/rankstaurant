@@ -19,6 +19,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
     required double latestRating,
     required int numberOfRatings,
     required int sumOfRatings,
+    required bool archived,
   }) = _RestaurantDto;
 
   factory RestaurantDto.fromJson(Map<String, dynamic> json) =>
@@ -41,6 +42,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       latestRating: restaurant.latestRating.getOrCrash(),
       numberOfRatings: restaurant.numberOfRatings,
       sumOfRatings: restaurant.sumOfRatings,
+      archived: restaurant.archived,
     );
   }
 
@@ -55,6 +57,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       latestRating: RestaurantRating(latestRating),
       numberOfRatings: numberOfRatings,
       sumOfRatings: sumOfRatings,
+      archived: archived,
     );
   }
 }

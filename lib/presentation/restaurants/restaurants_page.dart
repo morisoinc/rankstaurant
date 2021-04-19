@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:rankstaurant/application/auth/auth_bloc.dart';
-import 'package:rankstaurant/application/restaurant_creation/restaurant_creation_bloc.dart';
+import 'package:rankstaurant/application/restaurant_form/restaurant_form_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/injection.dart';
@@ -75,9 +75,9 @@ class RestaurantsPage extends StatelessWidget {
   void showCreateRestaurantDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (_) => BlocProvider<RestaurantCreationBloc>(
-        create: (context) => getIt<RestaurantCreationBloc>(),
-        child: BlocConsumer<RestaurantCreationBloc, RestaurantCreationState>(
+      builder: (_) => BlocProvider<RestaurantFormBloc>(
+        create: (context) => getIt<RestaurantFormBloc>(),
+        child: BlocConsumer<RestaurantFormBloc, RestaurantFormState>(
           listener: (context, state) {
             state.restaurantFailureOrSuccessOption.fold(
               () {},
@@ -99,12 +99,13 @@ class RestaurantsPage extends StatelessWidget {
                 child: TextFormField(
                   decoration: const InputDecoration(hintText: 'Name'),
                   onChanged: (value) => context
-                      .read<RestaurantCreationBloc>()
-                      .add(RestaurantCreationEvent.nameChanged(value)),
+                      .read<RestaurantFormBloc>()
+                      .add(RestaurantFormEvent.nameChanged(value)),
                   validator: (_) => context
-                      .read<RestaurantCreationBloc>()
+                      .read<RestaurantFormBloc>()
                       .state
-                      .restaurantName
+                      .restaurant
+                      .name
                       .value
                       .fold(
                         (f) => f.maybeMap(
@@ -124,9 +125,8 @@ class RestaurantsPage extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       FocusScope.of(context).unfocus();
-                      context.read<RestaurantCreationBloc>().add(
-                          const RestaurantCreationEvent
-                              .createRestaurantPressed());
+                      context.read<RestaurantFormBloc>().add(
+                          const RestaurantFormEvent.saveRestaurantPressed());
                     },
                     child: const Text('Create')),
               ],
