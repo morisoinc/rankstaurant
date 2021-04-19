@@ -212,18 +212,12 @@ void showEditReview(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const SizedBox(height: 16),
-                        BlocBuilder<ReviewFormBloc, ReviewFormState>(
-                          buildWhen: (p, c) =>
-                              p.review.rating != c.review.rating,
-                          builder: (context, state) {
-                            return StarsSelector(
-                              starsSelected: state.review.rating.getOrCrash(),
-                              onChanged: (starsSelected) => context
-                                  .read<ReviewFormBloc>()
-                                  .add(ReviewFormEvent.ratingChanged(
-                                      starsSelected)),
-                            );
-                          },
+                        StarsSelector(
+                          starsSelected: state.review.rating.getOrCrash(),
+                          onChanged: (starsSelected) => context
+                              .read<ReviewFormBloc>()
+                              .add(
+                                  ReviewFormEvent.ratingChanged(starsSelected)),
                         ),
                         const SizedBox(height: 16),
                         TextFormField(

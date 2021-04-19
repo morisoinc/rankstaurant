@@ -24,7 +24,8 @@ class RestaurantSelfPage extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => getIt<RestaurantSelfBloc>()
-            ..add(RestaurantSelfEvent.initialized(optionOf(restaurant))),
+            ..add(RestaurantSelfEvent.initialized(optionOf(restaurant)))
+            ..add(RestaurantSelfEvent.watch(restaurant)),
         ),
         BlocProvider(
           create: (context) =>
@@ -34,14 +35,17 @@ class RestaurantSelfPage extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            BlocConsumer<RestaurantSelfBloc, RestaurantSelfState>(
-              listener: (context, state) {},
+            BlocBuilder<RestaurantSelfBloc, RestaurantSelfState>(
               builder: (context, state) {
-                return buildHeader(state, context);
+                return state.map(
+                  (value) => buildHeader(value.restaurant, context),
+                  loaded: (state) => buildHeader(state.restaurant, context),
+                  fail: (state) => Container(),
+                );
               },
             ),
-            LayoutBuilder(builder: (context, constraints) {
-              return BlocConsumer<ReviewsBloc, ReviewsState>(
+            Expanded(
+              child: BlocConsumer<ReviewsBloc, ReviewsState>(
                 listener: (context, state) {},
                 builder: (context, state) {
                   return state.map(
@@ -67,8 +71,8 @@ class RestaurantSelfPage extends StatelessWidget {
                     fail: (_) => Container(),
                   );
                 },
-              );
-            }),
+              ),
+            ),
           ],
         ),
         floatingActionButton: _buildFab(context),
@@ -76,7 +80,7 @@ class RestaurantSelfPage extends StatelessWidget {
     );
   }
 
-  Column buildHeader(RestaurantSelfState state, BuildContext context) {
+  Column buildHeader(Restaurant restaurant, BuildContext context) {
     return Column(
       children: [
         Row(
@@ -84,7 +88,7 @@ class RestaurantSelfPage extends StatelessWidget {
           children: [
             Flexible(
               child: Text(
-                state.restaurant.name.getOrCrash(),
+                restaurant.name.getOrCrash(),
                 style: Theme.of(context).textTheme.headline4,
                 textAlign: TextAlign.center,
               ),
@@ -92,13 +96,13 @@ class RestaurantSelfPage extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 16),
-        buildRatingSection(state, context),
+        buildRatingSection(restaurant, context),
       ],
     );
   }
 
-  Row buildRatingSection(RestaurantSelfState state, BuildContext context) {
-    final isRestaurantNew = state.restaurant.averageRating.getOrCrash() == -1;
+  Row buildRatingSection(Restaurant restaurant, BuildContext context) {
+    final isRestaurantNew = restaurant.averageRating.getOrCrash() == -1;
 
     if (isRestaurantNew) {
       return Row(
@@ -117,12 +121,9 @@ class RestaurantSelfPage extends StatelessWidget {
         ],
       );
     } else {
-      final lowestRating =
-          state.restaurant.lowestRating.getOrCrash().toString();
-      final averageRating =
-          state.restaurant.averageRating.getOrCrash().toString();
-      final highestRating =
-          state.restaurant.highestRating.getOrCrash().toString();
+      final lowestRating = restaurant.lowestRating.getOrCrash().toString();
+      final averageRating = restaurant.averageRating.getOrCrash().toString();
+      final highestRating = restaurant.highestRating.getOrCrash().toString();
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -217,6 +218,7 @@ class RestaurantSelfPage extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           StarsSelector(
+                            starsSelected: state.review.rating.getOrCrash(),
                             onChanged: (starsSelected) => context
                                 .read<ReviewFormBloc>()
                                 .add(ReviewFormEvent.ratingChanged(

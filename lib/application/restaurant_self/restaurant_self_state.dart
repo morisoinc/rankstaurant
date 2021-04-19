@@ -8,4 +8,7 @@ abstract class RestaurantSelfState with _$RestaurantSelfState {
   factory RestaurantSelfState.initial() => RestaurantSelfState(
         restaurant: Restaurant.empty(),
       );
+
+  factory RestaurantSelfState.loaded(Restaurant restaurant) = _Loaded;
+  factory RestaurantSelfState.fail(RestaurantFailure failure) = _Fail;
 }

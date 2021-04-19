@@ -45,7 +45,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i10.UserRepository(get<_i4.FirebaseFirestore>()));
   gh.factory<_i11.RestaurantFormBloc>(
       () => _i11.RestaurantFormBloc(get<_i5.IRestaurantRepository>()));
-  gh.factory<_i12.RestaurantSelfBloc>(() => _i12.RestaurantSelfBloc());
+  gh.factory<_i12.RestaurantSelfBloc>(
+      () => _i12.RestaurantSelfBloc(get<_i5.IRestaurantRepository>()));
   gh.factory<_i13.RestaurantsBloc>(
       () => _i13.RestaurantsBloc(get<_i5.IRestaurantRepository>()));
   gh.factory<_i14.ReviewFormBloc>(() => _i14.ReviewFormBloc(

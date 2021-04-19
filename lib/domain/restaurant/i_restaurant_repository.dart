@@ -8,6 +8,7 @@ import 'package:rankstaurant/domain/review/review_failure.dart';
 abstract class IRestaurantRepository {
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll();
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn();
+  Stream<Either<RestaurantFailure, Restaurant>> watch(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> create(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> update(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> delete(Restaurant restaurant);

@@ -24,8 +24,7 @@ class ReviewRepository implements IReviewRepository {
       final reviewsCollection =
           await _firestore.reviewsColleciton(restaurant.id.getOrCrash());
 
-      final result =
-          await reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
+      await reviewsCollection.doc(reviewDto.id).set(reviewDto.toJson());
 
       return right(unit);
     } on FirebaseException catch (e) {

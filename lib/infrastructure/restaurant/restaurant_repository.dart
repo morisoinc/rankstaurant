@@ -25,6 +25,22 @@ class RestaurantRepository implements IRestaurantRepository {
   final FirebaseAuth _firebaseAuth;
 
   @override
+  Stream<Either<RestaurantFailure, Restaurant>> watch(
+      Restaurant restaurant) async* {
+    final restaurantsCollection = await _firestore.restaurantsCollection();
+
+    yield* restaurantsCollection
+        .doc(restaurant.id.getOrCrash())
+        .snapshots()
+        .map(
+          (snapshot) => right<RestaurantFailure, Restaurant>(
+            RestaurantDto.fromFirestore(snapshot).toDomain(),
+          ),
+        )
+        .onErrorReturnWith((e) => left(const RestaurantFailure.unexpected()));
+  }
+
+  @override
   Future<Either<RestaurantFailure, Unit>> create(Restaurant restaurant) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
