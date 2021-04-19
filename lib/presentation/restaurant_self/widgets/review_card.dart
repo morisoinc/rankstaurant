@@ -323,7 +323,7 @@ class ReviewResponse extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.only(right: 8),
           color: kLightestBrown,
-          width: width - 30,
+          width: width - 64,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(12, 18, 12, 18),
             child: Text(responseStr),

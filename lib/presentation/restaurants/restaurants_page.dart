@@ -35,7 +35,6 @@ class RestaurantsPage extends StatelessWidget {
           floatingActionButton: _buildFab(context),
           body: RContainer(
             headerTitle: 'Restaurants',
-            headerContent: const SizedBox(height: 0, width: 0),
             leftIcon: const Icon(
               Icons.logout,
               size: 18,

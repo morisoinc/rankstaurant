@@ -8,6 +8,7 @@ import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/error_review.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/review_card.dart';
@@ -33,47 +34,49 @@ class RestaurantSelfPage extends StatelessWidget {
         ),
       ],
       child: Scaffold(
-        body: Column(
-          children: [
-            BlocBuilder<RestaurantSelfBloc, RestaurantSelfState>(
-              builder: (context, state) {
-                return state.map(
-                  (value) => buildHeader(value.restaurant, context),
-                  loaded: (state) => buildHeader(state.restaurant, context),
-                  fail: (state) => Container(),
-                );
-              },
-            ),
-            Expanded(
-              child: BlocConsumer<ReviewsBloc, ReviewsState>(
-                listener: (context, state) {},
-                builder: (context, state) {
-                  return state.map(
-                    (value) => Container(),
-                    loading: (_) =>
-                        const Center(child: CircularProgressIndicator()),
-                    loaded: (state) {
-                      return state.reviews.isEmpty()
-                          ? Container()
-                          : ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: state.reviews.size,
-                              itemBuilder: (context, index) {
-                                final review = state.reviews[index];
-                                if (review.failureOrOption.isSome()) {
-                                  return ErrorReviewCard();
-                                } else {
-                                  return ReviewCard(review, restaurant);
-                                }
-                              },
-                            );
-                    },
-                    fail: (_) => Container(),
-                  );
-                },
+        body: RContainer(
+          headerContent: BlocBuilder<RestaurantSelfBloc, RestaurantSelfState>(
+            builder: (context, state) {
+              return state.map(
+                (value) => buildHeader(value.restaurant, context),
+                loaded: (state) => buildHeader(state.restaurant, context),
+                fail: (state) => Container(),
+              );
+            },
+          ),
+          body: Column(
+            children: [
+              Expanded(
+                child: BlocConsumer<ReviewsBloc, ReviewsState>(
+                  listener: (context, state) {},
+                  builder: (context, state) {
+                    return state.map(
+                      (value) => Container(),
+                      loading: (_) =>
+                          const Center(child: CircularProgressIndicator()),
+                      loaded: (state) {
+                        return state.reviews.isEmpty()
+                            ? Container()
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: state.reviews.size,
+                                itemBuilder: (context, index) {
+                                  final review = state.reviews[index];
+                                  if (review.failureOrOption.isSome()) {
+                                    return ErrorReviewCard();
+                                  } else {
+                                    return ReviewCard(review, restaurant);
+                                  }
+                                },
+                              );
+                      },
+                      fail: (_) => Container(),
+                    );
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         floatingActionButton: _buildFab(context),
       ),
