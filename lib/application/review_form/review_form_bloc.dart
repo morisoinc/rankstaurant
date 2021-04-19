@@ -27,73 +27,81 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
   Stream<ReviewFormState> mapEventToState(
     ReviewFormEvent event,
   ) async* {
-    yield* event.map(initialized: (e) async* {
-      yield e.initialRestaurantOption.fold(
-          () => state,
-          (restaurant) => e.initialReviewOption.fold(
-              () => state.copyWith(restaurant: restaurant),
-              (review) => state.copyWith(
-                  restaurant: restaurant, review: review, isEditing: true)));
-    }, bodyChanged: (e) async* {
-      yield state.copyWith(
-        review: state.review.copyWith(body: ReviewBody(e.bodyStr)),
-        reviewFailureOrSuccessOption: none(),
-      );
-    }, ratingChanged: (e) async* {
-      yield state.copyWith(
-        review: state.review.copyWith(rating: ReviewRating(e.ratingInt)),
-        reviewFailureOrSuccessOption: none(),
-      );
-    }, responseChanged: (e) async* {
-      yield state.copyWith(
-        review: state.review.copyWith(response: ReviewResponse(e.responseStr)),
-        reviewFailureOrSuccessOption: none(),
-      );
-    }, saveReviewPressed: (e) async* {
-      Either<ReviewFailure, Unit> failureOrSuccess =
-          left(const ReviewFailure.unexpected());
+    yield* event.map(
+      initialized: (e) async* {
+        yield e.initialRestaurantOption.fold(
+            () => state,
+            (restaurant) => e.initialReviewOption.fold(
+                () => state.copyWith(restaurant: restaurant),
+                (review) => state.copyWith(
+                    restaurant: restaurant, review: review, isEditing: true)));
+      },
+      bodyChanged: (e) async* {
+        yield state.copyWith(
+          review: state.review.copyWith(body: ReviewBody(e.bodyStr)),
+          reviewFailureOrSuccessOption: none(),
+        );
+      },
+      ratingChanged: (e) async* {
+        yield state.copyWith(
+          review: state.review.copyWith(rating: ReviewRating(e.ratingInt)),
+          reviewFailureOrSuccessOption: none(),
+        );
+      },
+      responseChanged: (e) async* {
+        yield state.copyWith(
+          review:
+              state.review.copyWith(response: ReviewResponse(e.responseStr)),
+          reviewFailureOrSuccessOption: none(),
+        );
+      },
+      saveReviewPressed: (e) async* {
+        Either<ReviewFailure, Unit> failureOrSuccess =
+            left(const ReviewFailure.unexpected());
 
-      yield state.copyWith(
-        isSubmitting: true,
-        reviewFailureOrSuccessOption: none(),
-      );
+        yield state.copyWith(
+          isSubmitting: true,
+          reviewFailureOrSuccessOption: none(),
+        );
 
-      if (state.review.failureOrOption.isNone()) {
-        if (state.isEditing) {
-          failureOrSuccess =
-              await reviewRepository.update(state.review, state.restaurant);
-        } else {
-          failureOrSuccess =
-              await reviewRepository.create(state.review, state.restaurant);
-          if (failureOrSuccess.isRight()) {
-            failureOrSuccess = await restaurantRepository.updateWithReview(
-                state.restaurant, state.review);
+        if (state.review.failureOrOption.isNone()) {
+          if (state.isEditing) {
+            failureOrSuccess =
+                await reviewRepository.update(state.review, state.restaurant);
+          } else {
+            failureOrSuccess =
+                await reviewRepository.create(state.review, state.restaurant);
+            if (failureOrSuccess.isRight()) {
+              failureOrSuccess = await restaurantRepository.updateWithReview(
+                  state.restaurant, state.review);
+            }
           }
         }
-      }
 
-      yield state.copyWith(
-        isSubmitting: false,
-        reviewFailureOrSuccessOption: optionOf(failureOrSuccess),
-      );
-    }, deleteReviewPressed: (e) async* {
-      yield state.copyWith(
-        isSubmitting: true,
-        reviewFailureOrSuccessOption: none(),
-      );
+        yield state.copyWith(
+          isSubmitting: false,
+          reviewFailureOrSuccessOption: optionOf(failureOrSuccess),
+        );
+      },
+      deleteReviewPressed: (e) async* {
+        yield state.copyWith(
+          isSubmitting: true,
+          reviewFailureOrSuccessOption: none(),
+        );
 
-      Either<ReviewFailure, Unit> failureOrSuccess =
-          await reviewRepository.delete(state.review, state.restaurant);
+        Either<ReviewFailure, Unit> failureOrSuccess =
+            await reviewRepository.delete(state.review, state.restaurant);
 
-      if (failureOrSuccess.isRight()) {
-        failureOrSuccess = await restaurantRepository.updateWithReview(
-            state.restaurant, state.review);
-      }
+        if (failureOrSuccess.isRight()) {
+          failureOrSuccess = await restaurantRepository.updateWithReview(
+              state.restaurant, state.review);
+        }
 
-      yield state.copyWith(
-        isSubmitting: false,
-        reviewFailureOrSuccessOption: optionOf(failureOrSuccess),
-      );
-    });
+        yield state.copyWith(
+          isSubmitting: false,
+          reviewFailureOrSuccessOption: optionOf(failureOrSuccess),
+        );
+      },
+    );
   }
 }
