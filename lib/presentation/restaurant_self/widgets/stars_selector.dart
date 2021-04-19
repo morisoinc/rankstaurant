@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class StarsSelector extends StatefulWidget {
-  const StarsSelector({required this.onChanged});
+  const StarsSelector({this.starsSelected = 0, required this.onChanged});
 
+  final int starsSelected;
   final Function(int starsSelected) onChanged;
 
   @override
@@ -14,6 +15,7 @@ class _StarsSelectorState extends State<StarsSelector> {
 
   @override
   Widget build(BuildContext context) {
+    starsSelected = widget.starsSelected;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
