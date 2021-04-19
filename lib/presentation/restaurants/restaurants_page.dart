@@ -36,15 +36,12 @@ class RestaurantsPage extends StatelessWidget {
           body: RContainer(
             headerTitle: 'Restaurants',
             headerContent: const SizedBox(height: 0, width: 0),
-            // appBar: AppBar(
-            //   title: const Text('Restaurants'),
-            //   leading: IconButton(
-            //     icon: const Icon(Icons.logout),
-            //     onPressed: () {
-            //       context.read<AuthBloc>().add(const AuthEvent.signedOut());
-            //     },
-            //   ),
-            // ),
+            leftIcon: const Icon(
+              Icons.logout,
+              size: 18,
+            ),
+            leftAction: () =>
+                context.read<AuthBloc>().add(const AuthEvent.signedOut()),
             body: RestaurantsList(),
           ),
         ),
