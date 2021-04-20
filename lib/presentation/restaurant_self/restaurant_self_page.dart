@@ -11,6 +11,7 @@ import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
+import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/error_review.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/review_card.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
@@ -200,12 +201,14 @@ class RestaurantSelfPage extends StatelessWidget {
             state.reviewFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold((failure) {
+                loadingOverlay.hide();
                 FlushbarHelper.createError(
                   message: failure.map(
                     unexpected: (_) => 'Unexpected error',
                   ),
                 ).show(context);
               }, (_) {
+                loadingOverlay.hide();
                 Navigator.pop(context);
               }),
             );
@@ -216,6 +219,7 @@ class RestaurantSelfPage extends StatelessWidget {
               context: context,
               saveText: 'Save',
               saveAction: () {
+                loadingOverlay.show(context);
                 FocusScope.of(context).unfocus();
                 context
                     .read<ReviewFormBloc>()

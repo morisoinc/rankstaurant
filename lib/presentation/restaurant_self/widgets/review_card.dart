@@ -9,6 +9,7 @@ import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/injection.dart';
+import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
 
 class ReviewCard extends StatelessWidget {
@@ -92,12 +93,14 @@ void showRespondToReview(
           state.reviewFailureOrSuccessOption.fold(
             () {},
             (either) => either.fold((failure) {
+              loadingOverlay.hide();
               FlushbarHelper.createError(
                 message: failure.map(
                   unexpected: (_) => 'Unexpected error',
                 ),
               ).show(context);
             }, (_) {
+              loadingOverlay.hide();
               Navigator.pop(context);
             }),
           );
@@ -108,6 +111,7 @@ void showRespondToReview(
             context: context,
             saveText: 'Save',
             saveAction: () {
+              loadingOverlay.show(context);
               FocusScope.of(context).unfocus();
               context
                   .read<ReviewFormBloc>()
@@ -178,12 +182,14 @@ void showEditReview(
           state.reviewFailureOrSuccessOption.fold(
             () {},
             (either) => either.fold((failure) {
+              loadingOverlay.hide();
               FlushbarHelper.createError(
                 message: failure.map(
                   unexpected: (_) => 'Unexpected error',
                 ),
               ).show(context);
             }, (_) {
+              loadingOverlay.hide();
               Navigator.pop(context);
             }),
           );
@@ -194,6 +200,7 @@ void showEditReview(
             context: context,
             saveText: 'Save',
             saveAction: () {
+              loadingOverlay.show(context);
               FocusScope.of(context).unfocus();
               context
                   .read<ReviewFormBloc>()
@@ -201,6 +208,7 @@ void showEditReview(
             },
             deleteText: 'archive',
             deleteAction: () {
+              loadingOverlay.show(context);
               FocusScope.of(context).unfocus();
               context
                   .read<ReviewFormBloc>()

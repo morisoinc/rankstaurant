@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rankstaurant/application/auth/auth_bloc.dart';
 import 'package:rankstaurant/application/auth/sign_in_form/sign_in_form_bloc.dart';
+import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
@@ -23,12 +24,14 @@ class SignInForm extends StatelessWidget {
                   invalidEmailOrPassword: (_) => 'Invalid email or password',
                 ),
               ).show(context);
+              loadingOverlay.hide();
             },
             (_) {
               context.router.replace(const RestaurantsRoute());
               context
                   .read<AuthBloc>()
                   .add(const AuthEvent.authCheckRequested());
+              loadingOverlay.hide();
             },
           ),
         );
@@ -108,6 +111,7 @@ class SignInForm extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
+                      loadingOverlay.show(context);
                       FocusScope.of(context).unfocus();
                       context.read<SignInFormBloc>().add(
                             const SignInFormEvent
@@ -118,6 +122,7 @@ class SignInForm extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
+                      loadingOverlay.show(context);
                       FocusScope.of(context).unfocus();
                       context.read<SignInFormBloc>().add(
                             const SignInFormEvent

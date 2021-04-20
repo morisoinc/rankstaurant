@@ -7,11 +7,13 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'package:injectable/injectable.dart';
+import 'package:rankstaurant/global/widgets/r_loading_overlay.dart';
 import 'package:rankstaurant/presentation/core/app.dart';
 import 'package:rankstaurant/simple_bloc_observer.dart';
 
 import 'injection.dart';
 
+final RLoadingOverlay loadingOverlay = RLoadingOverlay();
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureInjection(Environment.prod);

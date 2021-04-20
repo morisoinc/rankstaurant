@@ -10,6 +10,7 @@ import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
+import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/restaurants_list.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
@@ -26,6 +27,7 @@ class RestaurantsPage extends StatelessWidget {
         listeners: [
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
+              loadingOverlay.hide();
               state.maybeMap(
                   unauthenticated: (_) =>
                       context.router.replace(const SignInRoute()),
@@ -86,6 +88,7 @@ class RestaurantsPage extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
+                  loadingOverlay.hide();
                   FlushbarHelper.createError(
                     message: failure.map(
                       unexpected: (_) => 'Unexpected error',
@@ -93,6 +96,7 @@ class RestaurantsPage extends StatelessWidget {
                   ).show(context);
                 },
                 (_) {
+                  loadingOverlay.hide();
                   Navigator.pop(context);
                 },
               ),
@@ -104,6 +108,7 @@ class RestaurantsPage extends StatelessWidget {
               context: context,
               saveText: 'Create',
               saveAction: () {
+                loadingOverlay.show(context);
                 FocusScope.of(context).unfocus();
                 context
                     .read<RestaurantFormBloc>()

@@ -9,6 +9,7 @@ import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/injection.dart';
+import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class RestaurantCard extends StatelessWidget {
@@ -89,12 +90,14 @@ class RestaurantCard extends StatelessWidget {
             state.restaurantFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold((failure) {
+                loadingOverlay.hide();
                 FlushbarHelper.createError(
                   message: failure.map(
                     unexpected: (_) => 'Unexpected error',
                   ),
                 ).show(context);
               }, (_) {
+                loadingOverlay.hide();
                 Navigator.pop(context);
               }),
             );
@@ -105,6 +108,7 @@ class RestaurantCard extends StatelessWidget {
               context: context,
               saveText: 'Save',
               saveAction: () {
+                loadingOverlay.show(context);
                 FocusScope.of(context).unfocus();
                 context
                     .read<RestaurantFormBloc>()
@@ -112,6 +116,7 @@ class RestaurantCard extends StatelessWidget {
               },
               deleteText: 'archive',
               deleteAction: () {
+                loadingOverlay.show(context);
                 FocusScope.of(context).unfocus();
                 context
                     .read<RestaurantFormBloc>()
