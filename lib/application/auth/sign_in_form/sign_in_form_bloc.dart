@@ -46,7 +46,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         );
       },
       registerWithEmailAndPasswordPressed: (e) async* {
-        Either<AuthFailure, Unit>? failureOrSuccess;
+        Either<AuthFailure, Unit> failureOrSuccess =
+            left(const AuthFailure.invalidEmailOrPassword());
 
         final isEmailValid = state.emailAddress.isValid();
         final isPasswordValid = state.password.isValid();
@@ -72,7 +73,8 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
         );
       },
       signInWithEmailAndPasswordPressed: (e) async* {
-        Either<AuthFailure, Unit>? failureOrSuccess;
+        Either<AuthFailure, Unit> failureOrSuccess =
+            left(const AuthFailure.invalidEmailOrPassword());
 
         final isEmailValid = state.emailAddress.isValid();
         final isPasswordValid = state.password.isValid();
