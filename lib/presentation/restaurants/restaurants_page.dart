@@ -45,6 +45,8 @@ class RestaurantsPage extends StatelessWidget {
             ),
             leftAction: () =>
                 context.read<AuthBloc>().add(const AuthEvent.signedOut()),
+            rightIcon: _buildRightIcon(),
+            rightAction: _buildRightAction(context),
             body: RestaurantsList(),
           ),
         ),
@@ -75,6 +77,21 @@ class RestaurantsPage extends StatelessWidget {
       default:
         return Container();
     }
+  }
+
+  Icon? _buildRightIcon() {
+    if (SettingsHelper.userRole() == Role.admin) {
+      return const Icon(Icons.person, size: 18);
+    }
+    return null;
+  }
+
+  Function()? _buildRightAction(BuildContext context) {
+    if (SettingsHelper.userRole() == Role.admin) {
+      return () => RBottomSheet.show(context,
+          RBottomSheet(title: 'Users', context: context, child: Container()));
+    }
+    return null;
   }
 
   void showCreateRestaurantDialog(BuildContext context) {
