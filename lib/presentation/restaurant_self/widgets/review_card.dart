@@ -7,6 +7,7 @@ import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
 
@@ -73,10 +74,13 @@ void onReviewLongPress(
 }
 
 void showRespondToReview(
-    Review review, Restaurant restaurant, BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) => BlocProvider<ReviewFormBloc>(
+  Review review,
+  Restaurant restaurant,
+  BuildContext context,
+) {
+  RBottomSheet.show(
+    context,
+    BlocProvider<ReviewFormBloc>(
       create: (context) => getIt<ReviewFormBloc>()
         ..add(ReviewFormEvent.initialized(
             optionOf(review), optionOf(restaurant))),
@@ -96,63 +100,45 @@ void showRespondToReview(
           );
         },
         builder: (context, state) {
-          return AlertDialog(
-            title: const Text('Respond to a review'),
-            content: Builder(
-              builder: (context) {
-                final width = MediaQuery.of(context).size.width;
-                return Form(
-                  child: SizedBox(
-                    width: width,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 16),
-                        TextFormField(
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 5,
-                          decoration:
-                              const InputDecoration(hintText: 'Comment'),
-                          onChanged: (value) => context
-                              .read<ReviewFormBloc>()
-                              .add(ReviewFormEvent.responseChanged(value)),
-                          validator: (_) => context
-                              .read<ReviewFormBloc>()
-                              .state
-                              .review
-                              .response
-                              .value
-                              .fold(
-                                (f) => f.maybeMap(
-                                  longReviewBody: (_) =>
-                                      'Response must be shorter',
-                                  orElse: () => null,
-                                ),
-                                (_) => null,
-                              ),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
-            ),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    context
+          return RBottomSheet(
+            title: 'Respond to a Review',
+            context: context,
+            saveText: 'Save',
+            saveAction: () {
+              FocusScope.of(context).unfocus();
+              context
+                  .read<ReviewFormBloc>()
+                  .add(const ReviewFormEvent.saveReviewPressed());
+            },
+            child: Form(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: const InputDecoration(hintText: 'Comment'),
+                    onChanged: (value) => context
                         .read<ReviewFormBloc>()
-                        .add(const ReviewFormEvent.saveReviewPressed());
-                  },
-                  child: const Text('Leave')),
-            ],
-            shape: const RoundedRectangleBorder(),
+                        .add(ReviewFormEvent.responseChanged(value)),
+                    validator: (_) => context
+                        .read<ReviewFormBloc>()
+                        .state
+                        .review
+                        .response
+                        .value
+                        .fold(
+                          (f) => f.maybeMap(
+                            longReviewBody: (_) => 'Response must be shorter',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       ),
@@ -168,9 +154,9 @@ void showEditReview(
   bool bodyEditingControllerInitialized = false;
   bool responseEditingControllerInitialized = false;
 
-  showDialog(
-    context: context,
-    builder: (_) => BlocProvider<ReviewFormBloc>(
+  RBottomSheet.show(
+    context,
+    BlocProvider<ReviewFormBloc>(
       create: (context) => getIt<ReviewFormBloc>()
         ..add(ReviewFormEvent.initialized(
             optionOf(review), optionOf(restaurant))),
@@ -200,103 +186,83 @@ void showEditReview(
           );
         },
         builder: (context, state) {
-          return AlertDialog(
-            title: const Text('Edit a review'),
-            content: Builder(
-              builder: (context) {
-                final width = MediaQuery.of(context).size.width;
-                return Form(
-                  child: SizedBox(
-                    width: width,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(height: 16),
-                        StarsSelector(
-                          starsSelected: state.review.rating.getOrCrash(),
-                          onChanged: (starsSelected) => context
-                              .read<ReviewFormBloc>()
-                              .add(
-                                  ReviewFormEvent.ratingChanged(starsSelected)),
-                        ),
-                        const SizedBox(height: 16),
-                        TextFormField(
-                          controller: bodyEditingController,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 5,
-                          decoration: const InputDecoration(hintText: 'Body'),
-                          onChanged: (value) => context
-                              .read<ReviewFormBloc>()
-                              .add(ReviewFormEvent.bodyChanged(value)),
-                          validator: (_) => context
-                              .read<ReviewFormBloc>()
-                              .state
-                              .review
-                              .body
-                              .value
-                              .fold(
-                                (f) => f.maybeMap(
-                                  longReviewBody: (_) => 'Body must be shorter',
-                                  orElse: () => null,
-                                ),
-                                (_) => null,
-                              ),
-                        ),
-                        const SizedBox(height: 16),
-                        TextFormField(
-                          controller: responseEditingController,
-                          keyboardType: TextInputType.multiline,
-                          maxLines: 5,
-                          decoration:
-                              const InputDecoration(hintText: 'Response'),
-                          onChanged: (value) => context
-                              .read<ReviewFormBloc>()
-                              .add(ReviewFormEvent.responseChanged(value)),
-                          validator: (_) => context
-                              .read<ReviewFormBloc>()
-                              .state
-                              .review
-                              .response
-                              .value
-                              .fold(
-                                (f) => f.maybeMap(
-                                  longReviewBody: (_) =>
-                                      'Response must be shorter',
-                                  orElse: () => null,
-                                ),
-                                (_) => null,
-                              ),
-                        ),
-                      ],
-                    ),
+          return RBottomSheet(
+            title: 'Edit a Review',
+            context: context,
+            saveText: 'Save',
+            saveAction: () {
+              FocusScope.of(context).unfocus();
+              context
+                  .read<ReviewFormBloc>()
+                  .add(const ReviewFormEvent.saveReviewPressed());
+            },
+            deleteText: 'Archive',
+            deleteAction: () {
+              FocusScope.of(context).unfocus();
+              context
+                  .read<ReviewFormBloc>()
+                  .add(const ReviewFormEvent.deleteReviewPressed());
+            },
+            child: Form(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 16),
+                  StarsSelector(
+                    starsSelected: state.review.rating.getOrCrash(),
+                    onChanged: (starsSelected) => context
+                        .read<ReviewFormBloc>()
+                        .add(ReviewFormEvent.ratingChanged(starsSelected)),
                   ),
-                );
-              },
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: bodyEditingController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: const InputDecoration(hintText: 'Body'),
+                    onChanged: (value) => context
+                        .read<ReviewFormBloc>()
+                        .add(ReviewFormEvent.bodyChanged(value)),
+                    validator: (_) => context
+                        .read<ReviewFormBloc>()
+                        .state
+                        .review
+                        .body
+                        .value
+                        .fold(
+                          (f) => f.maybeMap(
+                            longReviewBody: (_) => 'Body must be shorter',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: responseEditingController,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: const InputDecoration(hintText: 'Response'),
+                    onChanged: (value) => context
+                        .read<ReviewFormBloc>()
+                        .add(ReviewFormEvent.responseChanged(value)),
+                    validator: (_) => context
+                        .read<ReviewFormBloc>()
+                        .state
+                        .review
+                        .response
+                        .value
+                        .fold(
+                          (f) => f.maybeMap(
+                            longReviewBody: (_) => 'Response must be shorter',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
+                  ),
+                ],
+              ),
             ),
-            actions: [
-              ElevatedButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<ReviewFormBloc>()
-                        .add(const ReviewFormEvent.deleteReviewPressed());
-                  },
-                  child: const Text('Archive')),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel')),
-              ElevatedButton(
-                  onPressed: () {
-                    FocusScope.of(context).unfocus();
-                    context
-                        .read<ReviewFormBloc>()
-                        .add(const ReviewFormEvent.saveReviewPressed());
-                  },
-                  child: const Text('Save')),
-            ],
-            shape: const RoundedRectangleBorder(),
           );
         },
       ),

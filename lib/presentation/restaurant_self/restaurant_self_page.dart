@@ -8,6 +8,7 @@ import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurant_self/widgets/error_review.dart';
@@ -188,9 +189,9 @@ class RestaurantSelfPage extends StatelessWidget {
   }
 
   void showLeaveReviewDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => BlocProvider<ReviewFormBloc>(
+    RBottomSheet.show(
+      context,
+      BlocProvider<ReviewFormBloc>(
         create: (context) => getIt<ReviewFormBloc>()
           ..add(ReviewFormEvent.initialized(
               optionOf(null), optionOf(restaurant))),
@@ -210,70 +211,51 @@ class RestaurantSelfPage extends StatelessWidget {
             );
           },
           builder: (context, state) {
-            return AlertDialog(
-              title: const Text('Leave a review'),
-              content: Builder(
-                builder: (context) {
-                  final width = MediaQuery.of(context).size.width;
-                  return Form(
-                    child: SizedBox(
-                      width: width,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          StarsSelector(
-                            starsSelected: state.review.rating.getOrCrash(),
-                            onChanged: (starsSelected) => context
-                                .read<ReviewFormBloc>()
-                                .add(ReviewFormEvent.ratingChanged(
-                                    starsSelected)),
-                          ),
-                          const SizedBox(height: 16),
-                          TextFormField(
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 5,
-                            decoration:
-                                const InputDecoration(hintText: 'Comment'),
-                            onChanged: (value) => context
-                                .read<ReviewFormBloc>()
-                                .add(ReviewFormEvent.bodyChanged(value)),
-                            validator: (_) => context
-                                .read<ReviewFormBloc>()
-                                .state
-                                .review
-                                .body
-                                .value
-                                .fold(
-                                  (f) => f.maybeMap(
-                                    longReviewBody: (_) =>
-                                        'Comment must be shorter',
-                                    orElse: () => null,
-                                  ),
-                                  (_) => null,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancel')),
-                ElevatedButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context
+            return RBottomSheet(
+              title: 'Leave a Review',
+              context: context,
+              saveText: 'Save',
+              saveAction: () {
+                FocusScope.of(context).unfocus();
+                context
+                    .read<ReviewFormBloc>()
+                    .add(const ReviewFormEvent.saveReviewPressed());
+              },
+              child: Form(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    StarsSelector(
+                      starsSelected: state.review.rating.getOrCrash(),
+                      onChanged: (starsSelected) => context
                           .read<ReviewFormBloc>()
-                          .add(const ReviewFormEvent.saveReviewPressed());
-                    },
-                    child: const Text('Save')),
-              ],
-              shape: const RoundedRectangleBorder(),
+                          .add(ReviewFormEvent.ratingChanged(starsSelected)),
+                    ),
+                    const SizedBox(height: 16),
+                    TextFormField(
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 5,
+                      decoration: const InputDecoration(hintText: 'Comment'),
+                      onChanged: (value) => context
+                          .read<ReviewFormBloc>()
+                          .add(ReviewFormEvent.bodyChanged(value)),
+                      validator: (_) => context
+                          .read<ReviewFormBloc>()
+                          .state
+                          .review
+                          .body
+                          .value
+                          .fold(
+                            (f) => f.maybeMap(
+                              longReviewBody: (_) => 'Comment must be shorter',
+                              orElse: () => null,
+                            ),
+                            (_) => null,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
             );
           },
         ),
