@@ -19,40 +19,43 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        InkWell(
-          onLongPress: () => onReviewLongPress(review, restaurant, context),
-          child: Card(
-            margin: const EdgeInsets.fromLTRB(8, 8, 8, 0),
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Flexible(child: Text(review.body.getOrCrash())),
-                  Row(
-                    children: [
-                      Column(
-                        children: const [
-                          SizedBox(height: 2),
-                          Icon(Icons.star),
-                        ],
-                      ),
-                      const SizedBox(width: 2),
-                      Text('${review.rating.getOrCrash()}'),
-                    ],
-                  ),
-                ],
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          InkWell(
+            onLongPress: () => onReviewLongPress(review, restaurant, context),
+            child: Card(
+              margin: const EdgeInsets.all(0),
+              elevation: 0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Flexible(child: Text(review.body.getOrCrash())),
+                    Row(
+                      children: [
+                        Column(
+                          children: const [
+                            SizedBox(height: 2),
+                            Icon(Icons.star),
+                          ],
+                        ),
+                        const SizedBox(width: 2),
+                        Text('${review.rating.getOrCrash()}'),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        ReviewResponse(review: review)
-      ],
+          ReviewResponse(review: review)
+        ],
+      ),
     );
   }
 }
@@ -196,7 +199,7 @@ void showEditReview(
                   .read<ReviewFormBloc>()
                   .add(const ReviewFormEvent.saveReviewPressed());
             },
-            deleteText: 'Archive',
+            deleteText: 'archive',
             deleteAction: () {
               FocusScope.of(context).unfocus();
               context
@@ -284,18 +287,19 @@ class ReviewResponse extends StatelessWidget {
     if (responseStr.isEmpty) {
       return Container();
     } else {
-      return Builder(builder: (context) {
-        final width = MediaQuery.of(context).size.width;
-        return Container(
-          margin: const EdgeInsets.only(right: 8),
-          color: kLightestBrown,
-          width: width - 64,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 18, 12, 18),
-            child: Text(responseStr),
-          ),
-        );
-      });
+      return Builder(
+        builder: (context) {
+          final width = MediaQuery.of(context).size.width;
+          return Container(
+            color: kLightestBrown,
+            width: width - 64,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+              child: Text(responseStr),
+            ),
+          );
+        },
+      );
     }
   }
 }

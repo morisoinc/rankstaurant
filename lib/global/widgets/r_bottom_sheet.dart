@@ -24,41 +24,48 @@ class RBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Container(
-                      margin: const EdgeInsets.only(top: 2),
-                      child: const Text('cancel'))),
-              Text(
-                title,
-                style: Theme.of(context).textTheme.headline6,
+      child: SafeArea(
+        top: false,
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Container(
+                        margin: const EdgeInsets.only(top: 2),
+                        child: const Text('cancel'))),
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+                TextButton(
+                    onPressed: deleteAction,
+                    child: Text(
+                      deleteText ?? '',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1!
+                          .copyWith(color: kRed),
+                    )),
+              ],
+            ),
+            Expanded(
+              child: ListView(
+                padding: const EdgeInsets.all(16),
+                children: [
+                  child,
+                  const SizedBox(height: 16),
+                ],
               ),
-              TextButton(
-                  onPressed: deleteAction,
-                  child: Text(
-                    deleteText ?? '',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: kRed),
-                  )),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: child,
-          ),
-          const Spacer(),
-          if (saveText == null)
-            Container()
-          else
-            ElevatedButton(onPressed: saveAction, child: Text(saveText!)),
-        ],
+            ),
+            if (saveText == null)
+              Container()
+            else
+              ElevatedButton(onPressed: saveAction, child: Text(saveText!)),
+          ],
+        ),
       ),
     );
   }
@@ -67,6 +74,8 @@ class RBottomSheet extends StatelessWidget {
     showCupertinoModalBottomSheet(
       expand: true,
       context: context,
+      isDismissible: false,
+      enableDrag: false,
       builder: (context) => bottomSheet,
     );
   }

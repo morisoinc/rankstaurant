@@ -20,13 +20,14 @@ class RestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final averageRating = restaurant.averageRating.getOrCrash();
     return Card(
+      margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () {
           context.router.push(RestaurantSelfRoute(restaurant: restaurant));
         },
         onLongPress: () => showEditDeleteRestaurantDialog(context, restaurant),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 24),
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -109,7 +110,7 @@ class RestaurantCard extends StatelessWidget {
                     .read<RestaurantFormBloc>()
                     .add(const RestaurantFormEvent.saveRestaurantPressed());
               },
-              deleteText: 'Archive',
+              deleteText: 'archive',
               deleteAction: () {
                 FocusScope.of(context).unfocus();
                 context
