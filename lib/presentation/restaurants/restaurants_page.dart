@@ -1,4 +1,5 @@
 import 'package:another_flushbar/flushbar_helper.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:auto_route/auto_route.dart';
@@ -6,6 +7,7 @@ import 'package:rankstaurant/application/auth/auth_bloc.dart';
 import 'package:rankstaurant/application/restaurant_form/restaurant_form_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
+import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/restaurants_list.dart';
@@ -74,29 +76,40 @@ class RestaurantsPage extends StatelessWidget {
   }
 
   void showCreateRestaurantDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (_) => BlocProvider<RestaurantFormBloc>(
+    RBottomSheet.show(
+      context,
+      BlocProvider<RestaurantFormBloc>(
         create: (context) => getIt<RestaurantFormBloc>(),
         child: BlocConsumer<RestaurantFormBloc, RestaurantFormState>(
           listener: (context, state) {
             state.restaurantFailureOrSuccessOption.fold(
               () {},
-              (either) => either.fold((failure) {
-                FlushbarHelper.createError(
-                  message: failure.map(
-                    unexpected: (_) => 'Unexpected error',
-                  ),
-                ).show(context);
-              }, (_) {
-                Navigator.pop(context);
-              }),
+              (either) => either.fold(
+                (failure) {
+                  FlushbarHelper.createError(
+                    message: failure.map(
+                      unexpected: (_) => 'Unexpected error',
+                    ),
+                  ).show(context);
+                },
+                (_) {
+                  Navigator.pop(context);
+                },
+              ),
             );
           },
           builder: (context, state) {
-            return AlertDialog(
-              title: const Text('Create a Restaurant'),
-              content: Form(
+            return RBottomSheet(
+              title: 'Create a Restaurant',
+              context: context,
+              saveText: 'Create',
+              saveAction: () {
+                FocusScope.of(context).unfocus();
+                context
+                    .read<RestaurantFormBloc>()
+                    .add(const RestaurantFormEvent.saveRestaurantPressed());
+              },
+              child: Form(
                 child: TextFormField(
                   decoration: const InputDecoration(hintText: 'Name'),
                   onChanged: (value) => context
@@ -110,32 +123,18 @@ class RestaurantsPage extends StatelessWidget {
                       .value
                       .fold(
                         (f) => f.maybeMap(
-                          shortPassword: (_) => 'Name must be shorter',
+                          longRestaurantName: (_) => 'Name must be shorter',
                           orElse: () => null,
                         ),
                         (_) => null,
                       ),
                 ),
               ),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancel')),
-                ElevatedButton(
-                    onPressed: () {
-                      FocusScope.of(context).unfocus();
-                      context.read<RestaurantFormBloc>().add(
-                          const RestaurantFormEvent.saveRestaurantPressed());
-                    },
-                    child: const Text('Create')),
-              ],
-              shape: const RoundedRectangleBorder(),
             );
           },
         ),
       ),
     );
+    return;
   }
 }
