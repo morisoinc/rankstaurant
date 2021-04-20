@@ -35,11 +35,7 @@ class RContainer extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 buildHeaderTitle(context),
-                if (headerContent == null)
-                  Container()
-                else
-                  Padding(padding: headerPadding, child: headerContent),
-                const SizedBox(height: 24),
+                buildHeaderContent(context),
               ],
             ),
           ),
@@ -73,6 +69,20 @@ class RContainer extends StatelessWidget {
         buildRightAction(),
       ],
     );
+  }
+
+  Widget buildHeaderContent(BuildContext context) {
+    if (headerContent == null) {
+      return Container();
+    } else {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Padding(padding: headerPadding, child: headerContent),
+          const SizedBox(height: 16),
+        ],
+      );
+    }
   }
 
   Widget buildLeftAction() {
