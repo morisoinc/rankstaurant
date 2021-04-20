@@ -4,6 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:rankstaurant/domain/core/value_validators.dart';
 import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
@@ -38,13 +39,13 @@ class RestaurantFormBloc
       },
       nameChanged: (e) async* {
         yield state.copyWith(
-          restaurant:
-              state.restaurant.copyWith(name: RestaurantName(e.nameStr)),
+          restaurant: state.restaurant
+              .copyWith(name: RestaurantName(e.nameStr, isInitial: false)),
           restaurantFailureOrSuccessOption: none(),
         );
       },
       saveRestaurantPressed: (e) async* {
-        Either<RestaurantFailure, Unit>? failureOrSuccess;
+        Either<RestaurantFailure, Unit> failureOrSuccess;
 
         yield state.copyWith(
           isSubmitting: true,
@@ -55,6 +56,15 @@ class RestaurantFormBloc
           failureOrSuccess = state.isEditing
               ? await restaurantRepository.update(state.restaurant)
               : await restaurantRepository.create(state.restaurant);
+        } else {
+          failureOrSuccess = state.restaurant.failureOrOption.fold(
+              () => right(unit),
+              (a) => a.maybeMap(
+                  longRestaurantName: (b) =>
+                      left(const RestaurantFailure.longName()),
+                  emptyRestaurantName: (c) =>
+                      left(const RestaurantFailure.emptyName()),
+                  orElse: () => right(unit)));
         }
 
         yield state.copyWith(

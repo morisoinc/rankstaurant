@@ -16,6 +16,9 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.longRestaurantName({
     required String failedValue,
   }) = LongRestaurantName<T>;
+  const factory ValueFailure.emptyRestaurantName({
+    required String failedValue,
+  }) = EmptyRestaurantName<T>;
   const factory ValueFailure.invalidRestaurantRating({
     required double failedValue,
   }) = InvalidRestaurantRating<T>;

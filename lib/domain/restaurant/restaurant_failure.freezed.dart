@@ -16,6 +16,14 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RestaurantFailureTearOff {
   const _$RestaurantFailureTearOff();
 
+  _EmptyName emptyName() {
+    return const _EmptyName();
+  }
+
+  _LongName longName() {
+    return const _LongName();
+  }
+
   _Unexpected unexpected() {
     return const _Unexpected();
   }
@@ -28,22 +36,30 @@ const $RestaurantFailure = _$RestaurantFailureTearOff();
 mixin _$RestaurantFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyName,
+    required TResult Function() longName,
     required TResult Function() unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyName,
+    TResult Function()? longName,
     TResult Function()? unexpected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_EmptyName value) emptyName,
+    required TResult Function(_LongName value) longName,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EmptyName value)? emptyName,
+    TResult Function(_LongName value)? longName,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) =>
@@ -65,6 +81,181 @@ class _$RestaurantFailureCopyWithImpl<$Res>
   final RestaurantFailure _value;
   // ignore: unused_field
   final $Res Function(RestaurantFailure) _then;
+}
+
+/// @nodoc
+abstract class _$EmptyNameCopyWith<$Res> {
+  factory _$EmptyNameCopyWith(
+          _EmptyName value, $Res Function(_EmptyName) then) =
+      __$EmptyNameCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EmptyNameCopyWithImpl<$Res>
+    extends _$RestaurantFailureCopyWithImpl<$Res>
+    implements _$EmptyNameCopyWith<$Res> {
+  __$EmptyNameCopyWithImpl(_EmptyName _value, $Res Function(_EmptyName) _then)
+      : super(_value, (v) => _then(v as _EmptyName));
+
+  @override
+  _EmptyName get _value => super._value as _EmptyName;
+}
+
+/// @nodoc
+class _$_EmptyName implements _EmptyName {
+  const _$_EmptyName();
+
+  @override
+  String toString() {
+    return 'RestaurantFailure.emptyName()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _EmptyName);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emptyName,
+    required TResult Function() longName,
+    required TResult Function() unexpected,
+  }) {
+    return emptyName();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyName,
+    TResult Function()? longName,
+    TResult Function()? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emptyName != null) {
+      return emptyName();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EmptyName value) emptyName,
+    required TResult Function(_LongName value) longName,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return emptyName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EmptyName value)? emptyName,
+    TResult Function(_LongName value)? longName,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emptyName != null) {
+      return emptyName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EmptyName implements RestaurantFailure {
+  const factory _EmptyName() = _$_EmptyName;
+}
+
+/// @nodoc
+abstract class _$LongNameCopyWith<$Res> {
+  factory _$LongNameCopyWith(_LongName value, $Res Function(_LongName) then) =
+      __$LongNameCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LongNameCopyWithImpl<$Res>
+    extends _$RestaurantFailureCopyWithImpl<$Res>
+    implements _$LongNameCopyWith<$Res> {
+  __$LongNameCopyWithImpl(_LongName _value, $Res Function(_LongName) _then)
+      : super(_value, (v) => _then(v as _LongName));
+
+  @override
+  _LongName get _value => super._value as _LongName;
+}
+
+/// @nodoc
+class _$_LongName implements _LongName {
+  const _$_LongName();
+
+  @override
+  String toString() {
+    return 'RestaurantFailure.longName()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _LongName);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() emptyName,
+    required TResult Function() longName,
+    required TResult Function() unexpected,
+  }) {
+    return longName();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyName,
+    TResult Function()? longName,
+    TResult Function()? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longName != null) {
+      return longName();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_EmptyName value) emptyName,
+    required TResult Function(_LongName value) longName,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return longName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EmptyName value)? emptyName,
+    TResult Function(_LongName value)? longName,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longName != null) {
+      return longName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LongName implements RestaurantFailure {
+  const factory _LongName() = _$_LongName;
 }
 
 /// @nodoc
@@ -106,6 +297,8 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() emptyName,
+    required TResult Function() longName,
     required TResult Function() unexpected,
   }) {
     return unexpected();
@@ -114,6 +307,8 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? emptyName,
+    TResult Function()? longName,
     TResult Function()? unexpected,
     required TResult orElse(),
   }) {
@@ -126,6 +321,8 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_EmptyName value) emptyName,
+    required TResult Function(_LongName value) longName,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unexpected(this);
@@ -134,6 +331,8 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_EmptyName value)? emptyName,
+    TResult Function(_LongName value)? longName,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {

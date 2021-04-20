@@ -93,6 +93,8 @@ class RestaurantCard extends StatelessWidget {
                 loadingOverlay.hide();
                 FlushbarHelper.createError(
                   message: failure.map(
+                    longName: (_) => 'Name must be shorter',
+                    emptyName: (_) => "Name can't be empty",
                     unexpected: (_) => 'Unexpected error',
                   ),
                 ).show(context);
@@ -123,14 +125,13 @@ class RestaurantCard extends StatelessWidget {
                     .add(const RestaurantFormEvent.deleteRestaurantPressed());
               },
               child: Form(
+                autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(height: 16),
                     TextFormField(
                       controller: textEditingController,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 5,
                       decoration: const InputDecoration(hintText: 'Name'),
                       onChanged: (value) => context
                           .read<RestaurantFormBloc>()
@@ -143,6 +144,7 @@ class RestaurantCard extends StatelessWidget {
                           .value
                           .fold(
                             (f) => f.maybeMap(
+                              emptyRestaurantName: (_) => "Name can't be empty",
                               longRestaurantName: (_) => 'Name must be shorter',
                               orElse: () => null,
                             ),

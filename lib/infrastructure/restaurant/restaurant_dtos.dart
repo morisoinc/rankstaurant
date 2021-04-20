@@ -49,7 +49,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
   Restaurant toDomain() {
     return Restaurant(
       id: UniqueId.fromUniqueString(id ?? ''),
-      name: RestaurantName(name),
+      name: RestaurantName(name, isInitial: false),
       owner: UniqueId.fromUniqueString(owner),
       averageRating: RestaurantRating(averageRating),
       highestRating: RestaurantRating(highestRating),

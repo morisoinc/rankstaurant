@@ -28,11 +28,14 @@ Either<ValueFailure<String>, String> validateUserRole(String input) {
   }
 }
 
-Either<ValueFailure<String>, String> validateRestaurantName(String input) {
-  if (input.length <= 50) {
-    return right(input);
-  } else {
+Either<ValueFailure<String>, String> validateRestaurantName(String input,
+    {required bool isInitial}) {
+  if (input.isEmpty && !isInitial) {
+    return left(ValueFailure.emptyRestaurantName(failedValue: input));
+  } else if (input.length > 50) {
     return left(ValueFailure.longRestaurantName(failedValue: input));
+  } else {
+    return right(input);
   }
 }
 

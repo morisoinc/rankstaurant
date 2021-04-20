@@ -25,7 +25,7 @@ abstract class Restaurant implements _$Restaurant {
 
   factory Restaurant.empty() => Restaurant(
         id: UniqueId(),
-        name: RestaurantName(''),
+        name: RestaurantName('', isInitial: true),
         owner: UniqueId(),
         averageRating: RestaurantRating(-1),
         highestRating: RestaurantRating(-1),

@@ -4,8 +4,9 @@ import 'package:rankstaurant/domain/core/value_objects.dart';
 import 'package:rankstaurant/domain/core/value_validators.dart';
 
 class RestaurantName extends ValueObject<String> {
-  factory RestaurantName(String input) {
-    return RestaurantName._(validateRestaurantName(input));
+  factory RestaurantName(String input, {required bool isInitial}) {
+    return RestaurantName._(
+        validateRestaurantName(input, isInitial: isInitial));
   }
 
   const RestaurantName._(this.value);
