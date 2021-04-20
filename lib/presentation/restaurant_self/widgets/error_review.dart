@@ -4,8 +4,9 @@ class ErrorReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Card(
+      margin: EdgeInsets.only(bottom: 8),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(16, 24, 16, 24),
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         child: Text('Error loading review 😰'),
       ),
     );

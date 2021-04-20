@@ -6,6 +6,7 @@ import 'package:rankstaurant/application/restaurant_self/restaurant_self_bloc.da
 import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
+import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
@@ -204,6 +205,9 @@ class RestaurantSelfPage extends StatelessWidget {
                 loadingOverlay.hide();
                 FlushbarHelper.createError(
                   message: failure.map(
+                    emptyRating: (_) => 'Rating is required',
+                    longReviewBody: (_) => 'Comment must be shorter',
+                    longReviewResponse: (_) => 'Response must be shorter',
                     unexpected: (_) => 'Unexpected error',
                   ),
                 ).show(context);
@@ -219,6 +223,9 @@ class RestaurantSelfPage extends StatelessWidget {
               context: context,
               saveText: 'Save',
               saveAction: () {
+                context.read<ReviewFormBloc>().add(
+                    ReviewFormEvent.ratingChanged(
+                        state.review.rating.value.fold((l) => 0, (r) => r)));
                 loadingOverlay.show(context);
                 FocusScope.of(context).unfocus();
                 context
@@ -226,11 +233,13 @@ class RestaurantSelfPage extends StatelessWidget {
                     .add(const ReviewFormEvent.saveReviewPressed());
               },
               child: Form(
+                autovalidateMode: AutovalidateMode.always,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     StarsSelector(
-                      starsSelected: state.review.rating.getOrCrash(),
+                      starsSelected:
+                          state.review.rating.value.fold((l) => 0, (r) => r),
                       onChanged: (starsSelected) => context
                           .read<ReviewFormBloc>()
                           .add(ReviewFormEvent.ratingChanged(starsSelected)),

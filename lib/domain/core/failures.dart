@@ -25,9 +25,9 @@ abstract class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.longReviewBody({
     required String failedValue,
   }) = LongReviewBody<T>;
-  const factory ValueFailure.invalidRating({
+  const factory ValueFailure.emptyReviewRating({
     required int failedValue,
-  }) = InvalidRating<T>;
+  }) = EmptyReviewRating<T>;
   const factory ValueFailure.longReviewResponse({
     required String failedValue,
   }) = LongReviewResponse<T>;

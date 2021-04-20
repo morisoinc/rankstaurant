@@ -21,7 +21,7 @@ abstract class Review with _$Review {
   factory Review.empty() => Review(
         id: UniqueId(),
         body: ReviewBody(''),
-        rating: ReviewRating(0),
+        rating: ReviewRating(0, isInitial: true),
         response: ReviewResponse(''),
         archived: false,
       );

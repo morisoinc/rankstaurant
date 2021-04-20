@@ -15,8 +15,8 @@ class ReviewBody extends ValueObject<String> {
 }
 
 class ReviewRating extends ValueObject<int> {
-  factory ReviewRating(int input) {
-    return ReviewRating._(validateReviewRating(input));
+  factory ReviewRating(int input, {required bool isInitial}) {
+    return ReviewRating._(validateReviewRating(input, isInitial: isInitial));
   }
 
   const ReviewRating._(this.value);

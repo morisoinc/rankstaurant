@@ -16,6 +16,18 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$ReviewFailureTearOff {
   const _$ReviewFailureTearOff();
 
+  _LongReviewResponse longReviewResponse() {
+    return const _LongReviewResponse();
+  }
+
+  _EmptyRating emptyRating() {
+    return const _EmptyRating();
+  }
+
+  _LongReviewBody longReviewBody() {
+    return const _LongReviewBody();
+  }
+
   _Unexpected unexpected() {
     return const _Unexpected();
   }
@@ -28,22 +40,34 @@ const $ReviewFailure = _$ReviewFailureTearOff();
 mixin _$ReviewFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() longReviewResponse,
+    required TResult Function() emptyRating,
+    required TResult Function() longReviewBody,
     required TResult Function() unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? longReviewResponse,
+    TResult Function()? emptyRating,
+    TResult Function()? longReviewBody,
     TResult Function()? unexpected,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LongReviewResponse value) longReviewResponse,
+    required TResult Function(_EmptyRating value) emptyRating,
+    required TResult Function(_LongReviewBody value) longReviewBody,
     required TResult Function(_Unexpected value) unexpected,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LongReviewResponse value)? longReviewResponse,
+    TResult Function(_EmptyRating value)? emptyRating,
+    TResult Function(_LongReviewBody value)? longReviewBody,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) =>
@@ -65,6 +89,284 @@ class _$ReviewFailureCopyWithImpl<$Res>
   final ReviewFailure _value;
   // ignore: unused_field
   final $Res Function(ReviewFailure) _then;
+}
+
+/// @nodoc
+abstract class _$LongReviewResponseCopyWith<$Res> {
+  factory _$LongReviewResponseCopyWith(
+          _LongReviewResponse value, $Res Function(_LongReviewResponse) then) =
+      __$LongReviewResponseCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LongReviewResponseCopyWithImpl<$Res>
+    extends _$ReviewFailureCopyWithImpl<$Res>
+    implements _$LongReviewResponseCopyWith<$Res> {
+  __$LongReviewResponseCopyWithImpl(
+      _LongReviewResponse _value, $Res Function(_LongReviewResponse) _then)
+      : super(_value, (v) => _then(v as _LongReviewResponse));
+
+  @override
+  _LongReviewResponse get _value => super._value as _LongReviewResponse;
+}
+
+/// @nodoc
+class _$_LongReviewResponse implements _LongReviewResponse {
+  const _$_LongReviewResponse();
+
+  @override
+  String toString() {
+    return 'ReviewFailure.longReviewResponse()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _LongReviewResponse);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() longReviewResponse,
+    required TResult Function() emptyRating,
+    required TResult Function() longReviewBody,
+    required TResult Function() unexpected,
+  }) {
+    return longReviewResponse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? longReviewResponse,
+    TResult Function()? emptyRating,
+    TResult Function()? longReviewBody,
+    TResult Function()? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longReviewResponse != null) {
+      return longReviewResponse();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LongReviewResponse value) longReviewResponse,
+    required TResult Function(_EmptyRating value) emptyRating,
+    required TResult Function(_LongReviewBody value) longReviewBody,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return longReviewResponse(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LongReviewResponse value)? longReviewResponse,
+    TResult Function(_EmptyRating value)? emptyRating,
+    TResult Function(_LongReviewBody value)? longReviewBody,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longReviewResponse != null) {
+      return longReviewResponse(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LongReviewResponse implements ReviewFailure {
+  const factory _LongReviewResponse() = _$_LongReviewResponse;
+}
+
+/// @nodoc
+abstract class _$EmptyRatingCopyWith<$Res> {
+  factory _$EmptyRatingCopyWith(
+          _EmptyRating value, $Res Function(_EmptyRating) then) =
+      __$EmptyRatingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$EmptyRatingCopyWithImpl<$Res> extends _$ReviewFailureCopyWithImpl<$Res>
+    implements _$EmptyRatingCopyWith<$Res> {
+  __$EmptyRatingCopyWithImpl(
+      _EmptyRating _value, $Res Function(_EmptyRating) _then)
+      : super(_value, (v) => _then(v as _EmptyRating));
+
+  @override
+  _EmptyRating get _value => super._value as _EmptyRating;
+}
+
+/// @nodoc
+class _$_EmptyRating implements _EmptyRating {
+  const _$_EmptyRating();
+
+  @override
+  String toString() {
+    return 'ReviewFailure.emptyRating()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _EmptyRating);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() longReviewResponse,
+    required TResult Function() emptyRating,
+    required TResult Function() longReviewBody,
+    required TResult Function() unexpected,
+  }) {
+    return emptyRating();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? longReviewResponse,
+    TResult Function()? emptyRating,
+    TResult Function()? longReviewBody,
+    TResult Function()? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emptyRating != null) {
+      return emptyRating();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LongReviewResponse value) longReviewResponse,
+    required TResult Function(_EmptyRating value) emptyRating,
+    required TResult Function(_LongReviewBody value) longReviewBody,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return emptyRating(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LongReviewResponse value)? longReviewResponse,
+    TResult Function(_EmptyRating value)? emptyRating,
+    TResult Function(_LongReviewBody value)? longReviewBody,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (emptyRating != null) {
+      return emptyRating(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _EmptyRating implements ReviewFailure {
+  const factory _EmptyRating() = _$_EmptyRating;
+}
+
+/// @nodoc
+abstract class _$LongReviewBodyCopyWith<$Res> {
+  factory _$LongReviewBodyCopyWith(
+          _LongReviewBody value, $Res Function(_LongReviewBody) then) =
+      __$LongReviewBodyCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$LongReviewBodyCopyWithImpl<$Res>
+    extends _$ReviewFailureCopyWithImpl<$Res>
+    implements _$LongReviewBodyCopyWith<$Res> {
+  __$LongReviewBodyCopyWithImpl(
+      _LongReviewBody _value, $Res Function(_LongReviewBody) _then)
+      : super(_value, (v) => _then(v as _LongReviewBody));
+
+  @override
+  _LongReviewBody get _value => super._value as _LongReviewBody;
+}
+
+/// @nodoc
+class _$_LongReviewBody implements _LongReviewBody {
+  const _$_LongReviewBody();
+
+  @override
+  String toString() {
+    return 'ReviewFailure.longReviewBody()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _LongReviewBody);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() longReviewResponse,
+    required TResult Function() emptyRating,
+    required TResult Function() longReviewBody,
+    required TResult Function() unexpected,
+  }) {
+    return longReviewBody();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? longReviewResponse,
+    TResult Function()? emptyRating,
+    TResult Function()? longReviewBody,
+    TResult Function()? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longReviewBody != null) {
+      return longReviewBody();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_LongReviewResponse value) longReviewResponse,
+    required TResult Function(_EmptyRating value) emptyRating,
+    required TResult Function(_LongReviewBody value) longReviewBody,
+    required TResult Function(_Unexpected value) unexpected,
+  }) {
+    return longReviewBody(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LongReviewResponse value)? longReviewResponse,
+    TResult Function(_EmptyRating value)? emptyRating,
+    TResult Function(_LongReviewBody value)? longReviewBody,
+    TResult Function(_Unexpected value)? unexpected,
+    required TResult orElse(),
+  }) {
+    if (longReviewBody != null) {
+      return longReviewBody(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LongReviewBody implements ReviewFailure {
+  const factory _LongReviewBody() = _$_LongReviewBody;
 }
 
 /// @nodoc
@@ -105,6 +407,9 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() longReviewResponse,
+    required TResult Function() emptyRating,
+    required TResult Function() longReviewBody,
     required TResult Function() unexpected,
   }) {
     return unexpected();
@@ -113,6 +418,9 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? longReviewResponse,
+    TResult Function()? emptyRating,
+    TResult Function()? longReviewBody,
     TResult Function()? unexpected,
     required TResult orElse(),
   }) {
@@ -125,6 +433,9 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(_LongReviewResponse value) longReviewResponse,
+    required TResult Function(_EmptyRating value) emptyRating,
+    required TResult Function(_LongReviewBody value) longReviewBody,
     required TResult Function(_Unexpected value) unexpected,
   }) {
     return unexpected(this);
@@ -133,6 +444,9 @@ class _$_Unexpected implements _Unexpected {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(_LongReviewResponse value)? longReviewResponse,
+    TResult Function(_EmptyRating value)? emptyRating,
+    TResult Function(_LongReviewBody value)? longReviewBody,
     TResult Function(_Unexpected value)? unexpected,
     required TResult orElse(),
   }) {

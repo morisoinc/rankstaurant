@@ -55,11 +55,12 @@ Either<ValueFailure<String>, String> validateReviewBody(String input) {
   }
 }
 
-Either<ValueFailure<int>, int> validateReviewRating(int input) {
-  if (input >= 0 && input <= 5) {
+Either<ValueFailure<int>, int> validateReviewRating(int input,
+    {required bool isInitial}) {
+  if ((input > 0 && input <= 5) || isInitial) {
     return right(input);
   } else {
-    return left(ValueFailure.invalidRating(failedValue: input));
+    return left(ValueFailure.emptyReviewRating(failedValue: input));
   }
 }
 

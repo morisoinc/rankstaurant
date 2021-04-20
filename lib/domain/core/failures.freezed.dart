@@ -59,8 +59,8 @@ class _$ValueFailureTearOff {
     );
   }
 
-  InvalidRating<T> invalidRating<T>({required int failedValue}) {
-    return InvalidRating<T>(
+  EmptyReviewRating<T> emptyReviewRating<T>({required int failedValue}) {
+    return EmptyReviewRating<T>(
       failedValue: failedValue,
     );
   }
@@ -86,7 +86,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) =>
       throw _privateConstructorUsedError;
@@ -99,7 +99,7 @@ mixin _$ValueFailure<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) =>
@@ -114,7 +114,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) =>
       throw _privateConstructorUsedError;
@@ -127,7 +127,7 @@ mixin _$ValueFailure<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) =>
@@ -223,7 +223,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidEmail(failedValue);
@@ -239,7 +239,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -260,7 +260,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidEmail(this);
@@ -276,7 +276,7 @@ class _$InvalidEmail<T> implements InvalidEmail<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -368,7 +368,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return shortPassword(failedValue);
@@ -384,7 +384,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -405,7 +405,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return shortPassword(this);
@@ -421,7 +421,7 @@ class _$ShortPassword<T> implements ShortPassword<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -514,7 +514,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidUserRole(failedValue);
@@ -530,7 +530,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -551,7 +551,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidUserRole(this);
@@ -567,7 +567,7 @@ class _$InvalidUserRole<T> implements InvalidUserRole<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -661,7 +661,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return longRestaurantName(failedValue);
@@ -677,7 +677,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -698,7 +698,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return longRestaurantName(this);
@@ -714,7 +714,7 @@ class _$LongRestaurantName<T> implements LongRestaurantName<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -808,7 +808,7 @@ class _$EmptyRestaurantName<T> implements EmptyRestaurantName<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return emptyRestaurantName(failedValue);
@@ -824,7 +824,7 @@ class _$EmptyRestaurantName<T> implements EmptyRestaurantName<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -845,7 +845,7 @@ class _$EmptyRestaurantName<T> implements EmptyRestaurantName<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return emptyRestaurantName(this);
@@ -861,7 +861,7 @@ class _$EmptyRestaurantName<T> implements EmptyRestaurantName<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -957,7 +957,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return invalidRestaurantRating(failedValue);
@@ -973,7 +973,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -994,7 +994,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return invalidRestaurantRating(this);
@@ -1010,7 +1010,7 @@ class _$InvalidRestaurantRating<T> implements InvalidRestaurantRating<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -1103,7 +1103,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return longReviewBody(failedValue);
@@ -1119,7 +1119,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -1140,7 +1140,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return longReviewBody(this);
@@ -1156,7 +1156,7 @@ class _$LongReviewBody<T> implements LongReviewBody<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -1178,29 +1178,29 @@ abstract class LongReviewBody<T> implements ValueFailure<T> {
 }
 
 /// @nodoc
-abstract class $InvalidRatingCopyWith<T, $Res> {
-  factory $InvalidRatingCopyWith(
-          InvalidRating<T> value, $Res Function(InvalidRating<T>) then) =
-      _$InvalidRatingCopyWithImpl<T, $Res>;
+abstract class $EmptyReviewRatingCopyWith<T, $Res> {
+  factory $EmptyReviewRatingCopyWith(EmptyReviewRating<T> value,
+          $Res Function(EmptyReviewRating<T>) then) =
+      _$EmptyReviewRatingCopyWithImpl<T, $Res>;
   $Res call({int failedValue});
 }
 
 /// @nodoc
-class _$InvalidRatingCopyWithImpl<T, $Res>
+class _$EmptyReviewRatingCopyWithImpl<T, $Res>
     extends _$ValueFailureCopyWithImpl<T, $Res>
-    implements $InvalidRatingCopyWith<T, $Res> {
-  _$InvalidRatingCopyWithImpl(
-      InvalidRating<T> _value, $Res Function(InvalidRating<T>) _then)
-      : super(_value, (v) => _then(v as InvalidRating<T>));
+    implements $EmptyReviewRatingCopyWith<T, $Res> {
+  _$EmptyReviewRatingCopyWithImpl(
+      EmptyReviewRating<T> _value, $Res Function(EmptyReviewRating<T>) _then)
+      : super(_value, (v) => _then(v as EmptyReviewRating<T>));
 
   @override
-  InvalidRating<T> get _value => super._value as InvalidRating<T>;
+  EmptyReviewRating<T> get _value => super._value as EmptyReviewRating<T>;
 
   @override
   $Res call({
     Object? failedValue = freezed,
   }) {
-    return _then(InvalidRating<T>(
+    return _then(EmptyReviewRating<T>(
       failedValue: failedValue == freezed
           ? _value.failedValue
           : failedValue // ignore: cast_nullable_to_non_nullable
@@ -1210,21 +1210,21 @@ class _$InvalidRatingCopyWithImpl<T, $Res>
 }
 
 /// @nodoc
-class _$InvalidRating<T> implements InvalidRating<T> {
-  const _$InvalidRating({required this.failedValue});
+class _$EmptyReviewRating<T> implements EmptyReviewRating<T> {
+  const _$EmptyReviewRating({required this.failedValue});
 
   @override
   final int failedValue;
 
   @override
   String toString() {
-    return 'ValueFailure<$T>.invalidRating(failedValue: $failedValue)';
+    return 'ValueFailure<$T>.emptyReviewRating(failedValue: $failedValue)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is InvalidRating<T> &&
+        (other is EmptyReviewRating<T> &&
             (identical(other.failedValue, failedValue) ||
                 const DeepCollectionEquality()
                     .equals(other.failedValue, failedValue)));
@@ -1236,8 +1236,9 @@ class _$InvalidRating<T> implements InvalidRating<T> {
 
   @JsonKey(ignore: true)
   @override
-  $InvalidRatingCopyWith<T, InvalidRating<T>> get copyWith =>
-      _$InvalidRatingCopyWithImpl<T, InvalidRating<T>>(this, _$identity);
+  $EmptyReviewRatingCopyWith<T, EmptyReviewRating<T>> get copyWith =>
+      _$EmptyReviewRatingCopyWithImpl<T, EmptyReviewRating<T>>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1249,10 +1250,10 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
-    return invalidRating(failedValue);
+    return emptyReviewRating(failedValue);
   }
 
   @override
@@ -1265,12 +1266,12 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
-    if (invalidRating != null) {
-      return invalidRating(failedValue);
+    if (emptyReviewRating != null) {
+      return emptyReviewRating(failedValue);
     }
     return orElse();
   }
@@ -1286,10 +1287,10 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
-    return invalidRating(this);
+    return emptyReviewRating(this);
   }
 
   @override
@@ -1302,23 +1303,24 @@ class _$InvalidRating<T> implements InvalidRating<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {
-    if (invalidRating != null) {
-      return invalidRating(this);
+    if (emptyReviewRating != null) {
+      return emptyReviewRating(this);
     }
     return orElse();
   }
 }
 
-abstract class InvalidRating<T> implements ValueFailure<T> {
-  const factory InvalidRating({required int failedValue}) = _$InvalidRating<T>;
+abstract class EmptyReviewRating<T> implements ValueFailure<T> {
+  const factory EmptyReviewRating({required int failedValue}) =
+      _$EmptyReviewRating<T>;
 
   int get failedValue => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $InvalidRatingCopyWith<T, InvalidRating<T>> get copyWith =>
+  $EmptyReviewRatingCopyWith<T, EmptyReviewRating<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1395,7 +1397,7 @@ class _$LongReviewResponse<T> implements LongReviewResponse<T> {
     required TResult Function(String failedValue) emptyRestaurantName,
     required TResult Function(double failedValue) invalidRestaurantRating,
     required TResult Function(String failedValue) longReviewBody,
-    required TResult Function(int failedValue) invalidRating,
+    required TResult Function(int failedValue) emptyReviewRating,
     required TResult Function(String failedValue) longReviewResponse,
   }) {
     return longReviewResponse(failedValue);
@@ -1411,7 +1413,7 @@ class _$LongReviewResponse<T> implements LongReviewResponse<T> {
     TResult Function(String failedValue)? emptyRestaurantName,
     TResult Function(double failedValue)? invalidRestaurantRating,
     TResult Function(String failedValue)? longReviewBody,
-    TResult Function(int failedValue)? invalidRating,
+    TResult Function(int failedValue)? emptyReviewRating,
     TResult Function(String failedValue)? longReviewResponse,
     required TResult orElse(),
   }) {
@@ -1432,7 +1434,7 @@ class _$LongReviewResponse<T> implements LongReviewResponse<T> {
     required TResult Function(InvalidRestaurantRating<T> value)
         invalidRestaurantRating,
     required TResult Function(LongReviewBody<T> value) longReviewBody,
-    required TResult Function(InvalidRating<T> value) invalidRating,
+    required TResult Function(EmptyReviewRating<T> value) emptyReviewRating,
     required TResult Function(LongReviewResponse<T> value) longReviewResponse,
   }) {
     return longReviewResponse(this);
@@ -1448,7 +1450,7 @@ class _$LongReviewResponse<T> implements LongReviewResponse<T> {
     TResult Function(EmptyRestaurantName<T> value)? emptyRestaurantName,
     TResult Function(InvalidRestaurantRating<T> value)? invalidRestaurantRating,
     TResult Function(LongReviewBody<T> value)? longReviewBody,
-    TResult Function(InvalidRating<T> value)? invalidRating,
+    TResult Function(EmptyReviewRating<T> value)? emptyReviewRating,
     TResult Function(LongReviewResponse<T> value)? longReviewResponse,
     required TResult orElse(),
   }) {

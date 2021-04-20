@@ -96,6 +96,9 @@ void showRespondToReview(
               loadingOverlay.hide();
               FlushbarHelper.createError(
                 message: failure.map(
+                  longReviewResponse: (_) => 'Response must be shorter',
+                  longReviewBody: (_) => 'Comment must be shorter',
+                  emptyRating: (_) => 'Rating is required',
                   unexpected: (_) => 'Unexpected error',
                 ),
               ).show(context);
@@ -118,6 +121,7 @@ void showRespondToReview(
                   .add(const ReviewFormEvent.saveReviewPressed());
             },
             child: Form(
+              autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -125,7 +129,7 @@ void showRespondToReview(
                   TextFormField(
                     keyboardType: TextInputType.multiline,
                     maxLines: 5,
-                    decoration: const InputDecoration(hintText: 'Comment'),
+                    decoration: const InputDecoration(hintText: 'Response'),
                     onChanged: (value) => context
                         .read<ReviewFormBloc>()
                         .add(ReviewFormEvent.responseChanged(value)),
@@ -137,7 +141,8 @@ void showRespondToReview(
                         .value
                         .fold(
                           (f) => f.maybeMap(
-                            longReviewBody: (_) => 'Response must be shorter',
+                            longReviewResponse: (_) =>
+                                'Response must be shorter',
                             orElse: () => null,
                           ),
                           (_) => null,
@@ -185,6 +190,9 @@ void showEditReview(
               loadingOverlay.hide();
               FlushbarHelper.createError(
                 message: failure.map(
+                  emptyRating: (_) => 'Rating is required',
+                  longReviewBody: (_) => 'Comment must be shorter',
+                  longReviewResponse: (_) => 'Response must be shorter',
                   unexpected: (_) => 'Unexpected error',
                 ),
               ).show(context);
@@ -215,6 +223,7 @@ void showEditReview(
                   .add(const ReviewFormEvent.deleteReviewPressed());
             },
             child: Form(
+              autovalidateMode: AutovalidateMode.always,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -230,7 +239,7 @@ void showEditReview(
                     controller: bodyEditingController,
                     keyboardType: TextInputType.multiline,
                     maxLines: 5,
-                    decoration: const InputDecoration(hintText: 'Body'),
+                    decoration: const InputDecoration(hintText: 'Comment'),
                     onChanged: (value) => context
                         .read<ReviewFormBloc>()
                         .add(ReviewFormEvent.bodyChanged(value)),
@@ -242,7 +251,7 @@ void showEditReview(
                         .value
                         .fold(
                           (f) => f.maybeMap(
-                            longReviewBody: (_) => 'Body must be shorter',
+                            longReviewBody: (_) => 'Comment must be shorter',
                             orElse: () => null,
                           ),
                           (_) => null,
@@ -265,7 +274,8 @@ void showEditReview(
                         .value
                         .fold(
                           (f) => f.maybeMap(
-                            longReviewBody: (_) => 'Response must be shorter',
+                            longReviewResponse: (_) =>
+                                'Response must be shorter',
                             orElse: () => null,
                           ),
                           (_) => null,

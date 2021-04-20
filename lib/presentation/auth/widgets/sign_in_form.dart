@@ -8,8 +8,6 @@ import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
 
 class SignInForm extends StatelessWidget {
-  final _formKey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SignInFormBloc, SignInFormState>(
@@ -41,7 +39,6 @@ class SignInForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Form(
-          key: _formKey,
           autovalidateMode: AutovalidateMode.always,
           child: Padding(
             padding: const EdgeInsets.all(16.0),

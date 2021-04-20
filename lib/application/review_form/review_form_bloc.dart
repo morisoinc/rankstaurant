@@ -44,7 +44,8 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
       },
       ratingChanged: (e) async* {
         yield state.copyWith(
-          review: state.review.copyWith(rating: ReviewRating(e.ratingInt)),
+          review: state.review
+              .copyWith(rating: ReviewRating(e.ratingInt, isInitial: false)),
           reviewFailureOrSuccessOption: none(),
         );
       },
@@ -56,15 +57,15 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
         );
       },
       saveReviewPressed: (e) async* {
-        Either<ReviewFailure, Unit> failureOrSuccess =
-            left(const ReviewFailure.unexpected());
+        Either<ReviewFailure, Unit> failureOrSuccess;
 
         yield state.copyWith(
           isSubmitting: true,
           reviewFailureOrSuccessOption: none(),
         );
 
-        if (state.review.failureOrOption.isNone()) {
+        if (state.review.failureOrOption.isNone() &&
+            state.review.rating.getOrCrash() != 0) {
           if (state.isEditing) {
             failureOrSuccess =
                 await reviewRepository.update(state.review, state.restaurant);
@@ -76,6 +77,18 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
                   state.restaurant, state.review);
             }
           }
+        } else {
+          failureOrSuccess = state.review.failureOrOption.fold(
+              () => right(unit),
+              (a) => a.maybeMap(
+                    emptyReviewRating: (_) =>
+                        left(const ReviewFailure.emptyRating()),
+                    longReviewBody: (_) =>
+                        left(const ReviewFailure.longReviewBody()),
+                    longReviewResponse: (_) =>
+                        left(const ReviewFailure.longReviewBody()),
+                    orElse: () => right(unit),
+                  ));
         }
 
         yield state.copyWith(

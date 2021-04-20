@@ -43,7 +43,7 @@ abstract class ReviewDto implements _$ReviewDto {
     return Review(
       id: UniqueId.fromUniqueString(id ?? ''),
       body: ReviewBody(body),
-      rating: ReviewRating(rating),
+      rating: ReviewRating(rating, isInitial: false),
       response: ReviewResponse(response),
       archived: archived,
     );
