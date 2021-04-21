@@ -9,4 +9,5 @@ abstract class IUserRepository {
   Future<Either<UserFailure, User>> get(String id);
   Future<Either<UserFailure, User>> getByEmail(String email);
   Stream<Either<UserFailure, KtList<User>>> watchAll();
+  Stream<Either<UserFailure, User>> watchSelf();
 }

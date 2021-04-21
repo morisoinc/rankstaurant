@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:kt_dart/kt.dart';
 import 'package:rankstaurant/domain/user/i_user_repository.dart';
 import 'package:rankstaurant/domain/user/user_failure.dart';
@@ -11,9 +12,10 @@ import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository {
-  UserRepository(this._firestore);
+  UserRepository(this._firebaseAuth, this._firestore);
 
   final FirebaseFirestore _firestore;
+  final firebase_auth.FirebaseAuth _firebaseAuth;
 
   @override
   Future<Either<UserFailure, Unit>> create(User user) async {
@@ -98,5 +100,20 @@ class UserRepository implements IUserRepository {
           ),
         )
         .onErrorReturnWith((e) => left(const UserFailure.unexpected()));
+  }
+
+  @override
+  Stream<Either<UserFailure, User>> watchSelf() async* {
+    final usersCollection = await _firestore.usersCollection();
+
+    yield* usersCollection
+        .doc(_firebaseAuth.currentUser?.uid)
+        .snapshots()
+        .map(
+          (snapshot) => right<UserFailure, User>(
+            UserDto.fromFirestore(snapshot).toDomain(),
+          ),
+        )
+        .onErrorReturnWith((error) => left(const UserFailure.unexpected()));
   }
 }

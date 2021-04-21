@@ -7,15 +7,22 @@ import 'package:rankstaurant/presentation/routes/router.gr.dart';
 class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AuthBloc, AuthState>(
-      listener: (context, state) {
-        state.map(
-          initial: (_) {},
-          authenticated: (_) =>
-              context.router.replace(const RestaurantsRoute()),
-          unauthenticated: (_) => context.router.replace(const SignInRoute()),
-        );
-      },
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<AuthBloc, AuthState>(
+          listener: (context, state) {
+            state.map(
+              initial: (_) {},
+              authenticated: (_) =>
+                  context.router.replace(const RestaurantsRoute()),
+              unauthenticated: (_) {
+                context.router.popUntilRoot();
+                context.router.replace(const SignInRoute());
+              },
+            );
+          },
+        ),
+      ],
       child: const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),

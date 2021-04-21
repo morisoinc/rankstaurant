@@ -6,6 +6,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:rankstaurant/application/auth/auth_bloc.dart';
 import 'package:rankstaurant/application/restaurant_form/restaurant_form_bloc.dart';
 import 'package:rankstaurant/application/restaurants/restaurants_bloc.dart';
+import 'package:rankstaurant/application/user/user_bloc.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
@@ -23,6 +24,10 @@ class RestaurantsPage extends StatelessWidget {
         BlocProvider<RestaurantsBloc>(
           create: (context) => getIt<RestaurantsBloc>()..add(_watchEvent()),
         ),
+        BlocProvider<UserBloc>(
+          create: (context) =>
+              getIt<UserBloc>()..add(const UserEvent.watchSelf()),
+        )
       ],
       child: MultiBlocListener(
         listeners: [
@@ -30,9 +35,30 @@ class RestaurantsPage extends StatelessWidget {
             listener: (context, state) {
               loadingOverlay.hide();
               state.maybeMap(
-                  unauthenticated: (_) =>
-                      context.router.replace(const SignInRoute()),
+                  unauthenticated: (_) {
+                    context.router.popUntilRoot();
+                    context.router.replace(const SignInRoute());
+                  },
                   orElse: () {});
+            },
+          ),
+          BlocListener<UserBloc, UserState>(
+            listener: (context, state) {
+              state.map(
+                (value) {},
+                loaded: (state) {
+                  if (state.user.archived) {
+                    context.read<AuthBloc>().add(const AuthEvent.signedOut());
+                  } else {
+                    if (SettingsHelper.userRole().toString() !=
+                        state.user.role.getOrCrash()) {
+                      SettingsHelper.setUserRole(state.user.role.getOrCrash());
+                      context.read<RestaurantsBloc>().add(_watchEvent());
+                    }
+                  }
+                },
+                fail: (_) {},
+              );
             },
           ),
         ],
