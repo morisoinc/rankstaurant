@@ -41,6 +41,7 @@ dev_dependencies:
     sdk: flutter
   auto_route_generator: ^1.0.2
   build_runner: ^1.12.2
+  flutter_launcher_icons: ^0.9.0
   freezed: ^0.14.1+2
   injectable_generator: ^1.2.2
   json_serializable: ^4.1.0
@@ -60,3 +61,8 @@ flutter:
         - asset: fonts/NotoSerifJP-Regular.otf
         - asset: fonts/NotoSerifJP-SemiBold.otf
           weight: 600
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/icon.png"

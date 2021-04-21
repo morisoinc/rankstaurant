@@ -6,7 +6,6 @@ import 'package:rankstaurant/application/restaurant/restaurant_bloc.dart';
 import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
-import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/global/colors.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
