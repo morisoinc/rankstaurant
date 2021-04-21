@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
+import 'package:kt_dart/kt.dart';
 import 'package:rankstaurant/domain/user/i_user_repository.dart';
 import 'package:rankstaurant/domain/user/user_failure.dart';
 import 'package:rankstaurant/domain/user/user.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rankstaurant/infrastructure/core/firestore_helpers.dart';
 import 'package:rankstaurant/infrastructure/user/user_dtos.dart';
+import 'package:rxdart/rxdart.dart';
 
 @LazySingleton(as: IUserRepository)
 class UserRepository implements IUserRepository {
@@ -40,5 +42,22 @@ class UserRepository implements IUserRepository {
     } on FirebaseException {
       return left(const UserFailure.unexpected());
     }
+  }
+
+  @override
+  Stream<Either<UserFailure, KtList<User>>> watchAll() async* {
+    final usersCollection = await _firestore.usersCollection();
+
+    yield* usersCollection
+        .where('archived', isEqualTo: false)
+        .snapshots()
+        .map(
+          (snapshot) => right<UserFailure, KtList<User>>(
+            snapshot.docs
+                .map((doc) => UserDto.fromFirestore(doc).toDomain())
+                .toImmutableList(),
+          ),
+        )
+        .onErrorReturnWith((e) => left(const UserFailure.unexpected()));
   }
 }
