@@ -7,7 +7,7 @@ import 'package:rankstaurant/domain/auth/user.dart';
 import 'package:rankstaurant/domain/auth/value_objects.dart';
 import 'package:rankstaurant/domain/core/value_objects.dart';
 import 'package:rankstaurant/domain/user/i_user_repository.dart';
-import 'package:rankstaurant/domain/user/user.dart' as user;
+import 'package:rankstaurant/domain/user/user.dart' as user_domain;
 import 'package:rankstaurant/domain/user/user_failure.dart';
 import 'package:rankstaurant/domain/user/value_objects.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
@@ -39,7 +39,7 @@ class FirebaseAuthFacade implements IAuthFacade {
               email: emailAddressStr, password: passwordStr);
 
       final Either<UserFailure, Unit> userCreation =
-          await _userRepository.create(user.User(
+          await _userRepository.create(user_domain.User(
         id: UniqueId.fromUniqueString(userCredential.user?.uid ?? ''),
         email: UserEmail(emailAddressStr, isInitial: false),
         role: userRole,
@@ -70,6 +70,20 @@ class FirebaseAuthFacade implements IAuthFacade {
     final emailAddressStr = emailAddress.getOrCrash();
     final passwordStr = password.getOrCrash();
     try {
+      final userOption = await _userRepository.getByEmail(emailAddressStr);
+
+      final user_domain.User? existingUser =
+          userOption.fold((_) {}, (user) => user);
+      if (existingUser != null && existingUser.archived) {
+        return left(const AuthFailure.userDisabled());
+      }
+
+      userOption.fold((_) {}, (user) {
+        if (user.archived) {
+          return left(const AuthFailure.userDisabled());
+        }
+      });
+
       final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
         email: emailAddressStr,
         password: passwordStr,
@@ -89,6 +103,8 @@ class FirebaseAuthFacade implements IAuthFacade {
         return left(const AuthFailure.invalidEmailOrPassword());
       } else if (e.code == 'user-not-found') {
         return left(const AuthFailure.userNotFound());
+      } else if (e.code == 'user-disabled') {
+        return left(const AuthFailure.userDisabled());
       } else {
         return left(const AuthFailure.serverError());
       }

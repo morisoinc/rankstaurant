@@ -51,6 +51,8 @@ class UserPage extends StatelessWidget {
                         loadingOverlay.hide();
                         FlushbarHelper.createError(
                             message: failure.map(
+                          invalidEmail: (_) => 'Invalid email',
+                          invalidRole: (_) => 'Invalid role',
                           unexpected: (_) => 'Unexpected error',
                         )).show(context);
                       }, (_) {

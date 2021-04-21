@@ -45,6 +45,26 @@ class UserRepository implements IUserRepository {
   }
 
   @override
+  Future<Either<UserFailure, User>> getByEmail(String email) async {
+    try {
+      final usersCollection = await _firestore.usersCollection();
+
+      final query =
+          await usersCollection.where('email', isEqualTo: email).get();
+
+      if (query.size > 0) {
+        final user = UserDto.fromFirestore(query.docs.first).toDomain();
+
+        return right(user);
+      } else {
+        return left(const UserFailure.unexpected());
+      }
+    } on FirebaseException catch (e) {
+      return left(const UserFailure.unexpected());
+    }
+  }
+
+  @override
   Future<Either<UserFailure, Unit>> delete(User user) async {
     try {
       final usersCollection = await _firestore.usersCollection();

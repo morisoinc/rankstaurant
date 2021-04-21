@@ -22,6 +22,7 @@ class SignInForm extends StatelessWidget {
                   serverError: (_) => 'Server error',
                   emailAlreadyInUse: (_) => 'Email already in use',
                   invalidEmailOrPassword: (_) => 'Invalid email or password',
+                  userDisabled: (_) => 'The user is disabled for log in',
                   userNotFound: (_) => 'User not found',
                 ),
               ).show(context);
