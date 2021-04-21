@@ -12,9 +12,17 @@ abstract class User implements _$User {
     required UniqueId id,
     required UserEmail email,
     required UserRole role,
+    required bool archived,
   }) = _User;
 
   const User._();
+
+  factory User.empty() => User(
+        id: UniqueId(),
+        email: UserEmail('', isInitial: true),
+        role: UserRole('regular'),
+        archived: false,
+      );
 
   Option<ValueFailure<dynamic>> get failureOption {
     return email.failureOrUnit

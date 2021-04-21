@@ -19,11 +19,13 @@ class _$UserTearOff {
   _User call(
       {required UniqueId id,
       required UserEmail email,
-      required UserRole role}) {
+      required UserRole role,
+      required bool archived}) {
     return _User(
       id: id,
       email: email,
       role: role,
+      archived: archived,
     );
   }
 }
@@ -36,6 +38,7 @@ mixin _$User {
   UniqueId get id => throw _privateConstructorUsedError;
   UserEmail get email => throw _privateConstructorUsedError;
   UserRole get role => throw _privateConstructorUsedError;
+  bool get archived => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
@@ -45,7 +48,7 @@ mixin _$User {
 abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res>;
-  $Res call({UniqueId id, UserEmail email, UserRole role});
+  $Res call({UniqueId id, UserEmail email, UserRole role, bool archived});
 }
 
 /// @nodoc
@@ -61,6 +64,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? id = freezed,
     Object? email = freezed,
     Object? role = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -75,6 +79,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as UserRole,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -84,7 +92,7 @@ abstract class _$UserCopyWith<$Res> implements $UserCopyWith<$Res> {
   factory _$UserCopyWith(_User value, $Res Function(_User) then) =
       __$UserCopyWithImpl<$Res>;
   @override
-  $Res call({UniqueId id, UserEmail email, UserRole role});
+  $Res call({UniqueId id, UserEmail email, UserRole role, bool archived});
 }
 
 /// @nodoc
@@ -101,6 +109,7 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
     Object? id = freezed,
     Object? email = freezed,
     Object? role = freezed,
+    Object? archived = freezed,
   }) {
     return _then(_User(
       id: id == freezed
@@ -115,13 +124,21 @@ class __$UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as UserRole,
+      archived: archived == freezed
+          ? _value.archived
+          : archived // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 class _$_User extends _User {
-  _$_User({required this.id, required this.email, required this.role})
+  _$_User(
+      {required this.id,
+      required this.email,
+      required this.role,
+      required this.archived})
       : super._();
 
   @override
@@ -130,10 +147,12 @@ class _$_User extends _User {
   final UserEmail email;
   @override
   final UserRole role;
+  @override
+  final bool archived;
 
   @override
   String toString() {
-    return 'User(id: $id, email: $email, role: $role)';
+    return 'User(id: $id, email: $email, role: $role, archived: $archived)';
   }
 
   @override
@@ -145,7 +164,10 @@ class _$_User extends _User {
             (identical(other.email, email) ||
                 const DeepCollectionEquality().equals(other.email, email)) &&
             (identical(other.role, role) ||
-                const DeepCollectionEquality().equals(other.role, role)));
+                const DeepCollectionEquality().equals(other.role, role)) &&
+            (identical(other.archived, archived) ||
+                const DeepCollectionEquality()
+                    .equals(other.archived, archived)));
   }
 
   @override
@@ -153,7 +175,8 @@ class _$_User extends _User {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(role);
+      const DeepCollectionEquality().hash(role) ^
+      const DeepCollectionEquality().hash(archived);
 
   @JsonKey(ignore: true)
   @override
@@ -165,7 +188,8 @@ abstract class _User extends User {
   factory _User(
       {required UniqueId id,
       required UserEmail email,
-      required UserRole role}) = _$_User;
+      required UserRole role,
+      required bool archived}) = _$_User;
   _User._() : super._();
 
   @override
@@ -174,6 +198,8 @@ abstract class _User extends User {
   UserEmail get email => throw _privateConstructorUsedError;
   @override
   UserRole get role => throw _privateConstructorUsedError;
+  @override
+  bool get archived => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$UserCopyWith<_User> get copyWith => throw _privateConstructorUsedError;

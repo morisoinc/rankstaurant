@@ -12,7 +12,7 @@ abstract class SignInFormState with _$SignInFormState {
   }) = _SignInFormState;
 
   factory SignInFormState.initial() => SignInFormState(
-        emailAddress: EmailAddress(''),
+        emailAddress: EmailAddress('', isInitial: true),
         password: Password(''),
         userRole: UserRole('regular'),
         showErrorMessages: false,

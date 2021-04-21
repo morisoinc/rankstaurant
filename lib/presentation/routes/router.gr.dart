@@ -6,11 +6,13 @@
 
 import 'package:auto_route/auto_route.dart' as _i1;
 
-import '../../domain/restaurant/restaurant.dart' as _i6;
+import '../../domain/restaurant/restaurant.dart' as _i7;
+import '../../domain/user/user.dart' as _i8;
 import '../auth/sign_in_page.dart' as _i3;
-import '../restaurant_self/restaurant_self_page.dart' as _i5;
+import '../restaurant/restaurant_page.dart' as _i5;
 import '../restaurants/restaurants_page.dart' as _i4;
 import '../splash/splash_page.dart' as _i2;
+import '../user/user_page.dart' as _i6;
 
 class AppRouter extends _i1.RootStackRouter {
   AppRouter();
@@ -26,11 +28,15 @@ class AppRouter extends _i1.RootStackRouter {
     RestaurantsRoute.name: (entry) {
       return _i1.MaterialPageX(entry: entry, child: _i4.RestaurantsPage());
     },
-    RestaurantSelfRoute.name: (entry) {
-      var args = entry.routeData.argsAs<RestaurantSelfRouteArgs>();
+    RestaurantRoute.name: (entry) {
+      var args = entry.routeData.argsAs<RestaurantRouteArgs>();
       return _i1.MaterialPageX(
-          entry: entry,
-          child: _i5.RestaurantSelfPage(restaurant: args.restaurant));
+          entry: entry, child: _i5.RestaurantPage(restaurant: args.restaurant));
+    },
+    UserRoute.name: (entry) {
+      var args = entry.routeData.argsAs<UserRouteArgs>();
+      return _i1.MaterialPageX(
+          entry: entry, child: _i6.UserPage(user: args.user));
     }
   };
 
@@ -39,7 +45,8 @@ class AppRouter extends _i1.RootStackRouter {
         _i1.RouteConfig(SplashRoute.name, path: '/'),
         _i1.RouteConfig(SignInRoute.name, path: '/sign-in-page'),
         _i1.RouteConfig(RestaurantsRoute.name, path: '/restaurants-page'),
-        _i1.RouteConfig(RestaurantSelfRoute.name, path: '/restaurant-self-page')
+        _i1.RouteConfig(RestaurantRoute.name, path: '/restaurant-page'),
+        _i1.RouteConfig(UserRoute.name, path: '/user-page')
       ];
 }
 
@@ -61,17 +68,30 @@ class RestaurantsRoute extends _i1.PageRouteInfo {
   static const String name = 'RestaurantsRoute';
 }
 
-class RestaurantSelfRoute extends _i1.PageRouteInfo<RestaurantSelfRouteArgs> {
-  RestaurantSelfRoute({required _i6.Restaurant restaurant})
+class RestaurantRoute extends _i1.PageRouteInfo<RestaurantRouteArgs> {
+  RestaurantRoute({required _i7.Restaurant restaurant})
       : super(name,
-            path: '/restaurant-self-page',
-            args: RestaurantSelfRouteArgs(restaurant: restaurant));
+            path: '/restaurant-page',
+            args: RestaurantRouteArgs(restaurant: restaurant));
 
-  static const String name = 'RestaurantSelfRoute';
+  static const String name = 'RestaurantRoute';
 }
 
-class RestaurantSelfRouteArgs {
-  const RestaurantSelfRouteArgs({required this.restaurant});
+class RestaurantRouteArgs {
+  const RestaurantRouteArgs({required this.restaurant});
 
-  final _i6.Restaurant restaurant;
+  final _i7.Restaurant restaurant;
+}
+
+class UserRoute extends _i1.PageRouteInfo<UserRouteArgs> {
+  UserRoute({required _i8.User user})
+      : super(name, path: '/user-page', args: UserRouteArgs(user: user));
+
+  static const String name = 'UserRoute';
+}
+
+class UserRouteArgs {
+  const UserRouteArgs({required this.user});
+
+  final _i8.User user;
 }

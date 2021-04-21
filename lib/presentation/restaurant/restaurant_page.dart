@@ -2,7 +2,7 @@ import 'package:another_flushbar/flushbar_helper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rankstaurant/application/restaurant_self/restaurant_self_bloc.dart';
+import 'package:rankstaurant/application/restaurant/restaurant_bloc.dart';
 import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/application/reviews/reviews_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
@@ -13,12 +13,12 @@ import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/global/widgets/r_container.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/main.dart';
-import 'package:rankstaurant/presentation/restaurant_self/widgets/error_review.dart';
-import 'package:rankstaurant/presentation/restaurant_self/widgets/review_card.dart';
-import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
+import 'package:rankstaurant/presentation/restaurant/widgets/error_review.dart';
+import 'package:rankstaurant/presentation/restaurant/widgets/review_card.dart';
+import 'package:rankstaurant/presentation/restaurant/widgets/stars_selector.dart';
 
-class RestaurantSelfPage extends StatelessWidget {
-  const RestaurantSelfPage({required this.restaurant});
+class RestaurantPage extends StatelessWidget {
+  const RestaurantPage({required this.restaurant});
 
   final Restaurant restaurant;
 
@@ -27,9 +27,9 @@ class RestaurantSelfPage extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt<RestaurantSelfBloc>()
-            ..add(RestaurantSelfEvent.initialized(optionOf(restaurant)))
-            ..add(RestaurantSelfEvent.watch(restaurant)),
+          create: (context) => getIt<RestaurantBloc>()
+            ..add(RestaurantEvent.initialized(optionOf(restaurant)))
+            ..add(RestaurantEvent.watch(restaurant)),
         ),
         BlocProvider(
           create: (context) =>
@@ -38,7 +38,7 @@ class RestaurantSelfPage extends StatelessWidget {
       ],
       child: Scaffold(
         body: RContainer(
-          headerContent: BlocBuilder<RestaurantSelfBloc, RestaurantSelfState>(
+          headerContent: BlocBuilder<RestaurantBloc, RestaurantState>(
             builder: (context, state) {
               return state.map(
                 (value) => buildHeader(value.restaurant, context),

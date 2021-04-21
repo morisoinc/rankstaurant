@@ -24,7 +24,7 @@ class RestaurantCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () {
-          context.router.push(RestaurantSelfRoute(restaurant: restaurant));
+          context.router.push(RestaurantRoute(restaurant: restaurant));
         },
         onLongPress: () => showEditDeleteRestaurantDialog(context, restaurant),
         child: Padding(

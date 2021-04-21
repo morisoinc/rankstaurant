@@ -41,8 +41,9 @@ class FirebaseAuthFacade implements IAuthFacade {
       final Either<UserFailure, Unit> userCreation =
           await _userRepository.create(user.User(
         id: UniqueId.fromUniqueString(userCredential.user?.uid ?? ''),
-        email: UserEmail(emailAddressStr),
+        email: UserEmail(emailAddressStr, isInitial: false),
         role: userRole,
+        archived: false,
       ));
 
       return userCreation.fold(

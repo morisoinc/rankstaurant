@@ -9,40 +9,38 @@ import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
 
-part 'restaurant_self_event.dart';
-part 'restaurant_self_state.dart';
+part 'restaurant_event.dart';
+part 'restaurant_state.dart';
 
-part 'restaurant_self_bloc.freezed.dart';
+part 'restaurant_bloc.freezed.dart';
 
 @injectable
-class RestaurantSelfBloc
-    extends Bloc<RestaurantSelfEvent, RestaurantSelfState> {
-  RestaurantSelfBloc(this._restaurantRepository)
-      : super(RestaurantSelfState.initial());
+class RestaurantBloc extends Bloc<RestaurantEvent, RestaurantState> {
+  RestaurantBloc(this._restaurantRepository) : super(RestaurantState.initial());
 
   final IRestaurantRepository _restaurantRepository;
   StreamSubscription<Either<RestaurantFailure, Restaurant>>? _subscription;
 
   @override
-  Stream<RestaurantSelfState> mapEventToState(
-    RestaurantSelfEvent event,
+  Stream<RestaurantState> mapEventToState(
+    RestaurantEvent event,
   ) async* {
     yield* event.map(
       initialized: (e) async* {
         yield e.restaurantOption.fold(() => state,
-            (restaurant) => RestaurantSelfState(restaurant: restaurant));
+            (restaurant) => RestaurantState(restaurant: restaurant));
       },
       watch: (e) async* {
         await _subscription?.cancel();
         _subscription = _restaurantRepository.watch(e.restaurant).listen(
               (failureOrRestaurant) =>
-                  add(RestaurantSelfEvent.received(failureOrRestaurant)),
+                  add(RestaurantEvent.received(failureOrRestaurant)),
             );
       },
       received: (e) async* {
         yield e.failureOrRestaurant.fold(
-          (l) => RestaurantSelfState.fail(l),
-          (restaurant) => RestaurantSelfState.loaded(restaurant),
+          (l) => RestaurantState.fail(l),
+          (restaurant) => RestaurantState.loaded(restaurant),
         );
       },
     );

@@ -10,7 +10,7 @@ import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/main.dart';
-import 'package:rankstaurant/presentation/restaurant_self/widgets/stars_selector.dart';
+import 'package:rankstaurant/presentation/restaurant/widgets/stars_selector.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard(this.review, this.restaurant);

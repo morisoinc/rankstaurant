@@ -13,6 +13,7 @@ abstract class UserDto implements _$UserDto {
     @JsonKey(ignore: true) String? id,
     required String email,
     required String role,
+    required bool archived,
   }) = _UserDto;
 
   factory UserDto.fromJson(Map<String, dynamic> json) =>
@@ -29,14 +30,16 @@ abstract class UserDto implements _$UserDto {
       id: user.id.getOrCrash(),
       email: user.email.getOrCrash(),
       role: user.role.getOrCrash(),
+      archived: user.archived,
     );
   }
 
   User toDomain() {
     return User(
       id: UniqueId.fromUniqueString(id ?? ''),
-      email: UserEmail(email),
+      email: UserEmail(email, isInitial: false),
       role: UserRole(role),
+      archived: archived,
     );
   }
 }

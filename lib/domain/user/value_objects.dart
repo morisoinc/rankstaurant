@@ -4,8 +4,8 @@ import 'package:rankstaurant/domain/core/value_objects.dart';
 import 'package:rankstaurant/domain/core/value_validators.dart';
 
 class UserEmail extends ValueObject<String> {
-  factory UserEmail(String input) {
-    return UserEmail._(validateEmailAddress(input));
+  factory UserEmail(String input, {required bool isInitial}) {
+    return UserEmail._(validateEmailAddress(input, isInitial: isInitial));
   }
 
   const UserEmail._(this.value);

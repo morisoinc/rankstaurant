@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'restaurant_self_bloc.dart';
+part of 'restaurant_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,8 +13,8 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$RestaurantSelfEventTearOff {
-  const _$RestaurantSelfEventTearOff();
+class _$RestaurantEventTearOff {
+  const _$RestaurantEventTearOff();
 
   _Initialized initialized(Option<Restaurant> restaurantOption) {
     return _Initialized(
@@ -37,10 +37,10 @@ class _$RestaurantSelfEventTearOff {
 }
 
 /// @nodoc
-const $RestaurantSelfEvent = _$RestaurantSelfEventTearOff();
+const $RestaurantEvent = _$RestaurantEventTearOff();
 
 /// @nodoc
-mixin _$RestaurantSelfEvent {
+mixin _$RestaurantEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Option<Restaurant> restaurantOption) initialized,
@@ -77,20 +77,20 @@ mixin _$RestaurantSelfEvent {
 }
 
 /// @nodoc
-abstract class $RestaurantSelfEventCopyWith<$Res> {
-  factory $RestaurantSelfEventCopyWith(
-          RestaurantSelfEvent value, $Res Function(RestaurantSelfEvent) then) =
-      _$RestaurantSelfEventCopyWithImpl<$Res>;
+abstract class $RestaurantEventCopyWith<$Res> {
+  factory $RestaurantEventCopyWith(
+          RestaurantEvent value, $Res Function(RestaurantEvent) then) =
+      _$RestaurantEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RestaurantSelfEventCopyWithImpl<$Res>
-    implements $RestaurantSelfEventCopyWith<$Res> {
-  _$RestaurantSelfEventCopyWithImpl(this._value, this._then);
+class _$RestaurantEventCopyWithImpl<$Res>
+    implements $RestaurantEventCopyWith<$Res> {
+  _$RestaurantEventCopyWithImpl(this._value, this._then);
 
-  final RestaurantSelfEvent _value;
+  final RestaurantEvent _value;
   // ignore: unused_field
-  final $Res Function(RestaurantSelfEvent) _then;
+  final $Res Function(RestaurantEvent) _then;
 }
 
 /// @nodoc
@@ -103,7 +103,7 @@ abstract class _$InitializedCopyWith<$Res> {
 
 /// @nodoc
 class __$InitializedCopyWithImpl<$Res>
-    extends _$RestaurantSelfEventCopyWithImpl<$Res>
+    extends _$RestaurantEventCopyWithImpl<$Res>
     implements _$InitializedCopyWith<$Res> {
   __$InitializedCopyWithImpl(
       _Initialized _value, $Res Function(_Initialized) _then)
@@ -134,7 +134,7 @@ class _$_Initialized implements _Initialized {
 
   @override
   String toString() {
-    return 'RestaurantSelfEvent.initialized(restaurantOption: $restaurantOption)';
+    return 'RestaurantEvent.initialized(restaurantOption: $restaurantOption)';
   }
 
   @override
@@ -208,7 +208,7 @@ class _$_Initialized implements _Initialized {
   }
 }
 
-abstract class _Initialized implements RestaurantSelfEvent {
+abstract class _Initialized implements RestaurantEvent {
   const factory _Initialized(Option<Restaurant> restaurantOption) =
       _$_Initialized;
 
@@ -228,7 +228,7 @@ abstract class _$WatchCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$WatchCopyWithImpl<$Res> extends _$RestaurantSelfEventCopyWithImpl<$Res>
+class __$WatchCopyWithImpl<$Res> extends _$RestaurantEventCopyWithImpl<$Res>
     implements _$WatchCopyWith<$Res> {
   __$WatchCopyWithImpl(_Watch _value, $Res Function(_Watch) _then)
       : super(_value, (v) => _then(v as _Watch));
@@ -265,7 +265,7 @@ class _$_Watch implements _Watch {
 
   @override
   String toString() {
-    return 'RestaurantSelfEvent.watch(restaurant: $restaurant)';
+    return 'RestaurantEvent.watch(restaurant: $restaurant)';
   }
 
   @override
@@ -338,7 +338,7 @@ class _$_Watch implements _Watch {
   }
 }
 
-abstract class _Watch implements RestaurantSelfEvent {
+abstract class _Watch implements RestaurantEvent {
   const factory _Watch(Restaurant restaurant) = _$_Watch;
 
   Restaurant get restaurant => throw _privateConstructorUsedError;
@@ -354,8 +354,7 @@ abstract class _$ReceivedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$ReceivedCopyWithImpl<$Res>
-    extends _$RestaurantSelfEventCopyWithImpl<$Res>
+class __$ReceivedCopyWithImpl<$Res> extends _$RestaurantEventCopyWithImpl<$Res>
     implements _$ReceivedCopyWith<$Res> {
   __$ReceivedCopyWithImpl(_Received _value, $Res Function(_Received) _then)
       : super(_value, (v) => _then(v as _Received));
@@ -385,7 +384,7 @@ class _$_Received implements _Received {
 
   @override
   String toString() {
-    return 'RestaurantSelfEvent.received(failureOrRestaurant: $failureOrRestaurant)';
+    return 'RestaurantEvent.received(failureOrRestaurant: $failureOrRestaurant)';
   }
 
   @override
@@ -459,7 +458,7 @@ class _$_Received implements _Received {
   }
 }
 
-abstract class _Received implements RestaurantSelfEvent {
+abstract class _Received implements RestaurantEvent {
   const factory _Received(
       Either<RestaurantFailure, Restaurant> failureOrRestaurant) = _$_Received;
 
@@ -471,11 +470,11 @@ abstract class _Received implements RestaurantSelfEvent {
 }
 
 /// @nodoc
-class _$RestaurantSelfStateTearOff {
-  const _$RestaurantSelfStateTearOff();
+class _$RestaurantStateTearOff {
+  const _$RestaurantStateTearOff();
 
-  _RestaurantSelfState call({required Restaurant restaurant}) {
-    return _RestaurantSelfState(
+  _RestaurantState call({required Restaurant restaurant}) {
+    return _RestaurantState(
       restaurant: restaurant,
     );
   }
@@ -494,10 +493,10 @@ class _$RestaurantSelfStateTearOff {
 }
 
 /// @nodoc
-const $RestaurantSelfState = _$RestaurantSelfStateTearOff();
+const $RestaurantState = _$RestaurantStateTearOff();
 
 /// @nodoc
-mixin _$RestaurantSelfState {
+mixin _$RestaurantState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(Restaurant restaurant) $default, {
@@ -515,14 +514,14 @@ mixin _$RestaurantSelfState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value) $default, {
+    TResult Function(_RestaurantState value) $default, {
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Fail value) fail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value)? $default, {
+    TResult Function(_RestaurantState value)? $default, {
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Fail value)? fail,
     required TResult orElse(),
@@ -531,48 +530,48 @@ mixin _$RestaurantSelfState {
 }
 
 /// @nodoc
-abstract class $RestaurantSelfStateCopyWith<$Res> {
-  factory $RestaurantSelfStateCopyWith(
-          RestaurantSelfState value, $Res Function(RestaurantSelfState) then) =
-      _$RestaurantSelfStateCopyWithImpl<$Res>;
+abstract class $RestaurantStateCopyWith<$Res> {
+  factory $RestaurantStateCopyWith(
+          RestaurantState value, $Res Function(RestaurantState) then) =
+      _$RestaurantStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$RestaurantSelfStateCopyWithImpl<$Res>
-    implements $RestaurantSelfStateCopyWith<$Res> {
-  _$RestaurantSelfStateCopyWithImpl(this._value, this._then);
+class _$RestaurantStateCopyWithImpl<$Res>
+    implements $RestaurantStateCopyWith<$Res> {
+  _$RestaurantStateCopyWithImpl(this._value, this._then);
 
-  final RestaurantSelfState _value;
+  final RestaurantState _value;
   // ignore: unused_field
-  final $Res Function(RestaurantSelfState) _then;
+  final $Res Function(RestaurantState) _then;
 }
 
 /// @nodoc
-abstract class _$RestaurantSelfStateCopyWith<$Res> {
-  factory _$RestaurantSelfStateCopyWith(_RestaurantSelfState value,
-          $Res Function(_RestaurantSelfState) then) =
-      __$RestaurantSelfStateCopyWithImpl<$Res>;
+abstract class _$RestaurantStateCopyWith<$Res> {
+  factory _$RestaurantStateCopyWith(
+          _RestaurantState value, $Res Function(_RestaurantState) then) =
+      __$RestaurantStateCopyWithImpl<$Res>;
   $Res call({Restaurant restaurant});
 
   $RestaurantCopyWith<$Res> get restaurant;
 }
 
 /// @nodoc
-class __$RestaurantSelfStateCopyWithImpl<$Res>
-    extends _$RestaurantSelfStateCopyWithImpl<$Res>
-    implements _$RestaurantSelfStateCopyWith<$Res> {
-  __$RestaurantSelfStateCopyWithImpl(
-      _RestaurantSelfState _value, $Res Function(_RestaurantSelfState) _then)
-      : super(_value, (v) => _then(v as _RestaurantSelfState));
+class __$RestaurantStateCopyWithImpl<$Res>
+    extends _$RestaurantStateCopyWithImpl<$Res>
+    implements _$RestaurantStateCopyWith<$Res> {
+  __$RestaurantStateCopyWithImpl(
+      _RestaurantState _value, $Res Function(_RestaurantState) _then)
+      : super(_value, (v) => _then(v as _RestaurantState));
 
   @override
-  _RestaurantSelfState get _value => super._value as _RestaurantSelfState;
+  _RestaurantState get _value => super._value as _RestaurantState;
 
   @override
   $Res call({
     Object? restaurant = freezed,
   }) {
-    return _then(_RestaurantSelfState(
+    return _then(_RestaurantState(
       restaurant: restaurant == freezed
           ? _value.restaurant
           : restaurant // ignore: cast_nullable_to_non_nullable
@@ -589,21 +588,21 @@ class __$RestaurantSelfStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$_RestaurantSelfState implements _RestaurantSelfState {
-  const _$_RestaurantSelfState({required this.restaurant});
+class _$_RestaurantState implements _RestaurantState {
+  const _$_RestaurantState({required this.restaurant});
 
   @override
   final Restaurant restaurant;
 
   @override
   String toString() {
-    return 'RestaurantSelfState(restaurant: $restaurant)';
+    return 'RestaurantState(restaurant: $restaurant)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _RestaurantSelfState &&
+        (other is _RestaurantState &&
             (identical(other.restaurant, restaurant) ||
                 const DeepCollectionEquality()
                     .equals(other.restaurant, restaurant)));
@@ -615,9 +614,8 @@ class _$_RestaurantSelfState implements _RestaurantSelfState {
 
   @JsonKey(ignore: true)
   @override
-  _$RestaurantSelfStateCopyWith<_RestaurantSelfState> get copyWith =>
-      __$RestaurantSelfStateCopyWithImpl<_RestaurantSelfState>(
-          this, _$identity);
+  _$RestaurantStateCopyWith<_RestaurantState> get copyWith =>
+      __$RestaurantStateCopyWithImpl<_RestaurantState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -646,7 +644,7 @@ class _$_RestaurantSelfState implements _RestaurantSelfState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value) $default, {
+    TResult Function(_RestaurantState value) $default, {
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Fail value) fail,
   }) {
@@ -656,7 +654,7 @@ class _$_RestaurantSelfState implements _RestaurantSelfState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value)? $default, {
+    TResult Function(_RestaurantState value)? $default, {
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Fail value)? fail,
     required TResult orElse(),
@@ -668,13 +666,13 @@ class _$_RestaurantSelfState implements _RestaurantSelfState {
   }
 }
 
-abstract class _RestaurantSelfState implements RestaurantSelfState {
-  const factory _RestaurantSelfState({required Restaurant restaurant}) =
-      _$_RestaurantSelfState;
+abstract class _RestaurantState implements RestaurantState {
+  const factory _RestaurantState({required Restaurant restaurant}) =
+      _$_RestaurantState;
 
   Restaurant get restaurant => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  _$RestaurantSelfStateCopyWith<_RestaurantSelfState> get copyWith =>
+  _$RestaurantStateCopyWith<_RestaurantState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -688,8 +686,7 @@ abstract class _$LoadedCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$LoadedCopyWithImpl<$Res>
-    extends _$RestaurantSelfStateCopyWithImpl<$Res>
+class __$LoadedCopyWithImpl<$Res> extends _$RestaurantStateCopyWithImpl<$Res>
     implements _$LoadedCopyWith<$Res> {
   __$LoadedCopyWithImpl(_Loaded _value, $Res Function(_Loaded) _then)
       : super(_value, (v) => _then(v as _Loaded));
@@ -726,7 +723,7 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'RestaurantSelfState.loaded(restaurant: $restaurant)';
+    return 'RestaurantState.loaded(restaurant: $restaurant)';
   }
 
   @override
@@ -774,7 +771,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value) $default, {
+    TResult Function(_RestaurantState value) $default, {
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Fail value) fail,
   }) {
@@ -784,7 +781,7 @@ class _$_Loaded implements _Loaded {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value)? $default, {
+    TResult Function(_RestaurantState value)? $default, {
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Fail value)? fail,
     required TResult orElse(),
@@ -796,7 +793,7 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements RestaurantSelfState {
+abstract class _Loaded implements RestaurantState {
   factory _Loaded(Restaurant restaurant) = _$_Loaded;
 
   Restaurant get restaurant => throw _privateConstructorUsedError;
@@ -814,7 +811,7 @@ abstract class _$FailCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$FailCopyWithImpl<$Res> extends _$RestaurantSelfStateCopyWithImpl<$Res>
+class __$FailCopyWithImpl<$Res> extends _$RestaurantStateCopyWithImpl<$Res>
     implements _$FailCopyWith<$Res> {
   __$FailCopyWithImpl(_Fail _value, $Res Function(_Fail) _then)
       : super(_value, (v) => _then(v as _Fail));
@@ -851,7 +848,7 @@ class _$_Fail implements _Fail {
 
   @override
   String toString() {
-    return 'RestaurantSelfState.fail(failure: $failure)';
+    return 'RestaurantState.fail(failure: $failure)';
   }
 
   @override
@@ -898,7 +895,7 @@ class _$_Fail implements _Fail {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value) $default, {
+    TResult Function(_RestaurantState value) $default, {
     required TResult Function(_Loaded value) loaded,
     required TResult Function(_Fail value) fail,
   }) {
@@ -908,7 +905,7 @@ class _$_Fail implements _Fail {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_RestaurantSelfState value)? $default, {
+    TResult Function(_RestaurantState value)? $default, {
     TResult Function(_Loaded value)? loaded,
     TResult Function(_Fail value)? fail,
     required TResult orElse(),
@@ -920,7 +917,7 @@ class _$_Fail implements _Fail {
   }
 }
 
-abstract class _Fail implements RestaurantSelfState {
+abstract class _Fail implements RestaurantState {
   factory _Fail(RestaurantFailure failure) = _$_Fail;
 
   RestaurantFailure get failure => throw _privateConstructorUsedError;

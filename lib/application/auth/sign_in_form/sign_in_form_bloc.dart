@@ -29,7 +29,7 @@ class SignInFormBloc extends Bloc<SignInFormEvent, SignInFormState> {
     yield* event.map(
       emailChanged: (e) async* {
         yield state.copyWith(
-          emailAddress: EmailAddress(e.emailStr),
+          emailAddress: EmailAddress(e.emailStr, isInitial: false),
           authFailureOrSuccessOption: none(),
         );
       },

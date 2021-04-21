@@ -45,6 +45,25 @@ class UserRepository implements IUserRepository {
   }
 
   @override
+  Future<Either<UserFailure, Unit>> delete(User user) async {
+    try {
+      final usersCollection = await _firestore.usersCollection();
+
+      final doc = await usersCollection.doc(user.id.getOrCrash()).get();
+
+      final updatedUser =
+          UserDto.fromFirestore(doc).toDomain().copyWith(archived: true);
+      final userDto = UserDto.fromDomain(updatedUser);
+
+      await usersCollection.doc(userDto.id).update(userDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(const UserFailure.unexpected());
+    }
+  }
+
+  @override
   Stream<Either<UserFailure, KtList<User>>> watchAll() async* {
     final usersCollection = await _firestore.usersCollection();
 
