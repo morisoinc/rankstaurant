@@ -16,7 +16,7 @@ abstract class ReviewDto implements _$ReviewDto {
     required int rating,
     required String response,
     required bool archived,
-    @ServerTimestampConverter() required FieldValue serverTimeStamp,
+    @TimestampConverter() required DateTime serverTimeStamp,
   }) = _ReviewDto;
 
   factory ReviewDto.fromJson(Map<String, dynamic> json) =>
@@ -30,13 +30,12 @@ abstract class ReviewDto implements _$ReviewDto {
 
   factory ReviewDto.fromDomain(Review review) {
     return ReviewDto(
-      id: review.id.getOrCrash(),
-      body: review.body.getOrCrash(),
-      rating: review.rating.getOrCrash(),
-      response: review.response.getOrCrash(),
-      archived: review.archived,
-      serverTimeStamp: FieldValue.serverTimestamp(),
-    );
+        id: review.id.getOrCrash(),
+        body: review.body.getOrCrash(),
+        rating: review.rating.getOrCrash(),
+        response: review.response.getOrCrash(),
+        archived: review.archived,
+        serverTimeStamp: review.createdAt);
   }
 
   Review toDomain() {
@@ -46,6 +45,7 @@ abstract class ReviewDto implements _$ReviewDto {
       rating: ReviewRating(rating, isInitial: false),
       response: ReviewResponse(response),
       archived: archived,
+      createdAt: serverTimeStamp,
     );
   }
 }

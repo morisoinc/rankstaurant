@@ -6,6 +6,7 @@ import 'package:rankstaurant/application/review_form/review_form_bloc.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/global/colors.dart';
+import 'package:rankstaurant/global/services/formats.dart';
 import 'package:rankstaurant/global/settings/settings_helper.dart';
 import 'package:rankstaurant/global/widgets/r_bottom_sheet.dart';
 import 'package:rankstaurant/injection.dart';
@@ -20,6 +21,7 @@ class ReviewCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final reviewBody = review.body.getOrCrash();
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
       child: Column(
@@ -33,12 +35,18 @@ class ReviewCard extends StatelessWidget {
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Flexible(child: Text(review.body.getOrCrash())),
                     Row(
                       children: [
+                        const Spacer(),
+                        Text(
+                          dateFormat.format(review.createdAt),
+                          style: Theme.of(context).textTheme.caption,
+                        ),
+                        const SizedBox(width: 8),
                         Column(
                           children: const [
                             SizedBox(height: 2),
@@ -49,6 +57,7 @@ class ReviewCard extends StatelessWidget {
                         Text('${review.rating.getOrCrash()}'),
                       ],
                     ),
+                    _buildReviewBody(reviewBody),
                   ],
                 ),
               ),
@@ -289,6 +298,17 @@ void showEditReview(
       ),
     ),
   );
+}
+
+Widget _buildReviewBody(String reviewBody) {
+  if (reviewBody.isEmpty) {
+    return Container();
+  } else {
+    return Container(
+      margin: const EdgeInsets.only(top: 4),
+      child: Text(reviewBody),
+    );
+  }
 }
 
 class ReviewResponse extends StatelessWidget {

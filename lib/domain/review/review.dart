@@ -14,6 +14,7 @@ abstract class Review with _$Review {
     required ReviewRating rating,
     required ReviewResponse response,
     required bool archived,
+    required DateTime createdAt,
   }) = _Review;
 
   const Review._();
@@ -24,6 +25,7 @@ abstract class Review with _$Review {
         rating: ReviewRating(0, isInitial: true),
         response: ReviewResponse(''),
         archived: false,
+        createdAt: DateTime.now(),
       );
 
   Option<ValueFailure<dynamic>> get failureOrOption {

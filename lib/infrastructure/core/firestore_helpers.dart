@@ -20,14 +20,14 @@ extension FirestoreX on FirebaseFirestore {
   }
 }
 
-class ServerTimestampConverter implements JsonConverter<FieldValue, Object> {
-  const ServerTimestampConverter();
+class TimestampConverter implements JsonConverter<DateTime, Timestamp> {
+  const TimestampConverter();
 
   @override
-  FieldValue fromJson(Object json) {
-    return FieldValue.serverTimestamp();
+  DateTime fromJson(Timestamp timestamp) {
+    return timestamp.toDate();
   }
 
   @override
-  Object toJson(FieldValue? fieldValue) => fieldValue ?? '';
+  Timestamp toJson(DateTime date) => Timestamp.fromDate(date);
 }

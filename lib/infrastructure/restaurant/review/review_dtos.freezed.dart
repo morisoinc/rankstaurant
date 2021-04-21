@@ -26,7 +26,7 @@ class _$ReviewDtoTearOff {
       required int rating,
       required String response,
       required bool archived,
-      @ServerTimestampConverter() required FieldValue serverTimeStamp}) {
+      @TimestampConverter() required DateTime serverTimeStamp}) {
     return _ReviewDto(
       id: id,
       body: body,
@@ -53,8 +53,8 @@ mixin _$ReviewDto {
   int get rating => throw _privateConstructorUsedError;
   String get response => throw _privateConstructorUsedError;
   bool get archived => throw _privateConstructorUsedError;
-  @ServerTimestampConverter()
-  FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime get serverTimeStamp => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -72,7 +72,7 @@ abstract class $ReviewDtoCopyWith<$Res> {
       int rating,
       String response,
       bool archived,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @TimestampConverter() DateTime serverTimeStamp});
 }
 
 /// @nodoc
@@ -116,7 +116,7 @@ class _$ReviewDtoCopyWithImpl<$Res> implements $ReviewDtoCopyWith<$Res> {
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+              as DateTime,
     ));
   }
 }
@@ -133,7 +133,7 @@ abstract class _$ReviewDtoCopyWith<$Res> implements $ReviewDtoCopyWith<$Res> {
       int rating,
       String response,
       bool archived,
-      @ServerTimestampConverter() FieldValue serverTimeStamp});
+      @TimestampConverter() DateTime serverTimeStamp});
 }
 
 /// @nodoc
@@ -178,7 +178,7 @@ class __$ReviewDtoCopyWithImpl<$Res> extends _$ReviewDtoCopyWithImpl<$Res>
       serverTimeStamp: serverTimeStamp == freezed
           ? _value.serverTimeStamp
           : serverTimeStamp // ignore: cast_nullable_to_non_nullable
-              as FieldValue,
+              as DateTime,
     ));
   }
 }
@@ -193,7 +193,7 @@ class _$_ReviewDto extends _ReviewDto {
       required this.rating,
       required this.response,
       required this.archived,
-      @ServerTimestampConverter() required this.serverTimeStamp})
+      @TimestampConverter() required this.serverTimeStamp})
       : super._();
 
   factory _$_ReviewDto.fromJson(Map<String, dynamic> json) =>
@@ -211,8 +211,8 @@ class _$_ReviewDto extends _ReviewDto {
   @override
   final bool archived;
   @override
-  @ServerTimestampConverter()
-  final FieldValue serverTimeStamp;
+  @TimestampConverter()
+  final DateTime serverTimeStamp;
 
   @override
   String toString() {
@@ -263,13 +263,12 @@ class _$_ReviewDto extends _ReviewDto {
 
 abstract class _ReviewDto extends ReviewDto {
   const factory _ReviewDto(
-          {@JsonKey(ignore: true) String? id,
-          required String body,
-          required int rating,
-          required String response,
-          required bool archived,
-          @ServerTimestampConverter() required FieldValue serverTimeStamp}) =
-      _$_ReviewDto;
+      {@JsonKey(ignore: true) String? id,
+      required String body,
+      required int rating,
+      required String response,
+      required bool archived,
+      @TimestampConverter() required DateTime serverTimeStamp}) = _$_ReviewDto;
   const _ReviewDto._() : super._();
 
   factory _ReviewDto.fromJson(Map<String, dynamic> json) =
@@ -287,8 +286,8 @@ abstract class _ReviewDto extends ReviewDto {
   @override
   bool get archived => throw _privateConstructorUsedError;
   @override
-  @ServerTimestampConverter()
-  FieldValue get serverTimeStamp => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime get serverTimeStamp => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ReviewDtoCopyWith<_ReviewDto> get copyWith =>

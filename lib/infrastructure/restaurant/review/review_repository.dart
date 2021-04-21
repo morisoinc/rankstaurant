@@ -78,9 +78,7 @@ class ReviewRepository implements IReviewRepository {
         .orderBy('serverTimeStamp', descending: true)
         .snapshots()
         .map((snapshot) => right<ReviewFailure, KtList<Review>>(
-              snapshot.docs
-                  .where((doc) => !doc.metadata.hasPendingWrites)
-                  .map((doc) {
+              snapshot.docs.map((doc) {
                 return ReviewDto.fromFirestore(doc).toDomain();
               }).toImmutableList(),
             ))

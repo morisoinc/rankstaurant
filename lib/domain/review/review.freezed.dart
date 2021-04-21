@@ -21,13 +21,15 @@ class _$ReviewTearOff {
       required ReviewBody body,
       required ReviewRating rating,
       required ReviewResponse response,
-      required bool archived}) {
+      required bool archived,
+      required DateTime createdAt}) {
     return _Review(
       id: id,
       body: body,
       rating: rating,
       response: response,
       archived: archived,
+      createdAt: createdAt,
     );
   }
 }
@@ -42,6 +44,7 @@ mixin _$Review {
   ReviewRating get rating => throw _privateConstructorUsedError;
   ReviewResponse get response => throw _privateConstructorUsedError;
   bool get archived => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ReviewCopyWith<Review> get copyWith => throw _privateConstructorUsedError;
@@ -56,7 +59,8 @@ abstract class $ReviewCopyWith<$Res> {
       ReviewBody body,
       ReviewRating rating,
       ReviewResponse response,
-      bool archived});
+      bool archived,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -74,6 +78,7 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
     Object? rating = freezed,
     Object? response = freezed,
     Object? archived = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -96,6 +101,10 @@ class _$ReviewCopyWithImpl<$Res> implements $ReviewCopyWith<$Res> {
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -110,7 +119,8 @@ abstract class _$ReviewCopyWith<$Res> implements $ReviewCopyWith<$Res> {
       ReviewBody body,
       ReviewRating rating,
       ReviewResponse response,
-      bool archived});
+      bool archived,
+      DateTime createdAt});
 }
 
 /// @nodoc
@@ -129,6 +139,7 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
     Object? rating = freezed,
     Object? response = freezed,
     Object? archived = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_Review(
       id: id == freezed
@@ -151,6 +162,10 @@ class __$ReviewCopyWithImpl<$Res> extends _$ReviewCopyWithImpl<$Res>
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
               as bool,
+      createdAt: createdAt == freezed
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -162,7 +177,8 @@ class _$_Review extends _Review {
       required this.body,
       required this.rating,
       required this.response,
-      required this.archived})
+      required this.archived,
+      required this.createdAt})
       : super._();
 
   @override
@@ -175,10 +191,12 @@ class _$_Review extends _Review {
   final ReviewResponse response;
   @override
   final bool archived;
+  @override
+  final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Review(id: $id, body: $body, rating: $rating, response: $response, archived: $archived)';
+    return 'Review(id: $id, body: $body, rating: $rating, response: $response, archived: $archived, createdAt: $createdAt)';
   }
 
   @override
@@ -196,7 +214,10 @@ class _$_Review extends _Review {
                     .equals(other.response, response)) &&
             (identical(other.archived, archived) ||
                 const DeepCollectionEquality()
-                    .equals(other.archived, archived)));
+                    .equals(other.archived, archived)) &&
+            (identical(other.createdAt, createdAt) ||
+                const DeepCollectionEquality()
+                    .equals(other.createdAt, createdAt)));
   }
 
   @override
@@ -206,7 +227,8 @@ class _$_Review extends _Review {
       const DeepCollectionEquality().hash(body) ^
       const DeepCollectionEquality().hash(rating) ^
       const DeepCollectionEquality().hash(response) ^
-      const DeepCollectionEquality().hash(archived);
+      const DeepCollectionEquality().hash(archived) ^
+      const DeepCollectionEquality().hash(createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -220,7 +242,8 @@ abstract class _Review extends Review {
       required ReviewBody body,
       required ReviewRating rating,
       required ReviewResponse response,
-      required bool archived}) = _$_Review;
+      required bool archived,
+      required DateTime createdAt}) = _$_Review;
   const _Review._() : super._();
 
   @override
@@ -233,6 +256,8 @@ abstract class _Review extends Review {
   ReviewResponse get response => throw _privateConstructorUsedError;
   @override
   bool get archived => throw _privateConstructorUsedError;
+  @override
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ReviewCopyWith<_Review> get copyWith => throw _privateConstructorUsedError;
