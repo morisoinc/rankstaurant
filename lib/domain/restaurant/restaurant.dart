@@ -18,6 +18,7 @@ abstract class Restaurant implements _$Restaurant {
     required RestaurantRating latestRating,
     required int numberOfRatings,
     required int sumOfRatings,
+    required int pendingReviews,
     required bool archived,
   }) = _Restaurant;
 
@@ -33,6 +34,7 @@ abstract class Restaurant implements _$Restaurant {
         latestRating: RestaurantRating(-1),
         numberOfRatings: 0,
         sumOfRatings: 0,
+        pendingReviews: 0,
         archived: false,
       );
 

@@ -30,6 +30,7 @@ class _$RestaurantDtoTearOff {
       required double latestRating,
       required int numberOfRatings,
       required int sumOfRatings,
+      required int pendingReviews,
       required bool archived}) {
     return _RestaurantDto(
       id: id,
@@ -41,6 +42,7 @@ class _$RestaurantDtoTearOff {
       latestRating: latestRating,
       numberOfRatings: numberOfRatings,
       sumOfRatings: sumOfRatings,
+      pendingReviews: pendingReviews,
       archived: archived,
     );
   }
@@ -65,6 +67,7 @@ mixin _$RestaurantDto {
   double get latestRating => throw _privateConstructorUsedError;
   int get numberOfRatings => throw _privateConstructorUsedError;
   int get sumOfRatings => throw _privateConstructorUsedError;
+  int get pendingReviews => throw _privateConstructorUsedError;
   bool get archived => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -88,6 +91,7 @@ abstract class $RestaurantDtoCopyWith<$Res> {
       double latestRating,
       int numberOfRatings,
       int sumOfRatings,
+      int pendingReviews,
       bool archived});
 }
 
@@ -111,6 +115,7 @@ class _$RestaurantDtoCopyWithImpl<$Res>
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? pendingReviews = freezed,
     Object? archived = freezed,
   }) {
     return _then(_value.copyWith(
@@ -150,6 +155,10 @@ class _$RestaurantDtoCopyWithImpl<$Res>
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      pendingReviews: pendingReviews == freezed
+          ? _value.pendingReviews
+          : pendingReviews // ignore: cast_nullable_to_non_nullable
+              as int,
       archived: archived == freezed
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
@@ -175,6 +184,7 @@ abstract class _$RestaurantDtoCopyWith<$Res>
       double latestRating,
       int numberOfRatings,
       int sumOfRatings,
+      int pendingReviews,
       bool archived});
 }
 
@@ -200,6 +210,7 @@ class __$RestaurantDtoCopyWithImpl<$Res>
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? pendingReviews = freezed,
     Object? archived = freezed,
   }) {
     return _then(_RestaurantDto(
@@ -239,6 +250,10 @@ class __$RestaurantDtoCopyWithImpl<$Res>
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      pendingReviews: pendingReviews == freezed
+          ? _value.pendingReviews
+          : pendingReviews // ignore: cast_nullable_to_non_nullable
+              as int,
       archived: archived == freezed
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
@@ -261,6 +276,7 @@ class _$_RestaurantDto extends _RestaurantDto {
       required this.latestRating,
       required this.numberOfRatings,
       required this.sumOfRatings,
+      required this.pendingReviews,
       required this.archived})
       : super._();
 
@@ -287,11 +303,13 @@ class _$_RestaurantDto extends _RestaurantDto {
   @override
   final int sumOfRatings;
   @override
+  final int pendingReviews;
+  @override
   final bool archived;
 
   @override
   String toString() {
-    return 'RestaurantDto(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings, archived: $archived)';
+    return 'RestaurantDto(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings, pendingReviews: $pendingReviews, archived: $archived)';
   }
 
   @override
@@ -322,6 +340,9 @@ class _$_RestaurantDto extends _RestaurantDto {
             (identical(other.sumOfRatings, sumOfRatings) ||
                 const DeepCollectionEquality()
                     .equals(other.sumOfRatings, sumOfRatings)) &&
+            (identical(other.pendingReviews, pendingReviews) ||
+                const DeepCollectionEquality()
+                    .equals(other.pendingReviews, pendingReviews)) &&
             (identical(other.archived, archived) ||
                 const DeepCollectionEquality()
                     .equals(other.archived, archived)));
@@ -339,6 +360,7 @@ class _$_RestaurantDto extends _RestaurantDto {
       const DeepCollectionEquality().hash(latestRating) ^
       const DeepCollectionEquality().hash(numberOfRatings) ^
       const DeepCollectionEquality().hash(sumOfRatings) ^
+      const DeepCollectionEquality().hash(pendingReviews) ^
       const DeepCollectionEquality().hash(archived);
 
   @JsonKey(ignore: true)
@@ -363,6 +385,7 @@ abstract class _RestaurantDto extends RestaurantDto {
       required double latestRating,
       required int numberOfRatings,
       required int sumOfRatings,
+      required int pendingReviews,
       required bool archived}) = _$_RestaurantDto;
   const _RestaurantDto._() : super._();
 
@@ -388,6 +411,8 @@ abstract class _RestaurantDto extends RestaurantDto {
   int get numberOfRatings => throw _privateConstructorUsedError;
   @override
   int get sumOfRatings => throw _privateConstructorUsedError;
+  @override
+  int get pendingReviews => throw _privateConstructorUsedError;
   @override
   bool get archived => throw _privateConstructorUsedError;
   @override

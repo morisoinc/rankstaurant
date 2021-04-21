@@ -35,18 +35,26 @@ class RestaurantCard extends StatelessWidget {
               Flexible(child: Text(restaurant.name.getOrCrash())),
               Builder(builder: (context) {
                 if (averageRating > -1) {
-                  return Row(
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Column(
-                        children: const [
-                          SizedBox(height: 2),
-                          Icon(Icons.star),
+                      Row(
+                        children: [
+                          Column(
+                            children: const [
+                              SizedBox(height: 2),
+                              Icon(Icons.star),
+                            ],
+                          ),
+                          const SizedBox(width: 2),
+                          Text(restaurant.averageRating
+                              .getOrCrash()
+                              .toStringAsFixed(2)),
                         ],
                       ),
-                      const SizedBox(width: 2),
-                      Text(restaurant.averageRating
-                          .getOrCrash()
-                          .toStringAsFixed(2)),
+                      _buildPendingReviewsSection(
+                          restaurant.pendingReviews, context),
                     ],
                   );
                 } else {
@@ -64,6 +72,35 @@ class RestaurantCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildPendingReviewsSection(int pendingReviews, BuildContext context) {
+    if (SettingsHelper.userRole() == Role.regular || pendingReviews == 0) {
+      return Container();
+    } else {
+      return Container(
+        margin: const EdgeInsets.only(top: 4),
+        child: Row(
+          children: [
+            Column(
+              children: const [
+                SizedBox(height: 2),
+                Icon(
+                  Icons.warning,
+                  color: kYellow,
+                ),
+              ],
+            ),
+            const SizedBox(width: 2),
+            Text(pendingReviews.toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1!
+                    .copyWith(color: kYellow)),
+          ],
+        ),
+      );
+    }
   }
 
   void showEditDeleteRestaurantDialog(

@@ -66,6 +66,23 @@ class RestaurantRepository implements IRestaurantRepository {
   }
 
   @override
+  Future<Either<RestaurantFailure, Restaurant>> get(String id) async {
+    try {
+      final restaurantsCollection = await _firestore.restaurantsCollection();
+
+      final doc = await restaurantsCollection.doc(id).get();
+
+      final restaurant = RestaurantDto.fromFirestore(doc).toDomain();
+
+      return right(restaurant);
+    } on FirebaseException catch (e) {
+      return left(const RestaurantFailure.unexpected());
+    } on Exception catch (f) {
+      return left(const RestaurantFailure.unexpected());
+    }
+  }
+
+  @override
   Future<Either<RestaurantFailure, Unit>> update(Restaurant restaurant) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
@@ -146,6 +163,22 @@ class RestaurantRepository implements IRestaurantRepository {
   }
 
   @override
+  Future<Either<RestaurantFailure, Unit>> updatePendingReviews(
+      Restaurant restaurant, int pendingReviews) async {
+    try {
+      final Restaurant updatedRestaurant = restaurant.copyWith(
+        pendingReviews: restaurant.pendingReviews + pendingReviews,
+      );
+
+      final result = await update(updatedRestaurant);
+
+      return result.fold((l) => left(l), (r) => right(r));
+    } on FirebaseException catch (e) {
+      return left(const RestaurantFailure.unexpected());
+    }
+  }
+
+  @override
   Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll() async* {
     final restaurantsCollection = await _firestore.restaurantsCollection();
 
@@ -160,7 +193,9 @@ class RestaurantRepository implements IRestaurantRepository {
                 .toImmutableList(),
           ),
         )
-        .onErrorReturnWith((e) => left(const RestaurantFailure.unexpected()));
+        .onErrorReturnWith((e) {
+      return left(const RestaurantFailure.unexpected());
+    });
   }
 
   @override

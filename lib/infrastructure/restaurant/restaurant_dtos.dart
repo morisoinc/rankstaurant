@@ -19,6 +19,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
     required double latestRating,
     required int numberOfRatings,
     required int sumOfRatings,
+    required int pendingReviews,
     required bool archived,
   }) = _RestaurantDto;
 
@@ -42,6 +43,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       latestRating: restaurant.latestRating.getOrCrash(),
       numberOfRatings: restaurant.numberOfRatings,
       sumOfRatings: restaurant.sumOfRatings,
+      pendingReviews: restaurant.pendingReviews,
       archived: restaurant.archived,
     );
   }
@@ -57,6 +59,7 @@ abstract class RestaurantDto implements _$RestaurantDto {
       latestRating: RestaurantRating(latestRating),
       numberOfRatings: numberOfRatings,
       sumOfRatings: sumOfRatings,
+      pendingReviews: pendingReviews,
       archived: archived,
     );
   }

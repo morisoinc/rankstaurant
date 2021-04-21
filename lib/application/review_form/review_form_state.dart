@@ -5,6 +5,7 @@ abstract class ReviewFormState with _$ReviewFormState {
   const factory ReviewFormState({
     required Review review,
     required Restaurant restaurant,
+    required int originalResponseLength,
     required bool isEditing,
     required bool isSubmitting,
     required Option<Either<ReviewFailure, Unit>> reviewFailureOrSuccessOption,
@@ -13,6 +14,7 @@ abstract class ReviewFormState with _$ReviewFormState {
   factory ReviewFormState.initial() => ReviewFormState(
         review: Review.empty(),
         restaurant: Restaurant.empty(),
+        originalResponseLength: 0,
         isEditing: false,
         isSubmitting: false,
         reviewFailureOrSuccessOption: none(),

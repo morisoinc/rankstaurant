@@ -6,6 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
+import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
 import 'package:rankstaurant/domain/review/i_review_repository.dart';
 import 'package:rankstaurant/domain/review/review.dart';
 import 'package:rankstaurant/domain/review/review_failure.dart';
@@ -34,7 +35,12 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
             (restaurant) => e.initialReviewOption.fold(
                 () => state.copyWith(restaurant: restaurant),
                 (review) => state.copyWith(
-                    restaurant: restaurant, review: review, isEditing: true)));
+                      restaurant: restaurant,
+                      review: review,
+                      originalResponseLength:
+                          review.response.getOrCrash().length,
+                      isEditing: true,
+                    )));
       },
       bodyChanged: (e) async* {
         yield state.copyWith(
@@ -77,6 +83,9 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
                   state.restaurant, state.review);
             }
           }
+          if (failureOrSuccess.isRight()) {
+            failureOrSuccess = await processPendingReviews(state);
+          }
         } else {
           failureOrSuccess = state.review.failureOrOption.fold(
               () => right(unit),
@@ -116,5 +125,23 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
         );
       },
     );
+  }
+
+  Future<Either<ReviewFailure, Unit>> processPendingReviews(
+      ReviewFormState state) async {
+    final isResponseEmpty = state.review.response.getOrCrash().isEmpty;
+    Either<RestaurantFailure, Unit> failureOrSuccess = right(unit);
+
+    if (state.originalResponseLength == 0 && !isResponseEmpty) {
+      failureOrSuccess =
+          await restaurantRepository.updatePendingReviews(state.restaurant, -1);
+    } else if ((state.originalResponseLength != 0 && isResponseEmpty) ||
+        !state.isEditing) {
+      failureOrSuccess =
+          await restaurantRepository.updatePendingReviews(state.restaurant, 1);
+    }
+
+    return failureOrSuccess.fold(
+        (l) => left(const ReviewFailure.unexpected()), (r) => right(unit));
   }
 }

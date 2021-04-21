@@ -26,6 +26,7 @@ class _$RestaurantTearOff {
       required RestaurantRating latestRating,
       required int numberOfRatings,
       required int sumOfRatings,
+      required int pendingReviews,
       required bool archived}) {
     return _Restaurant(
       id: id,
@@ -37,6 +38,7 @@ class _$RestaurantTearOff {
       latestRating: latestRating,
       numberOfRatings: numberOfRatings,
       sumOfRatings: sumOfRatings,
+      pendingReviews: pendingReviews,
       archived: archived,
     );
   }
@@ -56,6 +58,7 @@ mixin _$Restaurant {
   RestaurantRating get latestRating => throw _privateConstructorUsedError;
   int get numberOfRatings => throw _privateConstructorUsedError;
   int get sumOfRatings => throw _privateConstructorUsedError;
+  int get pendingReviews => throw _privateConstructorUsedError;
   bool get archived => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -78,6 +81,7 @@ abstract class $RestaurantCopyWith<$Res> {
       RestaurantRating latestRating,
       int numberOfRatings,
       int sumOfRatings,
+      int pendingReviews,
       bool archived});
 }
 
@@ -100,6 +104,7 @@ class _$RestaurantCopyWithImpl<$Res> implements $RestaurantCopyWith<$Res> {
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? pendingReviews = freezed,
     Object? archived = freezed,
   }) {
     return _then(_value.copyWith(
@@ -139,6 +144,10 @@ class _$RestaurantCopyWithImpl<$Res> implements $RestaurantCopyWith<$Res> {
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      pendingReviews: pendingReviews == freezed
+          ? _value.pendingReviews
+          : pendingReviews // ignore: cast_nullable_to_non_nullable
+              as int,
       archived: archived == freezed
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
@@ -163,6 +172,7 @@ abstract class _$RestaurantCopyWith<$Res> implements $RestaurantCopyWith<$Res> {
       RestaurantRating latestRating,
       int numberOfRatings,
       int sumOfRatings,
+      int pendingReviews,
       bool archived});
 }
 
@@ -187,6 +197,7 @@ class __$RestaurantCopyWithImpl<$Res> extends _$RestaurantCopyWithImpl<$Res>
     Object? latestRating = freezed,
     Object? numberOfRatings = freezed,
     Object? sumOfRatings = freezed,
+    Object? pendingReviews = freezed,
     Object? archived = freezed,
   }) {
     return _then(_Restaurant(
@@ -226,6 +237,10 @@ class __$RestaurantCopyWithImpl<$Res> extends _$RestaurantCopyWithImpl<$Res>
           ? _value.sumOfRatings
           : sumOfRatings // ignore: cast_nullable_to_non_nullable
               as int,
+      pendingReviews: pendingReviews == freezed
+          ? _value.pendingReviews
+          : pendingReviews // ignore: cast_nullable_to_non_nullable
+              as int,
       archived: archived == freezed
           ? _value.archived
           : archived // ignore: cast_nullable_to_non_nullable
@@ -246,6 +261,7 @@ class _$_Restaurant extends _Restaurant {
       required this.latestRating,
       required this.numberOfRatings,
       required this.sumOfRatings,
+      required this.pendingReviews,
       required this.archived})
       : super._();
 
@@ -268,11 +284,13 @@ class _$_Restaurant extends _Restaurant {
   @override
   final int sumOfRatings;
   @override
+  final int pendingReviews;
+  @override
   final bool archived;
 
   @override
   String toString() {
-    return 'Restaurant(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings, archived: $archived)';
+    return 'Restaurant(id: $id, name: $name, owner: $owner, averageRating: $averageRating, highestRating: $highestRating, lowestRating: $lowestRating, latestRating: $latestRating, numberOfRatings: $numberOfRatings, sumOfRatings: $sumOfRatings, pendingReviews: $pendingReviews, archived: $archived)';
   }
 
   @override
@@ -303,6 +321,9 @@ class _$_Restaurant extends _Restaurant {
             (identical(other.sumOfRatings, sumOfRatings) ||
                 const DeepCollectionEquality()
                     .equals(other.sumOfRatings, sumOfRatings)) &&
+            (identical(other.pendingReviews, pendingReviews) ||
+                const DeepCollectionEquality()
+                    .equals(other.pendingReviews, pendingReviews)) &&
             (identical(other.archived, archived) ||
                 const DeepCollectionEquality()
                     .equals(other.archived, archived)));
@@ -320,6 +341,7 @@ class _$_Restaurant extends _Restaurant {
       const DeepCollectionEquality().hash(latestRating) ^
       const DeepCollectionEquality().hash(numberOfRatings) ^
       const DeepCollectionEquality().hash(sumOfRatings) ^
+      const DeepCollectionEquality().hash(pendingReviews) ^
       const DeepCollectionEquality().hash(archived);
 
   @JsonKey(ignore: true)
@@ -339,6 +361,7 @@ abstract class _Restaurant extends Restaurant {
       required RestaurantRating latestRating,
       required int numberOfRatings,
       required int sumOfRatings,
+      required int pendingReviews,
       required bool archived}) = _$_Restaurant;
   _Restaurant._() : super._();
 
@@ -360,6 +383,8 @@ abstract class _Restaurant extends Restaurant {
   int get numberOfRatings => throw _privateConstructorUsedError;
   @override
   int get sumOfRatings => throw _privateConstructorUsedError;
+  @override
+  int get pendingReviews => throw _privateConstructorUsedError;
   @override
   bool get archived => throw _privateConstructorUsedError;
   @override
