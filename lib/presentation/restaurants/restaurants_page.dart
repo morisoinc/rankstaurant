@@ -13,6 +13,7 @@ import 'package:rankstaurant/injection.dart';
 import 'package:rankstaurant/main.dart';
 import 'package:rankstaurant/presentation/restaurants/widgets/restaurants_list.dart';
 import 'package:rankstaurant/presentation/routes/router.gr.dart';
+import 'package:rankstaurant/presentation/users/users_page.dart';
 
 class RestaurantsPage extends StatelessWidget {
   @override
@@ -89,7 +90,7 @@ class RestaurantsPage extends StatelessWidget {
   Function()? _buildRightAction(BuildContext context) {
     if (SettingsHelper.userRole() == Role.admin) {
       return () => RBottomSheet.show(context,
-          RBottomSheet(title: 'Users', context: context, child: Container()));
+          RBottomSheet(title: 'Users', context: context, child: UsersPage()));
     }
     return null;
   }
