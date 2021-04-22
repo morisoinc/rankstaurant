@@ -39,6 +39,7 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
                       review: review,
                       originalResponseLength:
                           review.response.getOrCrash().length,
+                      originalRating: review.rating.getOrCrash(),
                       isEditing: true,
                     )));
       },
@@ -78,10 +79,9 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
           } else {
             failureOrSuccess =
                 await reviewRepository.create(state.review, state.restaurant);
-            if (failureOrSuccess.isRight()) {
-              failureOrSuccess = await restaurantRepository.updateWithReview(
-                  state.restaurant, state.review);
-            }
+          }
+          if (failureOrSuccess.isRight()) {
+            failureOrSuccess = await updateReviewRanking(state);
           }
           if (failureOrSuccess.isRight()) {
             failureOrSuccess = await processPendingReviews(state);
@@ -115,8 +115,11 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
             await reviewRepository.delete(state.review, state.restaurant);
 
         if (failureOrSuccess.isRight()) {
-          failureOrSuccess = await restaurantRepository.updateWithReview(
-              state.restaurant, state.review);
+          failureOrSuccess = await removeReviewFromRanking(state);
+        }
+
+        if (failureOrSuccess.isRight()) {
+          failureOrSuccess = await processPendingReviewsFromRemoval(state);
         }
 
         yield state.copyWith(
@@ -143,5 +146,36 @@ class ReviewFormBloc extends Bloc<ReviewFormEvent, ReviewFormState> {
 
     return failureOrSuccess.fold(
         (l) => left(const ReviewFailure.unexpected()), (r) => right(unit));
+  }
+
+  Future<Either<ReviewFailure, Unit>> updateReviewRanking(
+      ReviewFormState state) async {
+    final Either<RestaurantFailure, Unit> failureOrSuccess =
+        await restaurantRepository.updateReviewRanking(state.restaurant,
+            state.originalRating, state.review.rating.getOrCrash());
+    return failureOrSuccess.fold(
+        (l) => left(const ReviewFailure.unexpected()), (r) => right(r));
+  }
+
+  Future<Either<ReviewFailure, Unit>> removeReviewFromRanking(
+      ReviewFormState state) async {
+    final Either<RestaurantFailure, Unit> failureOrSuccess =
+        await restaurantRepository.removeReviewFromRanking(
+            state.restaurant, state.originalRating);
+
+    return failureOrSuccess.fold(
+        (l) => left(const ReviewFailure.unexpected()), (r) => right(r));
+  }
+
+  Future<Either<ReviewFailure, Unit>> processPendingReviewsFromRemoval(
+      ReviewFormState state) async {
+    if (state.originalResponseLength > 0) {
+      return right(unit);
+    }
+    final Either<RestaurantFailure, Unit> failureOrSuccess =
+        await restaurantRepository.updatePendingReviews(state.restaurant, -1);
+
+    return failureOrSuccess.fold(
+        (l) => left(const ReviewFailure.unexpected()), (r) => right(r));
   }
 }

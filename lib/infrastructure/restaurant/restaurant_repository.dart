@@ -9,8 +9,6 @@ import 'package:rankstaurant/domain/restaurant/i_restaurant_repository.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/restaurant/value_objects.dart';
-import 'package:rankstaurant/domain/review/review.dart';
-import 'package:rankstaurant/domain/review/review_failure.dart';
 import 'package:rankstaurant/infrastructure/core/firestore_helpers.dart';
 import 'package:rankstaurant/infrastructure/restaurant/restaurant_dtos.dart';
 import 'package:rxdart/rxdart.dart';
@@ -66,23 +64,6 @@ class RestaurantRepository implements IRestaurantRepository {
   }
 
   @override
-  Future<Either<RestaurantFailure, Restaurant>> get(String id) async {
-    try {
-      final restaurantsCollection = await _firestore.restaurantsCollection();
-
-      final doc = await restaurantsCollection.doc(id).get();
-
-      final restaurant = RestaurantDto.fromFirestore(doc).toDomain();
-
-      return right(restaurant);
-    } on FirebaseException catch (e) {
-      return left(const RestaurantFailure.unexpected());
-    } on Exception catch (f) {
-      return left(const RestaurantFailure.unexpected());
-    }
-  }
-
-  @override
   Future<Either<RestaurantFailure, Unit>> update(Restaurant restaurant) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
@@ -118,8 +99,8 @@ class RestaurantRepository implements IRestaurantRepository {
   }
 
   @override
-  Future<Either<ReviewFailure, Unit>> updateWithReview(
-      Restaurant restaurant, Review review) async {
+  Future<Either<RestaurantFailure, Unit>> updateReviewRanking(
+      Restaurant restaurant, int originalRating, int newRating) async {
     try {
       final restaurantsCollection = await _firestore.restaurantsCollection();
       final originalRestaurantDoc =
@@ -127,20 +108,25 @@ class RestaurantRepository implements IRestaurantRepository {
       final originalRestaurant =
           RestaurantDto.fromFirestore(originalRestaurantDoc).toDomain();
 
-      final rating = review.rating.getOrCrash().toDouble();
       final restaurantLowestRating =
           originalRestaurant.lowestRating.getOrCrash();
+      final restaurantHighestRating =
+          originalRestaurant.highestRating.getOrCrash();
 
       var updatedRestaurant = originalRestaurant.copyWith(
-        latestRating: RestaurantRating(rating),
-        numberOfRatings: originalRestaurant.numberOfRatings + 1,
-        sumOfRatings: originalRestaurant.sumOfRatings + rating.toInt(),
+        latestRating: RestaurantRating(newRating.toDouble()),
+        numberOfRatings: originalRating == 0
+            ? originalRestaurant.numberOfRatings + 1
+            : originalRestaurant.numberOfRatings,
+        sumOfRatings: originalRating == 0
+            ? originalRestaurant.sumOfRatings + newRating
+            : originalRestaurant.sumOfRatings + newRating - originalRating,
         lowestRating:
-            restaurantLowestRating == -1 || rating < restaurantLowestRating
-                ? RestaurantRating(rating)
+            restaurantLowestRating == -1 || newRating < restaurantLowestRating
+                ? RestaurantRating(newRating.toDouble())
                 : originalRestaurant.lowestRating,
-        highestRating: rating > originalRestaurant.highestRating.getOrCrash()
-            ? RestaurantRating(rating)
+        highestRating: newRating > restaurantHighestRating
+            ? RestaurantRating(newRating.toDouble())
             : originalRestaurant.highestRating,
       );
 
@@ -158,7 +144,42 @@ class RestaurantRepository implements IRestaurantRepository {
 
       return right(unit);
     } on FirebaseException catch (e) {
-      return left(const ReviewFailure.unexpected());
+      return left(const RestaurantFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Either<RestaurantFailure, Unit>> removeReviewFromRanking(
+    Restaurant restaurant,
+    int rating,
+  ) async {
+    try {
+      final restaurantsCollection = await _firestore.restaurantsCollection();
+      final originalRestaurantDoc =
+          await restaurantsCollection.doc(restaurant.id.getOrCrash()).get();
+      final originalRestaurant =
+          RestaurantDto.fromFirestore(originalRestaurantDoc).toDomain();
+
+      var updatedRestaurant = originalRestaurant.copyWith(
+        numberOfRatings: originalRestaurant.numberOfRatings - 1,
+        sumOfRatings: originalRestaurant.sumOfRatings - rating,
+      );
+
+      updatedRestaurant = updatedRestaurant.copyWith(
+        averageRating: RestaurantRating(
+          updatedRestaurant.sumOfRatings / updatedRestaurant.numberOfRatings,
+        ),
+      );
+
+      final restaurantDto = RestaurantDto.fromDomain(updatedRestaurant);
+
+      await restaurantsCollection
+          .doc(restaurantDto.id)
+          .update(restaurantDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(const RestaurantFailure.unexpected());
     }
   }
 
@@ -166,8 +187,14 @@ class RestaurantRepository implements IRestaurantRepository {
   Future<Either<RestaurantFailure, Unit>> updatePendingReviews(
       Restaurant restaurant, int pendingReviews) async {
     try {
-      final Restaurant updatedRestaurant = restaurant.copyWith(
-        pendingReviews: restaurant.pendingReviews + pendingReviews,
+      final restaurantsCollection = await _firestore.restaurantsCollection();
+      final originalRestaurantDoc =
+          await restaurantsCollection.doc(restaurant.id.getOrCrash()).get();
+      final originalRestaurant =
+          RestaurantDto.fromFirestore(originalRestaurantDoc).toDomain();
+
+      final Restaurant updatedRestaurant = originalRestaurant.copyWith(
+        pendingReviews: originalRestaurant.pendingReviews + pendingReviews,
       );
 
       final result = await update(updatedRestaurant);

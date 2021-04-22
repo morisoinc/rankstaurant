@@ -900,6 +900,7 @@ class _$ReviewFormStateTearOff {
       {required Review review,
       required Restaurant restaurant,
       required int originalResponseLength,
+      required int originalRating,
       required bool isEditing,
       required bool isSubmitting,
       required Option<Either<ReviewFailure, Unit>>
@@ -908,6 +909,7 @@ class _$ReviewFormStateTearOff {
       review: review,
       restaurant: restaurant,
       originalResponseLength: originalResponseLength,
+      originalRating: originalRating,
       isEditing: isEditing,
       isSubmitting: isSubmitting,
       reviewFailureOrSuccessOption: reviewFailureOrSuccessOption,
@@ -923,6 +925,7 @@ mixin _$ReviewFormState {
   Review get review => throw _privateConstructorUsedError;
   Restaurant get restaurant => throw _privateConstructorUsedError;
   int get originalResponseLength => throw _privateConstructorUsedError;
+  int get originalRating => throw _privateConstructorUsedError;
   bool get isEditing => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   Option<Either<ReviewFailure, Unit>> get reviewFailureOrSuccessOption =>
@@ -942,6 +945,7 @@ abstract class $ReviewFormStateCopyWith<$Res> {
       {Review review,
       Restaurant restaurant,
       int originalResponseLength,
+      int originalRating,
       bool isEditing,
       bool isSubmitting,
       Option<Either<ReviewFailure, Unit>> reviewFailureOrSuccessOption});
@@ -964,6 +968,7 @@ class _$ReviewFormStateCopyWithImpl<$Res>
     Object? review = freezed,
     Object? restaurant = freezed,
     Object? originalResponseLength = freezed,
+    Object? originalRating = freezed,
     Object? isEditing = freezed,
     Object? isSubmitting = freezed,
     Object? reviewFailureOrSuccessOption = freezed,
@@ -980,6 +985,10 @@ class _$ReviewFormStateCopyWithImpl<$Res>
       originalResponseLength: originalResponseLength == freezed
           ? _value.originalResponseLength
           : originalResponseLength // ignore: cast_nullable_to_non_nullable
+              as int,
+      originalRating: originalRating == freezed
+          ? _value.originalRating
+          : originalRating // ignore: cast_nullable_to_non_nullable
               as int,
       isEditing: isEditing == freezed
           ? _value.isEditing
@@ -1022,6 +1031,7 @@ abstract class _$ReviewFormStateCopyWith<$Res>
       {Review review,
       Restaurant restaurant,
       int originalResponseLength,
+      int originalRating,
       bool isEditing,
       bool isSubmitting,
       Option<Either<ReviewFailure, Unit>> reviewFailureOrSuccessOption});
@@ -1048,6 +1058,7 @@ class __$ReviewFormStateCopyWithImpl<$Res>
     Object? review = freezed,
     Object? restaurant = freezed,
     Object? originalResponseLength = freezed,
+    Object? originalRating = freezed,
     Object? isEditing = freezed,
     Object? isSubmitting = freezed,
     Object? reviewFailureOrSuccessOption = freezed,
@@ -1064,6 +1075,10 @@ class __$ReviewFormStateCopyWithImpl<$Res>
       originalResponseLength: originalResponseLength == freezed
           ? _value.originalResponseLength
           : originalResponseLength // ignore: cast_nullable_to_non_nullable
+              as int,
+      originalRating: originalRating == freezed
+          ? _value.originalRating
+          : originalRating // ignore: cast_nullable_to_non_nullable
               as int,
       isEditing: isEditing == freezed
           ? _value.isEditing
@@ -1087,6 +1102,7 @@ class _$_ReviewFormState implements _ReviewFormState {
       {required this.review,
       required this.restaurant,
       required this.originalResponseLength,
+      required this.originalRating,
       required this.isEditing,
       required this.isSubmitting,
       required this.reviewFailureOrSuccessOption});
@@ -1098,6 +1114,8 @@ class _$_ReviewFormState implements _ReviewFormState {
   @override
   final int originalResponseLength;
   @override
+  final int originalRating;
+  @override
   final bool isEditing;
   @override
   final bool isSubmitting;
@@ -1106,7 +1124,7 @@ class _$_ReviewFormState implements _ReviewFormState {
 
   @override
   String toString() {
-    return 'ReviewFormState(review: $review, restaurant: $restaurant, originalResponseLength: $originalResponseLength, isEditing: $isEditing, isSubmitting: $isSubmitting, reviewFailureOrSuccessOption: $reviewFailureOrSuccessOption)';
+    return 'ReviewFormState(review: $review, restaurant: $restaurant, originalResponseLength: $originalResponseLength, originalRating: $originalRating, isEditing: $isEditing, isSubmitting: $isSubmitting, reviewFailureOrSuccessOption: $reviewFailureOrSuccessOption)';
   }
 
   @override
@@ -1121,6 +1139,9 @@ class _$_ReviewFormState implements _ReviewFormState {
             (identical(other.originalResponseLength, originalResponseLength) ||
                 const DeepCollectionEquality().equals(
                     other.originalResponseLength, originalResponseLength)) &&
+            (identical(other.originalRating, originalRating) ||
+                const DeepCollectionEquality()
+                    .equals(other.originalRating, originalRating)) &&
             (identical(other.isEditing, isEditing) ||
                 const DeepCollectionEquality()
                     .equals(other.isEditing, isEditing)) &&
@@ -1140,6 +1161,7 @@ class _$_ReviewFormState implements _ReviewFormState {
       const DeepCollectionEquality().hash(review) ^
       const DeepCollectionEquality().hash(restaurant) ^
       const DeepCollectionEquality().hash(originalResponseLength) ^
+      const DeepCollectionEquality().hash(originalRating) ^
       const DeepCollectionEquality().hash(isEditing) ^
       const DeepCollectionEquality().hash(isSubmitting) ^
       const DeepCollectionEquality().hash(reviewFailureOrSuccessOption);
@@ -1155,6 +1177,7 @@ abstract class _ReviewFormState implements ReviewFormState {
       {required Review review,
       required Restaurant restaurant,
       required int originalResponseLength,
+      required int originalRating,
       required bool isEditing,
       required bool isSubmitting,
       required Option<Either<ReviewFailure, Unit>>
@@ -1166,6 +1189,8 @@ abstract class _ReviewFormState implements ReviewFormState {
   Restaurant get restaurant => throw _privateConstructorUsedError;
   @override
   int get originalResponseLength => throw _privateConstructorUsedError;
+  @override
+  int get originalRating => throw _privateConstructorUsedError;
   @override
   bool get isEditing => throw _privateConstructorUsedError;
   @override
