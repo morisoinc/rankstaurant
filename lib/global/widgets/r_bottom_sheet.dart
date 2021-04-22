@@ -63,7 +63,13 @@ class RBottomSheet extends StatelessWidget {
             if (saveText == null)
               Container()
             else
-              ElevatedButton(onPressed: saveAction, child: Text(saveText!)),
+              Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                child: ElevatedButton(
+                  onPressed: saveAction,
+                  child: Text(saveText!),
+                ),
+              ),
           ],
         ),
       ),
