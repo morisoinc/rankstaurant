@@ -16,12 +16,16 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$RestaurantsEventTearOff {
   const _$RestaurantsEventTearOff();
 
-  _WatchAll watchAll() {
-    return const _WatchAll();
+  _WatchAll watchAll({required int? ratingFilter}) {
+    return _WatchAll(
+      ratingFilter: ratingFilter,
+    );
   }
 
-  _WatchOwn watchOwn() {
-    return const _WatchOwn();
+  _WatchOwn watchOwn({required int? ratingFilter}) {
+    return _WatchOwn(
+      ratingFilter: ratingFilter,
+    );
   }
 
   _RestaurantsReceived restaurantsReceived(
@@ -39,8 +43,8 @@ const $RestaurantsEvent = _$RestaurantsEventTearOff();
 mixin _$RestaurantsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAll,
-    required TResult Function() watchOwn,
+    required TResult Function(int? ratingFilter) watchAll,
+    required TResult Function(int? ratingFilter) watchOwn,
     required TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)
         restaurantsReceived,
@@ -48,8 +52,8 @@ mixin _$RestaurantsEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAll,
-    TResult Function()? watchOwn,
+    TResult Function(int? ratingFilter)? watchAll,
+    TResult Function(int? ratingFilter)? watchOwn,
     TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)?
         restaurantsReceived,
@@ -94,6 +98,7 @@ class _$RestaurantsEventCopyWithImpl<$Res>
 abstract class _$WatchAllCopyWith<$Res> {
   factory _$WatchAllCopyWith(_WatchAll value, $Res Function(_WatchAll) then) =
       __$WatchAllCopyWithImpl<$Res>;
+  $Res call({int? ratingFilter});
 }
 
 /// @nodoc
@@ -104,49 +109,74 @@ class __$WatchAllCopyWithImpl<$Res> extends _$RestaurantsEventCopyWithImpl<$Res>
 
   @override
   _WatchAll get _value => super._value as _WatchAll;
+
+  @override
+  $Res call({
+    Object? ratingFilter = freezed,
+  }) {
+    return _then(_WatchAll(
+      ratingFilter: ratingFilter == freezed
+          ? _value.ratingFilter
+          : ratingFilter // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 class _$_WatchAll implements _WatchAll {
-  const _$_WatchAll();
+  const _$_WatchAll({required this.ratingFilter});
+
+  @override
+  final int? ratingFilter;
 
   @override
   String toString() {
-    return 'RestaurantsEvent.watchAll()';
+    return 'RestaurantsEvent.watchAll(ratingFilter: $ratingFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchAll);
+    return identical(this, other) ||
+        (other is _WatchAll &&
+            (identical(other.ratingFilter, ratingFilter) ||
+                const DeepCollectionEquality()
+                    .equals(other.ratingFilter, ratingFilter)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ratingFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  _$WatchAllCopyWith<_WatchAll> get copyWith =>
+      __$WatchAllCopyWithImpl<_WatchAll>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAll,
-    required TResult Function() watchOwn,
+    required TResult Function(int? ratingFilter) watchAll,
+    required TResult Function(int? ratingFilter) watchOwn,
     required TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)
         restaurantsReceived,
   }) {
-    return watchAll();
+    return watchAll(ratingFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAll,
-    TResult Function()? watchOwn,
+    TResult Function(int? ratingFilter)? watchAll,
+    TResult Function(int? ratingFilter)? watchOwn,
     TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)?
         restaurantsReceived,
     required TResult orElse(),
   }) {
     if (watchAll != null) {
-      return watchAll();
+      return watchAll(ratingFilter);
     }
     return orElse();
   }
@@ -177,13 +207,19 @@ class _$_WatchAll implements _WatchAll {
 }
 
 abstract class _WatchAll implements RestaurantsEvent {
-  const factory _WatchAll() = _$_WatchAll;
+  const factory _WatchAll({required int? ratingFilter}) = _$_WatchAll;
+
+  int? get ratingFilter => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$WatchAllCopyWith<_WatchAll> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class _$WatchOwnCopyWith<$Res> {
   factory _$WatchOwnCopyWith(_WatchOwn value, $Res Function(_WatchOwn) then) =
       __$WatchOwnCopyWithImpl<$Res>;
+  $Res call({int? ratingFilter});
 }
 
 /// @nodoc
@@ -194,49 +230,74 @@ class __$WatchOwnCopyWithImpl<$Res> extends _$RestaurantsEventCopyWithImpl<$Res>
 
   @override
   _WatchOwn get _value => super._value as _WatchOwn;
+
+  @override
+  $Res call({
+    Object? ratingFilter = freezed,
+  }) {
+    return _then(_WatchOwn(
+      ratingFilter: ratingFilter == freezed
+          ? _value.ratingFilter
+          : ratingFilter // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
+  }
 }
 
 /// @nodoc
 class _$_WatchOwn implements _WatchOwn {
-  const _$_WatchOwn();
+  const _$_WatchOwn({required this.ratingFilter});
+
+  @override
+  final int? ratingFilter;
 
   @override
   String toString() {
-    return 'RestaurantsEvent.watchOwn()';
+    return 'RestaurantsEvent.watchOwn(ratingFilter: $ratingFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _WatchOwn);
+    return identical(this, other) ||
+        (other is _WatchOwn &&
+            (identical(other.ratingFilter, ratingFilter) ||
+                const DeepCollectionEquality()
+                    .equals(other.ratingFilter, ratingFilter)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(ratingFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  _$WatchOwnCopyWith<_WatchOwn> get copyWith =>
+      __$WatchOwnCopyWithImpl<_WatchOwn>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAll,
-    required TResult Function() watchOwn,
+    required TResult Function(int? ratingFilter) watchAll,
+    required TResult Function(int? ratingFilter) watchOwn,
     required TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)
         restaurantsReceived,
   }) {
-    return watchOwn();
+    return watchOwn(ratingFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAll,
-    TResult Function()? watchOwn,
+    TResult Function(int? ratingFilter)? watchAll,
+    TResult Function(int? ratingFilter)? watchOwn,
     TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)?
         restaurantsReceived,
     required TResult orElse(),
   }) {
     if (watchOwn != null) {
-      return watchOwn();
+      return watchOwn(ratingFilter);
     }
     return orElse();
   }
@@ -267,7 +328,12 @@ class _$_WatchOwn implements _WatchOwn {
 }
 
 abstract class _WatchOwn implements RestaurantsEvent {
-  const factory _WatchOwn() = _$_WatchOwn;
+  const factory _WatchOwn({required int? ratingFilter}) = _$_WatchOwn;
+
+  int? get ratingFilter => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  _$WatchOwnCopyWith<_WatchOwn> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -338,8 +404,8 @@ class _$_RestaurantsReceived implements _RestaurantsReceived {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() watchAll,
-    required TResult Function() watchOwn,
+    required TResult Function(int? ratingFilter) watchAll,
+    required TResult Function(int? ratingFilter) watchOwn,
     required TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)
         restaurantsReceived,
@@ -350,8 +416,8 @@ class _$_RestaurantsReceived implements _RestaurantsReceived {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? watchAll,
-    TResult Function()? watchOwn,
+    TResult Function(int? ratingFilter)? watchAll,
+    TResult Function(int? ratingFilter)? watchOwn,
     TResult Function(
             Either<RestaurantFailure, KtList<Restaurant>> failureOrRestaurants)?
         restaurantsReceived,

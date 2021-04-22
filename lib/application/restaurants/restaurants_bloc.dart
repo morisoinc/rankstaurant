@@ -32,7 +32,9 @@ class RestaurantsBloc extends Bloc<RestaurantsEvent, RestaurantsState> {
       watchAll: (e) async* {
         yield const RestaurantsState.loading();
         await _subscription?.cancel();
-        _subscription = _restaurantRepository.watchAll().listen(
+        _subscription = _restaurantRepository
+            .watchAll(rating: e.ratingFilter)
+            .listen(
               (failureOrRestaurants) => add(
                   RestaurantsEvent.restaurantsReceived(failureOrRestaurants)),
             );
@@ -40,7 +42,9 @@ class RestaurantsBloc extends Bloc<RestaurantsEvent, RestaurantsState> {
       watchOwn: (e) async* {
         yield const RestaurantsState.loading();
         await _subscription?.cancel();
-        _subscription = _restaurantRepository.watchOwn().listen(
+        _subscription = _restaurantRepository
+            .watchOwn(rating: e.ratingFilter)
+            .listen(
               (failureOrRestaurants) => add(
                   RestaurantsEvent.restaurantsReceived(failureOrRestaurants)),
             );

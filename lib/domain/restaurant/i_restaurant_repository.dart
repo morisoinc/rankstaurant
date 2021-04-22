@@ -4,8 +4,10 @@ import 'package:rankstaurant/domain/restaurant/restaurant.dart';
 import 'package:rankstaurant/domain/restaurant/restaurant_failure.dart';
 
 abstract class IRestaurantRepository {
-  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll();
-  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn();
+  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll(
+      {required int? rating});
+  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn(
+      {required int? rating});
   Stream<Either<RestaurantFailure, Restaurant>> watch(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> create(Restaurant restaurant);
   Future<Either<RestaurantFailure, Unit>> update(Restaurant restaurant);

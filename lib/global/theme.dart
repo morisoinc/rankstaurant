@@ -69,6 +69,8 @@ ThemeData _buildColorDependentThemeData({
           side: BorderSide(color: darker),
         ),
       ),
+      unselectedWidgetColor: light,
+      toggleableActiveColor: primary,
       iconTheme: IconThemeData(
         color: darkest,
         size: 12,

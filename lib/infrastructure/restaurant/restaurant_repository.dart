@@ -206,48 +206,95 @@ class RestaurantRepository implements IRestaurantRepository {
   }
 
   @override
-  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll() async* {
+  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchAll({
+    required int? rating,
+  }) async* {
     final restaurantsCollection = await _firestore.restaurantsCollection();
 
-    yield* restaurantsCollection
-        .where('archived', isEqualTo: false)
-        .orderBy('averageRating', descending: true)
-        .snapshots()
-        .map(
-          (snapshot) => right<RestaurantFailure, KtList<Restaurant>>(
-            snapshot.docs
-                .map((doc) => RestaurantDto.fromFirestore(doc).toDomain())
-                .toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
-      return left(const RestaurantFailure.unexpected());
-    });
+    if (rating != null) {
+      yield* restaurantsCollection
+          .where('archived', isEqualTo: false)
+          .where('averageRating',
+              isGreaterThanOrEqualTo: rating, isLessThan: rating + 1)
+          .orderBy('averageRating', descending: true)
+          .snapshots()
+          .map(
+            (snapshot) => right<RestaurantFailure, KtList<Restaurant>>(
+              snapshot.docs
+                  .map((doc) => RestaurantDto.fromFirestore(doc).toDomain())
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith((e) {
+        return left(const RestaurantFailure.unexpected());
+      });
+    } else {
+      yield* restaurantsCollection
+          .where('archived', isEqualTo: false)
+          .orderBy('averageRating', descending: true)
+          .snapshots()
+          .map(
+            (snapshot) => right<RestaurantFailure, KtList<Restaurant>>(
+              snapshot.docs
+                  .map((doc) => RestaurantDto.fromFirestore(doc).toDomain())
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith((e) {
+        return left(const RestaurantFailure.unexpected());
+      });
+    }
   }
 
   @override
-  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn() async* {
+  Stream<Either<RestaurantFailure, KtList<Restaurant>>> watchOwn({
+    required int? rating,
+  }) async* {
     final userOption = await getIt<IAuthFacade>().getSignedInUser();
     final user = userOption.getOrElse(() => throw NotAuthenticatedError());
 
     final restaurantsCollection = await _firestore.restaurantsCollection();
-    yield* restaurantsCollection
-        .where('archived', isEqualTo: false)
-        .orderBy('averageRating', descending: true)
-        .snapshots()
-        .map(
-          (snapshot) => snapshot.docs
-              .map((doc) => RestaurantDto.fromFirestore(doc).toDomain()),
-        )
-        .map(
-          (restaurants) => right<RestaurantFailure, KtList<Restaurant>>(
-            restaurants
-                .where((restaurant) => restaurant.owner == user.id)
-                .toImmutableList(),
-          ),
-        )
-        .onErrorReturnWith((e) {
-      return left(const RestaurantFailure.unexpected());
-    });
+
+    if (rating != null) {
+      yield* restaurantsCollection
+          .where('archived', isEqualTo: false)
+          .where('averageRating',
+              isGreaterThanOrEqualTo: rating, isLessThan: rating + 1)
+          .orderBy('averageRating', descending: true)
+          .snapshots()
+          .map(
+            (snapshot) => snapshot.docs
+                .map((doc) => RestaurantDto.fromFirestore(doc).toDomain()),
+          )
+          .map(
+            (restaurants) => right<RestaurantFailure, KtList<Restaurant>>(
+              restaurants
+                  .where((restaurant) => restaurant.owner == user.id)
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith((e) {
+        return left(const RestaurantFailure.unexpected());
+      });
+    } else {
+      yield* restaurantsCollection
+          .where('archived', isEqualTo: false)
+          .orderBy('averageRating', descending: true)
+          .snapshots()
+          .map(
+            (snapshot) => snapshot.docs
+                .map((doc) => RestaurantDto.fromFirestore(doc).toDomain()),
+          )
+          .map(
+            (restaurants) => right<RestaurantFailure, KtList<Restaurant>>(
+              restaurants
+                  .where((restaurant) => restaurant.owner == user.id)
+                  .toImmutableList(),
+            ),
+          )
+          .onErrorReturnWith((e) {
+        return left(const RestaurantFailure.unexpected());
+      });
+    }
   }
 }

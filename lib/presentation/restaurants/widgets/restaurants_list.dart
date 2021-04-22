@@ -8,12 +8,18 @@ import 'package:rankstaurant/presentation/restaurants/widgets/restaurant_card.da
 class RestaurantsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RestaurantsBloc, RestaurantsState>(
+    return BlocConsumer<RestaurantsBloc, RestaurantsState>(
+      listener: (context, state) {},
       builder: (context, state) {
         return state.map(
           initial: (_) => Container(),
           loading: (_) => const Center(child: CircularProgressIndicator()),
           loaded: (state) {
+            if (state.restaurants.isEmpty()) {
+              return const Center(
+                child: Text('No restaurants!'),
+              );
+            }
             return ListView.builder(
               shrinkWrap: true,
               itemCount: state.restaurants.size,
